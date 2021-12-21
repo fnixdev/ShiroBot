@@ -1,7 +1,7 @@
 // De 104 para 32
 const fs = require("fs")
 const { default: makeWASocket, BufferJSON, initInMemoryKeyStore, DisconnectReason, MessageType,
-    MessageOptions, MimeType } = require("@adiwajshing/baileys-md")
+    MessageOptions, MimeType, useSingleFileAuthState } = require("@adiwajshing/baileys-md")
 const { state, saveState } = useSingleFileAuthState('./config/shirosession.json')
 const config = require('./config/config.json')
 const { banner, getBuffer, getRandom } = require('./src/functions')
