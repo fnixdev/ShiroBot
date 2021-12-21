@@ -1,27 +1,26 @@
 {
-  "name": "md-bots",
-  "description": "WhatsApp multi devices bots, with easy adjustment and customization",
-  "version": "0.0.1",
+  "name": "shirobot",
+  "description": "Weeb bot",
+  "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "node test.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evaasmakula/md-bots.git"
+    "url": "git+https://github.com/fnixdev/ShiroBot.git"
   },
   "keywords": [
     "whatsapp",
     "multi",
     "devices"
   ],
-  "author": "evaasmakula",
+  "author": "fnixdev",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/evaasmakula/md-bots/issues"
+    "url": "https://github.com/fnixdev/ShiroBot/issues"
   },
-  "homepage": "https://github.com/evaasmakula/md-bots#readme",
+  "homepage": "https://github.com/fnixdev/ShiroBot#readme",
   "dependencies": {
     "@adiwajshing/baileys-md": "github:adiwajshing/baileys#multi-device",
     "@hiyurigi/nlp": "^2.0.0-alpha.3",
