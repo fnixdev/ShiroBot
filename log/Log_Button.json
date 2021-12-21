@@ -1,0 +1,68 @@
+{
+    "messages": [{
+        "key": {
+            "remoteJid": "6282146301411@s.whatsapp.net",
+            "fromMe": false,
+            "id": "5D0820653846CE826C854FD08CFEA8A3"
+        },
+        "message": {
+            "templateButtonReplyMessage": {
+                "selectedId": "menu",
+                "selectedDisplayText": "menu",
+                "contextInfo": {
+                    "stanzaId": "BAE55DBA79FB1814",
+                    "participant": "6282132152210@s.whatsapp.net",
+                    "quotedMessage": {
+                        "templateMessage": {
+                            "hydratedFourRowTemplate": {
+                                "hydratedContentText": "Mohon maaf perintah yang kamu masukkan tidak ditemukan 😭\n\nSilahkan gunakan perintah lain ya atau kamu juga bisa menghubungi admin untuk penambahan fitur😊",
+                                "hydratedFooterText": "evaasmakula ERROR MESSAGE",
+                                "hydratedButtons": [{
+                                    "urlButton": {
+                                        "displayText": "Hubungi Admin",
+                                        "url": "https://facebook.com/evaasmakula"
+                                    },
+                                    "index": 0
+                                }, {
+                                    "quickReplyButton": {
+                                        "displayText": "menu",
+                                        "id": "menu"
+                                    },
+                                    "index": 1
+                                }]
+                            },
+                            "hydratedTemplate": {
+                                "hydratedContentText": "Mohon maaf perintah yang kamu masukkan tidak ditemukan 😭\n\nSilahkan gunakan perintah lain ya atau kamu juga bisa menghubungi admin untuk penambahan fitur😊",
+                                "hydratedFooterText": "evaasmakula ERROR MESSAGE",
+                                "hydratedButtons": [{
+                                    "urlButton": {
+                                        "displayText": "Hubungi Admin",
+                                        "url": "https://facebook.com/evaasmakula"
+                                    },
+                                    "index": 0
+                                }, {
+                                    "quickReplyButton": {
+                                        "displayText": "menu",
+                                        "id": "menu"
+                                    },
+                                    "index": 1
+                                }]
+                            }
+                        }
+                    }
+                },
+                "selectedIndex": 1
+            },
+            "messageContextInfo": {
+                "deviceListMetadata": {
+                    "recipientKeyHash": "6/A0zGyIZfSXyA==",
+                    "recipientTimestamp": "1639137294"
+                },
+                "deviceListMetadataVersion": 2
+            }
+        },
+        "messageTimestamp": "1639227947",
+        "pushName": "!help"
+    }],
+    "type": "notify"
+}

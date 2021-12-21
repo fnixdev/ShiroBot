@@ -1,2 +1,5 @@
-### ShiroBot
-Whatsapp Bot Pra upar arquivos 
+# md-bots
+WhatsApp multi devices bots, with easy adjustment and customization
+
+### require
+libwebp imagemagick
