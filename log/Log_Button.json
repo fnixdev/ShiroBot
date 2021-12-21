@@ -16,11 +16,11 @@
                         "templateMessage": {
                             "hydratedFourRowTemplate": {
                                 "hydratedContentText": "Mohon maaf perintah yang kamu masukkan tidak ditemukan 😭\n\nSilahkan gunakan perintah lain ya atau kamu juga bisa menghubungi admin untuk penambahan fitur😊",
-                                "hydratedFooterText": "evaasmakula ERROR MESSAGE",
+                                "hydratedFooterText": "fnixdev ERROR MESSAGE",
                                 "hydratedButtons": [{
                                     "urlButton": {
                                         "displayText": "Hubungi Admin",
-                                        "url": "https://facebook.com/evaasmakula"
+                                        "url": "https://facebook.com/fnixdev"
                                     },
                                     "index": 0
                                 }, {
@@ -33,11 +33,11 @@
                             },
                             "hydratedTemplate": {
                                 "hydratedContentText": "Mohon maaf perintah yang kamu masukkan tidak ditemukan 😭\n\nSilahkan gunakan perintah lain ya atau kamu juga bisa menghubungi admin untuk penambahan fitur😊",
-                                "hydratedFooterText": "evaasmakula ERROR MESSAGE",
+                                "hydratedFooterText": "fnixdev ERROR MESSAGE",
                                 "hydratedButtons": [{
                                     "urlButton": {
                                         "displayText": "Hubungi Admin",
-                                        "url": "https://facebook.com/evaasmakula"
+                                        "url": "https://facebook.com/fnixdev"
                                     },
                                     "index": 0
                                 }, {
