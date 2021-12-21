@@ -20,7 +20,7 @@ const startSock = () => {
             console.log('+ respondendo: ', msg.key.remoteJid)
             await sock.sendReadReceipt(msg.key.remoteJid, msg.key.participant, [msg.key.id])
             await sock.sendMessage(msg.key.remoteJid, 
-            fs.readFileSync("./src/shiro.jpeg"),
+            { url: './src/shiro.jpeg' },
             MessageType.photo,
             { mimetype: Mimetype.jpeg, caption: 'Opa! Shiro is alive' })
         }
