@@ -21,8 +21,8 @@ const startSock = () => {
             console.log('+ respondendo: ', msg.key.remoteJid)
             await sock.sendMessage(id,
             { url: './src/shiro.jpeg' },
-            MessageType.jpeg,
-            { mimetype: Mimetype.jpeg, caption: 'Opa! Shiro is alive' })
+            MessageType.image,
+            { mimetype: 'image/jpeg', caption: 'Opa! Shiro is alive' })
         }
     })
 
