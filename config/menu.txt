@@ -1,0 +1,51 @@
+Selamat datang di *EVA BOTS*
+Berikut beberapa perintah yang dapat kamu gunakan.
+
+╔═[ BASIC ]
+║
+╠ *!help*
+╠ *!contact* 
+╠ *!donatur*
+╚════════
+
+╔═[ EDUKASI ]
+║
+╠ *!kbbi kata*
+╠ *!wikipedia*
+╠ *brainly soal*
+╚════════
+
+╔═ [ CONVERT ]
+║
+╠ *!aksara teks*
+╠ *!hex teks*
+╠ *!binary teks*
+╠ *!pdf (privasi chat only)*
+╠ *!bplanet alias teks*
+║     ╚ !bplanet g anda sehat?
+╚════════
+
+╔═ [ MEDIA ]
+║   ╚ Reply stikernya ya
+╠ *!sticker caption*
+╠ *!gifsticker caption*
+╠ *!toimg*
+║   ╚ Sticker ke gambar
+╠ *!togif*
+║   ╚ Sticker ke Gif
+╠ *!write teks*
+╚════════
+
+╔═ [ TEXT ]
+║
+╠ *!Quotes*
+╠ *!Randomfact* / *!fact*
+╠ *!lirik* (genius)
+╚════════
+
+╔═ [ OTHER ]
+║
+╠ *!yt link*
+╠ *!ytmp3 link*
+╠ *!gempa*
+╚════════

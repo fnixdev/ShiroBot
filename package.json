@@ -1,43 +1,44 @@
 {
-  "name": "shirobot",
-  "version": "1.0.0",
-  "description": "Whatsapp bot.",
+  "name": "md-bots",
+  "description": "WhatsApp multi devices bots, with easy adjustment and customization",
+  "version": "0.0.1",
   "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
-    "start": "node index.js",
-    "postinstall": "npm i typescript -g && tsc -p ./node_modules/@adiwajshing/baileys-md/"
-  },
-  "keywords": [
-    "termux",
-    "whatsapp",
-    "2021",
-    "wabase-md",
-    "base",
-    "baileys-md",
-    "bot"
-  ],
-  "author": "fnixdev",
-  "license": "MIT",
-  "dependencies": {
-    "@adiwajshing/baileys-md": "github:adiwajshing/baileys#multi-device",
-    "@types/ws": "^8.2.0",
-    "axios": "^0.24.0",
-    "cfonts": "^2.10.0",
-    "chalk": "^4.1.2",
-    "spinnies": "^0.5.1",
-    "pino": "^7.0.5",
-    "moment-timezone": "^0.5.32",
-    "libsignal": "^2.0.1"
+    "test": ""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fnixdev/ShiroBot.git"
+    "url": "git+https://github.com/evaasmakula/md-bots.git"
   },
+  "keywords": [
+    "whatsapp",
+    "multi",
+    "devices"
+  ],
+  "author": "evaasmakula",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fnixdev/ShiroBot.git"
+    "url": "https://github.com/evaasmakula/md-bots/issues"
   },
-  "homepage": "https://github.com/fnixdev/ShiroBot#readme"
+  "homepage": "https://github.com/evaasmakula/md-bots#readme",
+  "dependencies": {
+    "@adiwajshing/baileys-md": "github:adiwajshing/baileys#multi-device",
+    "@hiyurigi/nlp": "^2.0.0-alpha.3",
+    "@sajenid/aksara.js": "^1.0.0-beta.6",
+    "add": "^2.0.6",
+    "axios": "^0.24.0",
+    "brainly-scraper-v2": "^2.0.9",
+    "cheerio": "^1.0.0-rc.10",
+    "file-type": "^17.0.0",
+    "genius-lyrics": "^4.3.5",
+    "node-fetch": "^3.1.0",
+    "node-scrapy": "^0.5.0",
+    "pdfkit": "^0.13.0",
+    "qrcode-terminal": "^0.12.0",
+    "qs": "^6.10.2",
+    "request": "^2.88.2",
+    "socket.io": "^4.4.0",
+    "translate-google": "^1.5.0",
+    "wa-sticker-formatter": "^2.8.0"
+  }
 }
