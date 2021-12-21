@@ -8,6 +8,7 @@ const { banner, getBuffer, getRandom } = require('./src/functions')
 
 // imports
 
+const id = config.dev
 const prefix = config.prefix
 
 
@@ -18,10 +19,9 @@ const startSock = () => {
         const msg = m.messages[0]
         if (!msg.key.fromMe && m.type === 'notify') {
             console.log('+ respondendo: ', msg.key.remoteJid)
-            await sock.sendReadReceipt(msg.key.remoteJid, msg.key.participant, [msg.key.id])
-            await sock.sendMessage(msg.key.remoteJid, 
+            await sock.sendMessage(id,
             { url: './src/shiro.jpeg' },
-            MessageType.image,
+            MessageType.jpeg,
             { mimetype: Mimetype.jpeg, caption: 'Opa! Shiro is alive' })
         }
     })
