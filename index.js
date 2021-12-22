@@ -6,13 +6,13 @@ const handler = require('./lib/handler.js');
 const errorHandler = require("./lib/errorHandler");
 
 const startSock = () => {
-    const conn = makeWASocket({ printQRInTerminal: true, auth: state })
+    const client = makeWASocket({ printQRInTerminal: true, auth: state })
 
-    conn.ev.on('messages.upsert', async m => {
+    client.ev.on('messages.upsert', async m => {
         const message = m.messages[0]
 
         // send read receipt
-        await conn.sendReadReceipt(message.key.remoteJid, message.key.participant, [message.key.id])
+        await client.sendReadReceipt(message.key.remoteJid, message.key.participant, [message.key.id])
        
         if(message.key.remoteJid == "status@broadcast"){
             return;
@@ -23,16 +23,16 @@ const startSock = () => {
             fs.writeFileSync(logDB, JSON.stringify(m));
 
             try {
-                await handler(conn, message);
+                await handler(client, message);
             } catch (err) {
                 const error = err.message;
                 console.log(error);
-                await errorHandler(conn, message, error)
+                await errorHandler(client, message, error)
             }
         }
     })
 
-    conn.ev.on('connection.update', (update) => {
+    client.ev.on('connection.update', (update) => {
         const { connection, lastDisconnect } = update
         if (connection === 'close') {
             lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut
@@ -41,9 +41,9 @@ const startSock = () => {
         }
     })
 
-    conn.ev.on('creds.update', saveState)
+    client.ev.on('creds.update', saveState)
 
-    return conn
+    return client
 }
 
 startSock()
