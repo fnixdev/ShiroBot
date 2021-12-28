@@ -303,12 +303,6 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 m.reply('Bot agora esta no modo privado')
             }
             break
-            case 'mine': {
-                m.reply(mess.wait)
-                
-                shiro.sendMessage(m.chat, { image: { url: `https://telegra.ph/file/0c97e206340a796a1e0cc.jpg` }, caption: `Download From ${text}` }, { quoted: m})
-            }
-            break
             case 'ping': case 'botstatus': case 'statusbot': {
                 let timestamp = speed()
                 let latensi = speed() - timestamp
