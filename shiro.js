@@ -16,7 +16,7 @@ const path = require('path')
 const os = require('os')
 const speed = require('performance-now')
 const { performance } = require('perf_hooks')
-const { pinterest, wallpaper, wikimedia, porno, hentai, quotesAnime } = require('./lib/scraper')
+const { pinterest, wallpaper, wikimedia, porno, neko, hentai, quotesAnime } = require('./lib/scraper')
 const { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./lib/myfunc')
 const database = require('./database.json')
@@ -417,6 +417,12 @@ _Por enquanto não faço muita coisa_
                     }
                 }), { userJid: m.chat, quoted: m })
                 shiro.relayMessage(m.chat, template.message, { messageId: template.key.id })
+            }
+            break
+            case 'neko': {
+                m.reply(mess.wait)
+                let anu = await neko()
+                hisoka.sendMessage(m.chat, { image: { url: anu }, caption: `_Vai bater pra 2d ne safado_` }, { quoted: m})
             }
             break
             case 'hentai': {
