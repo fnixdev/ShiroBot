@@ -303,6 +303,12 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 m.reply('Bot agora esta no modo privado')
             }
             break
+            case 'mine': {
+                m.reply(mess.wait)
+                
+                shiro.sendMessage(m.chat, { image: { url: `https://telegra.ph/file/0c97e206340a796a1e0cc.jpg` }, caption: `Download From ${text}` }, { quoted: m})
+            }
+            break
             case 'ping': case 'botstatus': case 'statusbot': {
                 let timestamp = speed()
                 let latensi = speed() - timestamp
@@ -352,8 +358,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             break
             case 'tes': case 'menu': case 'help': case '?': {
                 anu = `
-    Oi, eu sou ShiroBot ✨
-Por enquanto não faço muita coisa 
+    _Oi, eu sou ShiroBot ✨_
+_Por enquanto não faço muita coisa_
 
 ┌──⭓ Menu de Grupo
 │
@@ -408,6 +414,28 @@ Por enquanto não faço muita coisa
                                 urlButton: {
                                     displayText: 'Dono',
                                     url: 'https://github.com/fnixdev/'
+                                }
+                            }]
+                        }
+                    }
+                }), { userJid: m.chat, quoted: m })
+                shiro.relayMessage(m.chat, template.message, { messageId: template.key.id })
+            }
+            break
+            case 'mine': {
+                anu = `_Clique no botão abaixo para baixar a ultima versão do minecraft`
+                let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/shiromine.jpg') }, { upload: shiro.waUploadToServer })
+
+                const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+
+                    templateMessage: {
+                        hydratedTemplate: {
+                            imageMessage: message.imageMessage,
+                            hydratedContentText: anu,
+                            hydratedButtons: [{
+                                urlButton: {
+                                    displayText: 'Baixar Minecraft',
+                                    url: 'https://www.mediafire.com/file/wtrpb1rluqdgpm5/Minecraft-1.18.2.03-Official-by-wadduk.apk/file'
                                 }
                             }]
                         }
