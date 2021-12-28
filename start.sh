@@ -1,3 +1,3 @@
 #!/bin/sh
 
-screen -d -m -S "shiro" sudo npm start
+screen -d -m -S "shiro" sudo node index.js
