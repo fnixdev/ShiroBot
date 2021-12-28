@@ -350,7 +350,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 }
             }
             break
-            case 'tes': case 'menu': case 'help': case '?': {
+            case 'help': case 'menu': {
                 anu = `
     _Oi, eu sou ShiroBot ✨_
 _Por enquanto não faço muita coisa_
@@ -440,7 +440,7 @@ _Por enquanto não faço muita coisa_
             break
             case 'neko': {
                 m.reply(mess.wait)
-                let anu = await getBuffer(url('https://nekos.life/api/v2/img/neko'))
+                let anu = await getBuffer(('https://nekos.life/api/v2/img/neko'))
                 hisoka.sendMessage(m.chat, { image: { url: anu.url }, caption: `Download From ${text}` }, { quoted: m})
             }
             default:
