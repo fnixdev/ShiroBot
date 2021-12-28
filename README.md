@@ -10,8 +10,10 @@
 ## Disclaimer
 ```
 /**
+
     Bot whatsapp Feito usando baileys#MD
     
-    Ainda não possuí funções..
+    Ainda não possuí muitas funções..
+    
 /**
 ```

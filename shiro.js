@@ -352,6 +352,9 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             break
             case 'tes': case 'menu': case 'help': case '?': {
                 anu = `
+    Oi, eu sou ShiroBot ✨
+Por enquanto não faço muita coisa 
+
 ┌──⭓ Menu de Grupo
 │
 │⭔ ${prefix}linkgrupo

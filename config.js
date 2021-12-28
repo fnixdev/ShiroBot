@@ -2,20 +2,20 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-// Website Api
+// Site API
 global.APIs = {
 	zenz: 'https://zenzapi.xyz',
 }
 
-// Apikey Website Api
+// Apikey
 global.APIKeys = {
 	'https://zenzapi.xyz': 'Your Key',
 }
 
-// Other
+// Outros
 global.owner = ['5531989092420']
 global.packname = 'Shiro Bot'
-global.author = '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n'
+global.author = '\n'
 global.sessionName = 'shirosession'
 global.prefa = ['','!','.','🐦','🐤','🗿']
 global.sp = '⭔'

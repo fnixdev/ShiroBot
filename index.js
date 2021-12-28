@@ -79,9 +79,9 @@ async function startShiro() {
     shiro.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect } = update
         if (connection === 'close') {
-            lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut ? startShiro() : console.log('Koneksi Terputus...')
+            lastDisconnect.erro&&r?.output?.statusCode !== DisconnectReason.loggedOut ? startShiro() : console.log('Conexao desligada...')
         }
-        console.log('Koneksi Terhubung...', update)
+        console.log('Conectado...', update)
     })
 
     shiro.ev.on('creds.update', saveState)
