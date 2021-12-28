@@ -17,7 +17,7 @@ global.owner = ['553189092420']
 global.packname = 'Shiro Bot'
 global.author = '\n'
 global.sessionName = 'shirosession'
-global.prefa = ['','!','.','🐦','🐤','🗿']
+global.prefa = ['!','.','#','/']
 global.sp = '⭔'
 global.mess = {
     admin: 'Recurso especial de admin do grupo!',
