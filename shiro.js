@@ -80,12 +80,12 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 
         // Push Message To Console
         if (m.message) {
-            console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> Dari'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
+            console.log(chalk.black(chalk.bgWhite('[ MSG ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Em'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
         }
 
         switch(command) {
 	    case 'sc': {
-                m.reply('Script : https://github.com/fnixdev/ShiroBot\n\n Dont Forget Give Star')
+                m.reply('Script : https://github.com/fnixdev/ShiroBot\n\nNão se esqueça de dar uma star ✨.')
             }
             break
             case 'chat': {
@@ -221,30 +221,30 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             case 'delete': case 'del': {
                 if (!m.quoted) throw false
                 let { chat, fromMe, id, isBaileys } = m.quoted
-                if (!isBaileys) throw 'Pesan tersebut bukan dikirim oleh bot!'
+                if (!isBaileys) throw 'A mensagem não foi enviada pelo bot!'
                 shiro.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
             }
             break
             case 'sticker': case 's': case 'stickergif': case 'sgif': {
-            if (!quoted) throw `Balas Video/Image Dengan Caption ${prefix + command}`
+            if (!quoted) throw `Responda a uma imagem/video ${prefix + command}`
             m.reply(mess.wait)
                     if (/image/.test(mime)) {
                 let media = await quoted.download()
                 let encmedia = await shiro.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
                 await fs.unlinkSync(encmedia)
             } else if (/video/.test(mime)) {
-                if ((quoted.msg || quoted).seconds > 11) return m.reply('Maksimal 10 detik!')
+                if ((quoted.msg || quoted).seconds > 11) return m.reply('10 segundos no máximo!')
                 let media = await quoted.download()
                 let encmedia = await shiro.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
                 await fs.unlinkSync(encmedia)
             } else {
-                        throw `Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`
+                        throw `Envie uma foto/video ${prefix + command}\nO video deve ter de 1 a 9 segundos`
                 }
             }
             break
             case 'toimage': case 'toimg': {
                 if (!quoted) throw 'Reply Image'
-                if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+                if (!/webp/.test(mime)) throw `Responda a um sticker *${prefix + command}*`
                 m.reply(mess.wait)
                 let media = await shiro.downloadAndSaveMediaMessage(quoted)
                 let ran = await getRandom('.png')
@@ -259,7 +259,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             break
 	        case 'tomp4': case 'tovideo': {
                 if (!quoted) throw 'Reply Image'
-                if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+                if (!/webp/.test(mime)) throw `Responda a um sticker animado *${prefix + command}*`
                 m.reply(mess.wait)
                 let media = await shiro.downloadAndSaveMediaMessage(quoted)
                 let webpToMp4 = await webp2mp4File(media)
@@ -269,7 +269,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             break
             case 'togif': {
                 if (!quoted) throw 'Reply Image'
-                if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+                if (!/webp/.test(mime)) throw `Responda a um sticker *${prefix + command}*`
                 m.reply(mess.wait)
                 let media = await shiro.downloadAndSaveMediaMessage(quoted)
                 let webpToMp4 = await webp2mp4File(media)
@@ -294,13 +294,13 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             case 'public': {
                 if (!isCreator) throw mess.owner
                 shiro.public = true
-                m.reply('Sukse Change To Public Usage')
+                m.reply('Bot agora esta no modo público.')
             }
             break
             case 'self': {
                 if (!isCreator) throw mess.owner
                 shiro.public = false
-                m.reply('Sukses Change To Self Usage')
+                m.reply('Bot agora esta no modo privado')
             }
             break
             case 'ping': case 'botstatus': case 'statusbot': {
@@ -354,7 +354,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 anu = `
 ┌──⭓ Menu de Grupo
 │
-│⭔ ${prefix}linkgroup
+│⭔ ${prefix}linkgrupo
 │⭔ ${prefix}ephemeral [opção]
 │⭔ ${prefix}setpp
 │⭔ ${prefix}setname [texto]
@@ -410,16 +410,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                                 quickReplyButton: {
                                     displayText: 'Status Bot',
                                     id: 'ping'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Contact Owner',
-                                    id: 'owner'
-                                }  
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Script',
-                                    id: 'sc'
                                 }
                             }]
                         }

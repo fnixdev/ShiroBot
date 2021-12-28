@@ -1,7 +1,7 @@
 {
-  "name": "shiro-morou",
+  "name": "shiro-bot",
   "version": "1.1.0",
-  "description": "WhatsApp Using Lib Baileys Multi Device",
+  "description": "Whatsapp Bot Using Baileys#MD",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
@@ -42,10 +42,10 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DikaArdnt/https://github.com/fnixdev/ShiroBot-Morou.git"
+    "url": "git+https://github.com/fnixdev/ShiroBot.git"
   },
   "bugs": {
-    "url": "https://github.com/DikaArdnt/https://github.com/fnixdev/ShiroBot-Morou/issues"
+    "url": "https://github.com/fnixdev/ShiroBot/issues"
   },
-  "homepage": "https://github.com/DikaArdnt/https://github.com/fnixdev/ShiroBot-Morou#readme"
+  "homepage": "https://github.com/fnixdev/ShiroBot#readme"
 }
