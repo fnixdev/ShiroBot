@@ -13,7 +13,7 @@ global.APIKeys = {
 }
 
 // Outros
-global.owner = ['5531989092420']
+global.owner = ['553189092420']
 global.packname = 'Shiro Bot'
 global.author = '\n'
 global.sessionName = 'shirosession'
