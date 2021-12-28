@@ -419,6 +419,13 @@ _Por enquanto não faço muita coisa_
                 shiro.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
+            case 'hentai': {
+                m.reply(mess.wait)
+                anu = await hentai()
+                result = anu[Math.floor(Math.random() * anu.length)]
+                hisoka.sendMessage(m.chat, { video: { url: result.video_1 }, caption: `Titulo : ${result.title}\nCategoria : ${result.category}\nMimetype : ${result.type}\nViews : ${result.views_count}\nShares : ${result.share_count}\nSource : ${result.link}\nMedia Url : ${result.video_1}` }, { quoted: m })
+            }
+            break
             case 'mine': {
                 anu = `_Clique no botão abaixo para baixar a ultima versão do minecraft_`
                 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/shiromine.jpg') }, { upload: shiro.waUploadToServer })
