@@ -52,7 +52,7 @@ async function startShiro() {
                 try {
                     ppuser = await shiro.profilePictureUrl(num, 'image')
                 } catch {
-                    ppuser = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+                    ppuser = 'https://telegra.ph/file/d130fec8fa4bee9a4a533.jpg'
                 }
 
                 // Get Profile Picture Group
