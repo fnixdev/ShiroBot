@@ -417,7 +417,7 @@ _Por enquanto não faço muita coisa_
             }
             break
             case 'mine': {
-                anu = `_Clique no botão abaixo para baixar a ultima versão do minecraft`
+                anu = `_Clique no botão abaixo para baixar a ultima versão do minecraft_`
                 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/shiromine.jpg') }, { upload: shiro.waUploadToServer })
 
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
