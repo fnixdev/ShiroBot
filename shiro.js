@@ -440,8 +440,8 @@ _Por enquanto não faço muita coisa_
             break
             case 'neko': {
                 m.reply(mess.wait)
-                let anu = await getBuffer(api('https://nekos.life/api/v2/img/neko'))
-                hisoka.sendMessage(m.chat, { image: { url: anu }, caption: `Download From ${text}` }, { quoted: m})
+                let anu = await getBuffer(url('https://nekos.life/api/v2/img/neko'))
+                hisoka.sendMessage(m.chat, { image: { url: anu.url }, caption: `Download From ${text}` }, { quoted: m})
             }
             default:
                 if (budy.startsWith('=>')) {
