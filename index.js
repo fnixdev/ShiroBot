@@ -1,7 +1,7 @@
 /**
    * Create By Dika Ardnt.
-   * Contact Me on wa.me/6288292024190
-   * Follow https://github.com/DikaArdnt
+   * Base updated by fnixdev
+   * Follow https://github.com/fnixdev
 */
 
 require('./config')
@@ -63,9 +63,9 @@ async function startShiro() {
                 }
 
                 if (anu.action == 'add') {
-                    shiro.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Welcome To ${metadata.subject} @${num.split("@")[0]}` })
+                    shiro.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Bem vindo a ${metadata.subject} @${num.split("@")[0]}` })
                 } else if (anu.action == 'remove') {
-                    shiro.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
+                    shiro.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Saiu e foi joga no vasco.` })
                 }
             }
         } catch (err) {
