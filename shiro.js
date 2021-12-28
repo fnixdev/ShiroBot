@@ -309,11 +309,13 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 neww = performance.now()
                 oldd = performance.now()
                 respon = `
-🔹 ${latensi.toFixed(4)} _ms_
-🔸 _Uptime_: ${runtime(process.uptime())}
-🔹 _System_
-    RAM: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}
-🔸_NodeJS Usage_
+${latensi.toFixed(4)} _ms_
+
+_Uptime_: ${runtime(process.uptime())}
+
+_RAM_: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}
+
+_NodeJS Usage_
 ${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.length)),' ')}: ${formatp(used[key])}`).join('\n')}
 
                 `.trim()
