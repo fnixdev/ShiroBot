@@ -355,6 +355,14 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
     _Oi, eu sou ShiroBot ✨_
 _Por enquanto não faço muita coisa_
 
+┌──⭓ *Menu Principal*
+│
+│⭔ ${prefix}ping
+│⭔ ${prefix}dono
+│⭔ ${prefix}menu / ${prefix}help 
+│
+└───────⭓
+
 ┌──⭓ Menu de Grupo
 │
 │⭔ ${prefix}linkgrupo
@@ -377,16 +385,7 @@ _Por enquanto não faço muita coisa_
 │⭔ ${prefix}togif
 │⭔ ${prefix}tourl
 │
-└───────⭓
-
-┌──⭓ *Menu Principal*
-│
-│⭔ ${prefix}ping
-│⭔ ${prefix}owner
-│⭔ ${prefix}menu / ${prefix}help / ${prefix}?
-│⭔ ${prefix}delete
-│
-└───────⭓
+└───────⭓ 
 
 ┌──⭓ *Menu Dono*
 │
