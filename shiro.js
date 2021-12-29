@@ -345,7 +345,7 @@ ${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.
                     + 'N:;fnix.;;;'
                     + 'FN:Luis Gustavo.\n' // full name
                     + 'ORG:KuuhakuTeam;\n' // the organization of the contact
-                    + 'TEL;type=CELL;type=VOICE;waid=5531989092420:+55 (31) 98909-2420\n' // WhatsApp ID + phone number
+                    + 'TEL;type=CELL;type=VOICE;waid=553189092420:+55 31 89092420\n' // WhatsApp ID + phone number
                     + 'END:VCARD'
                 shiro.sendMessage(m.chat, { contacts: { displayName: 'fnix.', contacts: [{ vcard }] } }, { quoted: m })
             }
