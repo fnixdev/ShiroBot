@@ -377,7 +377,10 @@ _Por enquanto não faço muita coisa_
 ┌──⭓ *Outros Comandos*
 │
 │⭔ ${prefix}mine
-│⭔ ${prefix}discord 
+│⭔ ${prefix}discord
+│⭔ ${prefix}neko
+│⭔ ${prefix}waifu
+│⭔ ${prefix}wallpaper
 │
 └───────⭓ 
 
@@ -420,10 +423,15 @@ _Por enquanto não faço muita coisa_
             }
             break
             case 'neko': {
-                m.reply(mess.wait)
                 const neko = await axios.get('https://nekos.life/api/v2/img/neko')
                 const nekoimg = neko.data.url
                 shiro.sendMessage(m.chat, { image: { url: nekoimg }, caption: `_Vai bater pra 2d ne safado_` }, { quoted: m})
+            }
+            break
+            case 'wallpaper': {
+                const neko = await axios.get('https://nekos.life/api/v2/img/wallpaper')
+                const nekoimg = neko.data.url
+                shiro.sendMessage(m.chat, { image: { url: nekoimg }, }, { quoted: m})
             }
             break
             case 'hentai': {
