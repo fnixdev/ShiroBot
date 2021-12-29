@@ -324,13 +324,14 @@ ${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.
 	        case 'ytmp4': {
                 if (!text) throw 'Eu preciso que voce informe um link!'
                 m.reply(mess.wait)
-                let anu = await fetchJson(api('https://meguxrest.herokuapp.com/api/ytmp4?url=', { url: text }))
+                const neko = await axios.get('https://meguxrest.herokuapp.com/api/ytmp4?url=', { url: text })
+                const ano = neko.data.url
                 let buttons = [
                     {buttonId: `ytmp4 ${text}`, buttonText: {displayText: '► Video'}, type: 1}
                 ]
                 let buttonMessage = {
-                    video: { url: anu.result.url },
-                    caption: util.format(anu.result),
+                    video: { url: ano },
+                    caption: neko.title,
                     footer: 'Precione o botão abaixo.',
                     buttons: buttons,
                     headerType: 5
