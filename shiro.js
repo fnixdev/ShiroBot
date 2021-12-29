@@ -341,8 +341,11 @@ ${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.
             break
             case 'owner': case 'creator': case 'dono': {
                 let vcard = 'BEGIN:VCARD\n' // metadata of the contact card
-                    + 'Versão 1.0\n' 
-                    + 'by fnix'
+                    + 'VERSION:3.0\n' 
+                    + 'N:;fnix.;;;'
+                    + 'FN:Luis Gustavo.\n' // full name
+                    + 'ORG:KuuhakuTeam;\n' // the organization of the contact
+                    + 'TEL;type=CELL;type=VOICE;waid=5531989092420:+55 (31) 98909-2420\n' // WhatsApp ID + phone number
                     + 'END:VCARD'
                 shiro.sendMessage(m.chat, { contacts: { displayName: 'fnix.', contacts: [{ vcard }] } }, { quoted: m })
             }
