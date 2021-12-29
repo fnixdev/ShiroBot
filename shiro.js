@@ -329,7 +329,7 @@ ${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.
                     {buttonId: `ytmp4 ${text}`, buttonText: {displayText: '► Video'}, type: 1}
                 ]
                 let buttonMessage = {
-                    video: { url: anu.result.HD || anu.result.SD },
+                    video: { url: anu.result.url },
                     caption: util.format(anu.result),
                     footer: 'Precione o botão abaixo.',
                     buttons: buttons,
