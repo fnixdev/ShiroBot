@@ -10,6 +10,7 @@ const { default: makeWASocket, BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessa
 const fs = require('fs')
 const util = require('util')
 const chalk = require('chalk')
+const yts = require('yt-search')
 const { exec, spawn, execSync } = require("child_process")
 const axios = require('axios')
 const { fromBuffer } = require('file-type')
@@ -24,7 +25,7 @@ const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, slee
 const database = require('./database.json')
 
 global.prefix = config.prefix
-global.owner = config.dono
+global.owner = [config.dono]
 
 
 module.exports = shiro = async (shiro, m, chatUpdate) => {
@@ -92,6 +93,8 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 m.reply('Script : https://github.com/fnixdev/ShiroBot\n\nNão se esqueça de dar uma star ✨.')
             }
             break
+  
+            // Dono
             case 'chat': {
                 if (!isCreator) throw mess.owner
                 if (!q) throw 'Option : 1. mute\n2. unmute\n3. archive\n4. unarchive\n5. read\n6. unread\n7. delete'
@@ -126,6 +129,8 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 await shiro.groupLeave(m.chat).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
             }
             break
+  
+  // ADM
 	case 'kick': {
 		if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
