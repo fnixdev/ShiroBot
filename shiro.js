@@ -16,18 +16,18 @@ const { fromBuffer } = require('file-type')
 const path = require('path')
 const os = require('os')
 const speed = require('performance-now')
+const config = JSON.parse(fs.readFileSync('./src/config.json'))
 const { performance } = require('perf_hooks')
 const { pinterest, wallpaper, wikimedia, porno, neko, hentai, quotesAnime } = require('./lib/scraper')
 const { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./lib/myfunc')
 const database = require('./database.json')
 
-
 module.exports = shiro = async (shiro, m, chatUpdate) => {
     try {
         var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
         var budy = (typeof m.text == 'string' ? m.text : '')
-        var prefix = prefa ? /^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi)[0] : "" : prefa ?? global.prefix
+        var prefix =  config.prefix
         const isCmd = body.startsWith(prefix)
         const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
         const args = body.trim().split(/ +/).slice(1)
@@ -319,24 +319,6 @@ ${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.
 
                 `.trim()
                 m.reply(respon)
-            }
-            break
-	        case 'ytmp4': {
-                if (!text) throw 'Eu preciso que voce informe um link!'
-                m.reply(mess.wait)
-                const neko = await axios.get('https://meguxrest.herokuapp.com/api/ytmp4?url=', { url: text })
-                const ano = neko.data.url
-                let buttons = [
-                    {buttonId: `ytmp4 ${text}`, buttonText: {displayText: '► Video'}, type: 1}
-                ]
-                let buttonMessage = {
-                    video: { url: ano },
-                    caption: neko.title,
-                    footer: 'Precione o botão abaixo.',
-                    buttons: buttons,
-                    headerType: 5
-                }
-                shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
             case 'owner': case 'creator': case 'dono': {

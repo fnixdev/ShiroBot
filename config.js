@@ -26,8 +26,8 @@ global.sessionName = 'shirosession'
 global.prefa = ['!','.','#','/']
 global.sp = '⭔'
 global.mess = {
-    admin: 'Recurso especial de admin do grupo!',
-    botAdmin: 'O bot deve ser administrador primeiro!',
+    admin: 'Apenas administradores podem usar esse comando!',
+    botAdmin: 'Eu preciso ser administrador pra fazer isso!',
     owner: 'Este recurso é exclusivo do dono do bot',
     group: 'Isso só pode ser usado em um grupo!',
     private: 'Isso só pode ser usado no privado',
