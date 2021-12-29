@@ -336,7 +336,7 @@ ${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.
                     buttons: buttons,
                     headerType: 5
                 }
-                hisoka.sendMessage(m.chat, buttonMessage, { quoted: m })
+                shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
             case 'owner': case 'creator': case 'dono': {
@@ -477,11 +477,6 @@ _Por enquanto não faço muita coisa_
                 shiro.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
-            case 'neko': {
-                m.reply(mess.wait)
-                let anu = await getBuffer(('https://nekos.life/api/v2/img/neko'))
-                hisoka.sendMessage(m.chat, { image: { url: anu.url }, caption: `Download From ${text}` }, { quoted: m})
-            }
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return m.reply(mess.owner)
