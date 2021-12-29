@@ -167,7 +167,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 		await shiro.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 	}
 	break
-	    case 'setname': case 'setsubject': {
+	      case 'setname': case 'setsubject': {
                 if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
@@ -310,13 +310,11 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 neww = performance.now()
                 oldd = performance.now()
                 respon = `
-${latensi.toFixed(4)} _ms_
+*Ping*: ${latensi.toFixed(4)}ms
+*Uptime*: ${runtime(process.uptime())}
+*RAM*: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}
 
-_Uptime_: ${runtime(process.uptime())}
-
-_RAM_: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}
-
-_NodeJS Usage_
+*NodeJS Usage*
 ${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.length)),' ')}: ${formatp(used[key])}`).join('\n')}
 
                 `.trim()

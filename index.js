@@ -4,6 +4,7 @@
    * Follow https://github.com/fnixdev
 */
 
+
 require('./config')
 const { default: makeWASocket, useSingleFileAuthState, DisconnectReason, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage } = require("@adiwajshing/baileys-md")
 const { state, saveState } = useSingleFileAuthState(`./${sessionName}.json`)
