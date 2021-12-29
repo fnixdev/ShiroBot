@@ -321,7 +321,24 @@ ${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.
                 m.reply(respon)
             }
             break
-            case 'owner': case 'creator': {
+	        case 'ytmp4': {
+                if (!text) throw 'Eu preciso que voce informe um link!'
+                m.reply(mess.wait)
+                let anu = await fetchJson(api('https://meguxrest.herokuapp.com/api/ytmp4?url=', { url: text }))
+                let buttons = [
+                    {buttonId: `ytmp4 ${text}`, buttonText: {displayText: '► Video'}, type: 1}
+                ]
+                let buttonMessage = {
+                    video: { url: anu.result.HD || anu.result.SD },
+                    caption: util.format(anu.result),
+                    footer: 'Precione o botão abaixo.',
+                    buttons: buttons,
+                    headerType: 5
+                }
+                hisoka.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
+            break
+            case 'owner': case 'creator': case 'dono': {
                 let vcard = 'BEGIN:VCARD\n' // metadata of the contact card
                     + 'Versão 1.0\n' 
                     + 'by fnix'
