@@ -1,8 +1,9 @@
 /**
-   * Create By Dika Ardnt.
-   * Contact Me on wa.me/6288292024190
-   * Follow https://github.com/DikaArdnt
-*/
+ * Base Create By Dika Ardnt.
+ * Updated by fnixdev
+ * Follow https://github.com/fnixdev
+ */
+
 
 require('./config')
 const { default: makeWASocket, BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, downloadContentFromMessage, downloadHistory, proto, getMessage, generateWAMessageContent, prepareWAMessageMedia } = require('@adiwajshing/baileys-md')
@@ -434,19 +435,16 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { image: { url: nekoimg }, }, { quoted: m})
             }
             break
-            case 'hentai': {
-                m.reply(mess.wait)
-                anu = await hentai()
-                result = anu[Math.floor(Math.random() * anu.length)]
-                shiro.sendMessage(m.chat, { video: { url: result.video_1 }, caption: `Titulo : ${result.title}\nCategoria : ${result.category}\nMimetype : ${result.type}\nViews : ${result.views_count}\nShares : ${result.share_count}\nSource : ${result.link}\nMedia Url : ${result.video_1}` }, { quoted: m })
+            case 'waifu': {
+                const neko = await axios.get('https://api.waifu.pics/sfw/waifu')
+                const nekoimg = neko.data.url
+                shiro.sendMessage(m.chat, { image: { url: nekoimg }, }, { quoted: m})
             }
             break
             case 'mine': {
                 anu = `_Clique no botão abaixo para baixar a ultima versão do minecraft_`
                 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/shiromine.jpg') }, { upload: shiro.waUploadToServer })
-
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-
                     templateMessage: {
                         hydratedTemplate: {
                             imageMessage: message.imageMessage,
