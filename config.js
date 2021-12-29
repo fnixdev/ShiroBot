@@ -19,11 +19,9 @@ global.APIKeys = {
 }
 
 // Outros
-//global.owner = ['553189092420']
 global.packname = 'Shiro Bot'
 global.author = '\n'
 global.sessionName = 'shirosession'
-//global.prefa = ['!','.','#','/']
 global.sp = '⭔'
 global.mess = {
     admin: 'Apenas administradores podem usar esse comando!',
