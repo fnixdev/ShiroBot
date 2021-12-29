@@ -41,14 +41,14 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         const text = q = args.join(" ")
         const quoted = m.quoted ? m.quoted : m
         const mime = (quoted.msg || quoted).mimetype || ''
-	const isMedia = /image|video|sticker|audio/.test(mime)
+	      const isMedia = /image|video|sticker|audio/.test(mime)
 	
         // Group
         const groupMetadata = m.isGroup ? await shiro.groupMetadata(m.chat).catch(e => {}) : ''
         const groupName = m.isGroup ? groupMetadata.subject : ''
         const participants = m.isGroup ? await groupMetadata.participants : ''
         const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : ''
-	const isBotAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
+      	const isBotAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
         const isGroupAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
 
         // Bot Status
@@ -130,52 +130,52 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             }
             break
   
-  // ADM
-	case 'kick': {
-		if (!m.isGroup) throw mess.group
+            // ADM
+          	case 'kick': {
+	            	if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
-		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await shiro.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-	}
-	break
-	case 'add': {
-		if (!m.isGroup) throw mess.group
+		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+	            	await shiro.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+          	}
+	          break
+	          case 'add': {
+	            	if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
-		let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await shiro.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-	}
-	break
-	case 'promote': {
-		if (!m.isGroup) throw mess.group
+	             	let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+		            await shiro.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	          }
+          	break
+          	case 'promote': {
+            		if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
-		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await shiro.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-	}
-	break
-	case 'demote': {
-		if (!m.isGroup) throw mess.group
+	            	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+	            	await shiro.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+          	}
+          	break
+          	case 'demote': {
+		            if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
-		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-	}
-	break
-        case 'block': {
-		if (!isCreator) throw mess.owner
-		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await shiro.updateBlockStatus(users, 'block').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-	}
-	break
-        case 'unblock': {
-		if (!isCreator) throw mess.owner
-		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await shiro.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-	}
-	break
-	      case 'setname': case 'setsubject': {
+		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+            		await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+           	}
+	          break
+           case 'block': {
+	             	if (!isCreator) throw mess.owner
+	            	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+	            	await shiro.updateBlockStatus(users, 'block').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	          }
+          	break
+            case 'unblock': {
+		            if (!isCreator) throw mess.owner
+	             	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+		            await shiro.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	          }
+          	break
+	          case 'setname': case 'setsubject': {
                 if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
@@ -189,11 +189,11 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 if (/image/.test(mime)) throw `balas image dengan caption *${prefix + command}*`
                 let media = await shiro.downloadAndSaveMediaMessage(quoted)
                 if (!m.isGroup && !isBotAdmins && !isGroupAdmins) {
-                    await shiro.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
-		    await fs.unlinkSync(media)
+                await shiro.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
+		            await fs.unlinkSync(media)
                 } else if (!isCreator) {
-                    await shiro.updateProfilePicture(shiro.user.id, { url: media }).catch((err) => fs.unlinkSync(media))
-		    await fs.unlinkSync(media)
+                await shiro.updateProfilePicture(shiro.user.id, { url: media }).catch((err) => fs.unlinkSync(media))
+	        	    await fs.unlinkSync(media)
                 }
             }
             break
@@ -266,7 +266,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 })
             }
             break
-	        case 'tomp4': case 'tovideo': {
+	          case 'tomp4': case 'tovideo': {
                 if (!quoted) throw 'Reply Image'
                 if (!/webp/.test(mime)) throw `Responda a um sticker animado *${prefix + command}*`
                 m.reply(mess.wait)
@@ -286,7 +286,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 await fs.unlinkSync(media)
             }
             break
-	        case 'tourl': {
+	          case 'tourl': {
                 m.reply(mess.wait)
                 let media = await shiro.downloadAndSaveMediaMessage(quoted)
                 if (/image/.test(mime)) {
@@ -299,7 +299,6 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 await fs.unlinkSync(media)
             }
             break
-
             case 'public': {
                 if (!isCreator) throw mess.owner
                 shiro.public = true
