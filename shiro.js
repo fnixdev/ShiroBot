@@ -421,8 +421,9 @@ _Por enquanto não faço muita coisa_
             break
             case 'neko': {
                 m.reply(mess.wait)
-                let anu = await neko()
-                hisoka.sendMessage(m.chat, { image: { url: anu }, caption: `_Vai bater pra 2d ne safado_` }, { quoted: m})
+                const neko = await axios.get('https://nekos.life/api/v2/img/neko')
+                const nekoimg = neko.data.url
+                shiro.sendMessage(m.chat, { image: { url: nekoimg }, caption: `_Vai bater pra 2d ne safado_` }, { quoted: m})
             }
             break
             case 'hentai': {
