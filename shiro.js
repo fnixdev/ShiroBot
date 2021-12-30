@@ -10,7 +10,6 @@ const { default: makeWASocket, BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessa
 const fs = require('fs')
 const util = require('util')
 const chalk = require('chalk')
-const yts = require('yt-search')
 const { exec, spawn, execSync } = require("child_process")
 const axios = require('axios')
 const { fromBuffer } = require('file-type')
