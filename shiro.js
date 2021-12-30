@@ -144,6 +144,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
 	             	let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+	             	if users == isCreator
 		            await shiro.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 	          }
           	break
@@ -234,7 +235,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 shiro.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
             }
             break
-            case 'sticker': case 's': case 'stickergif': case 'sgif': {
+            case 'sticker': case 'stickergif': case 'sgif': {
             if (!quoted) throw `Responda a uma imagem/video ${prefix + command}`
             m.reply(mess.wait)
                     if (/image/.test(mime)) {
