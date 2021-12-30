@@ -211,7 +211,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 }
             }
             break
-            case 'linkgroup': case 'linkgc': {
+            case 'linkgrupo': case 'linkgc': {
                 if (!m.isGroup) throw mess.group
                 let response = await shiro.groupInviteCode(m.chat)
                 shiro.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nLink do grupo : ${groupMetadata.subject}`, m, { detectLink: true })
