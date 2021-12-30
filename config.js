@@ -19,6 +19,7 @@ global.APIKeys = {
 }
 
 // Outros
+global.prefa = ['','!']
 global.packname = 'Shiro Bot'
 global.author = '\n'
 global.sessionName = 'shirosession'
