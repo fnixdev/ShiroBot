@@ -62,7 +62,7 @@ async function startShiro() {
                     ppgroup = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
                 }
                 if (anu.action == 'add') {
-                    shiro.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Opa @${num.split("@")[0]}, bem vindo ao grupo ${metadata.subject}.\nEspero que tenha uma boa estadia.` })
+                    shiro.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Opa @${num.split("@")[0]}, bem vindo ao grupo ${metadata.subject}. Espero que tenha uma boa estadia.` })
                 } else if (anu.action == 'remove') {
                     shiro.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Saiu e foi joga no vasco.` })
                 }
