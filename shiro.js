@@ -314,6 +314,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             }
             break
             case 'ping': case 'botstatus': case 'statusbot': {
+                if (!isCreator) return m.reply(mess.owner)
                 let timestamp = speed()
                 let latensi = speed() - timestamp
                 neww = performance.now()
