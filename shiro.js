@@ -249,10 +249,10 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 await shiro.groupUpdateSubject(m.chat, text).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
             }
             break
-            case 'setprofile': case 'setpp': {
+            case 'setprofile': case 'setpic': {
                 if (!isCreator) throw mess.owner
-                if (!quoted) throw 'Reply Image'
-                if (/image/.test(mime)) throw `balas image dengan caption *${prefix + command}*`
+                if (!quoted) throw 'Responda a uma imagem'
+                if (/image/.test(mime)) throw `Responda a uma foto com *${prefix + command}*`
                 let media = await shiro.downloadAndSaveMediaMessage(quoted)
                 if (!m.isGroup && !isBotAdmins && !isGroupAdmins) {
                 await shiro.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
@@ -394,8 +394,7 @@ _Por enquanto não faço muita coisa_
 ┌──⭓ *Menu de Grupo*
 │
 │▸ ${prefix}linkgrupo
-│▸ ${prefix}ephemeral [opção]
-│▸ ${prefix}setpp
+│▸ ${prefix}setpic
 │▸ ${prefix}setname [texto]
 │▸ ${prefix}group [opção]
 │▸ ${prefix}add @user
