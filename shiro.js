@@ -298,13 +298,13 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             case 'source': {
                 const fnix = 'https://telegra.ph/file/d7d397bcc9208d6407818.jpg'
                 anu = `
-
 ┌──⭓ *Shiro Bot* ✨
 │
 │▸ _Bot com intuito de aprendizado_
-│  _em programação usando NodeJS_
+│  _em programação em JavaScript_
 │
 │▸ *Dono*: fnixdev
+│▸ https://github.com/fnixdev/ShiroBot
 │
 └───────⭓
 `
@@ -496,8 +496,9 @@ _Por enquanto não faço muita coisa_
             }
             break
             case 'mine': {
+                const min = 'https://telegra.ph/file/0c97e206340a796a1e0cc.jpg'
                 anu = `_Clique no botão abaixo para baixar a ultima versão do minecraft_`
-                let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/shiromine.jpg') }, { upload: shiro.waUploadToServer })
+                let message = await prepareWAMessageMedia({ image: { url: min }}, { upload: shiro.waUploadToServer })
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                     templateMessage: {
                         hydratedTemplate: {
