@@ -297,18 +297,33 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 
             case 'source': {
                 const fnix = 'https://telegra.ph/file/d7d397bcc9208d6407818.jpg'
-                const msg = `
+                anu = `
+
 ┌──⭓ *Shiro Bot* ✨
 │
-|▸ _Bot com intuito de aprendizado_
-|  _em programação usando NodeJS_
-|
+│▸ _Bot com intuito de aprendizado_
+│  _em programação usando NodeJS_
+│
 │▸ *Dono*: fnixdev
-│▸ *Source*: https://github.com/fnixdev/ShiroBot
 │
 └───────⭓
 `
-                shiro.sendMessage(m.chat, { image: { url: fnix }, caption: msg }, { quoted: m})
+                let message = await prepareWAMessageMedia({ image: { url: fnix } }, { upload: shiro.waUploadToServer })
+                const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+                    templateMessage: {
+                        hydratedTemplate: {
+                            imageMessage: message.imageMessage,
+                            hydratedContentText: anu,
+                            hydratedButtons: [{
+                                urlButton: {
+                                    displayText: 'Source Code',
+                                    url: 'https://github.com/fnixdev/ShiroBot'
+                                }
+                            }]
+                        }
+                    }
+                }), { userJid: m.chat, quoted: m })
+                shiro.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
             case 'sticker': case 'stickergif': case 'sgif': {
