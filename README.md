@@ -1,9 +1,12 @@
-
-<img src="https://i.imgur.com/8m5yu2Y.gif" width="220" height="300" align="center">
-<h2 align="center"Shiro Bot ✨</h2>
+<p align="center">
+  <img src="https://c.tenor.com/AQw5BIsQFRAAAAAC/shiro-ngnl.gif" width="400" height="400"/>
+</p>
+<h2 align="center">
+  <b>Shiro Bot ✨</b>
+</h2>
 
 * Bᴏᴛ ᴄᴏᴍ ɪɴᴛᴜɪᴛᴏ ᴅᴇ ᴀᴘʀᴇɴᴅᴇʀ ᴘʀᴏɢʀᴀᴍᴀᴄ̧ᴀ̃ᴏ ᴇᴍ JᴀᴠᴀSᴄʀɪᴘᴛ 
-* Aᴜᴛᴏʀ: [ғɴɪx](https://github.com/fnixdev)
+* Aᴜᴛᴏʀ: [fnixdev](https://github.com/fnixdev)
 
 ### Disclaimer
 ```
