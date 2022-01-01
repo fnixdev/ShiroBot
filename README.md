@@ -1,15 +1,19 @@
-<p align="center">
-<a href="https://t.me/kannaxup"><img src="https://telegra.ph/file/fc1957856f3ed0625d0ac.jpg" width="400" height="250"/>
-</p>
-<p align="center">
-<a href="https://github.com/fnixdev"><img title="Author" src="https://img.shields.io/badge/Author-fnixdev-red.svg?style=for-the-badge&logo=github"></a>
-<a href="http://fnixdev.github.io/"><img title="Bio" src="https://img.shields.io/badge/FNIXDEV-BIO-red.svg?style=for-the-badge&logo=appveyor"></a>
-</p>
+<div>
+<h2 align="center"Shiro Bot ✨</h2>
+<img src="https://i.imgur.com/NCxOohk.gif" width="150" height="150" align="right">
+<li>
+<b>Bᴏᴛ ᴄᴏᴍ ɪɴᴛᴜɪᴛᴏ ᴅᴇ ᴀᴘʀᴇɴᴅᴇʀ ᴘʀᴏɢʀᴀᴍᴀᴄ̧ᴀ̃ᴏ ᴇᴍ JᴀᴠᴀSᴄʀɪᴘᴛ <b/></li>
+<li>
+<b>Aᴜᴛᴏʀ:</b> [ғɴɪx](https://github.com/fnixdev)</li>
+</div>
 
-
-## Disclaimer
+### Disclaimer
 ```
     Bot whatsapp Feito usando baileys#MD
     Ainda não possuí muitas funções..
 ```
 
+### Agradecimentos
+
+* [BaileysMD](https://github.com/adiwajshing/baileys/tree/multi-device)
+* [Hisoka](https://github.com/DikaArdnt/Hisoka-Morou)

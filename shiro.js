@@ -2,7 +2,7 @@
  * Base Create By Dika Ardnt.
  * Updated by fnixdev
  * Follow https://github.com/fnixdev
- */
+ **/
 
 
 require('./config')
@@ -80,23 +80,34 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             }
         })
 
-        // Public & Self
+
+///////////////////////////////////////////////////////////
+//                                                       //
+//                   Public/Self                         //
+//                                                       //
+///////////////////////////////////////////////////////////
+
         if (!shiro.public) {
             if (!m.key.fromMe) return
         }
 
-        // Push Message To Console
+///////////////////////////////////////////////////////////
+//                                                       //
+//           Lida com as mensagens no console            //
+//                                                       //
+///////////////////////////////////////////////////////////
+
         if (m.message) {
             console.log(chalk.black(chalk.bgWhite('[ MSG ]')), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Em'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
         }
 
+///////////////////////////////////////////////////////////
+//                                                       //
+//                Comandos de Dono                       //
+//                                                       //
+///////////////////////////////////////////////////////////
+
         switch(command) {
-	    case 'sc': {
-                m.reply('Script : https://github.com/fnixdev/ShiroBot\n\nNão se esqueça de dar uma star ✨.')
-            }
-            break
-  
-            // Dono
             case 'chat': {
                 if (!isCreator) throw mess.owner
                 if (!q) throw 'Option : 1. mute\n2. unmute\n3. archive\n4. unarchive\n5. read\n6. unread\n7. delete'
@@ -131,8 +142,69 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 await shiro.groupLeave(m.chat).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
             }
             break
-  
-            // ADM
+            case 'public': {
+
+                if (!isCreator) throw mess.owner
+
+                shiro.public = true
+                m.reply('Bot agora esta no modo público.')
+            }
+            break
+            case 'self': {
+                if (!isCreator) throw mess.owner
+                shiro.public = false
+                m.reply('Bot agora esta no modo privado')
+            }
+            break
+            case 'ping': case 'botstatus': case 'statusbot': {
+                if (!isCreator) return m.reply(mess.owner)
+                let timestamp = speed()
+                let latensi = speed() - timestamp
+                neww = performance.now()
+                oldd = performance.now()
+                respon = `*Ping*: ${latensi.toFixed(4)}ms\n*Uptime*: ${runtime(process.uptime())}\n*RAM*: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}\n\n*NodeJS Usage*\n${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.length)),' ')}: ${formatp(used[key])}`).join('\n')}
+
+                `.trim()
+                m.reply(respon)
+            }
+            break
+           case 'block': {
+	             	if (!isCreator) throw mess.owner
+	            	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+	            	await shiro.updateBlockStatus(users, 'block').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	          }
+          	break
+            case 'unblock': {
+		            if (!isCreator) throw mess.owner
+	             	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+		            await shiro.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	          }
+          	break
+            case 'eval': {
+
+                if (!isCreator) return m.reply(mess.owner)
+                function Return(sul) {
+                    sat = JSON.stringify(sul, null, 2)
+                    bang = util.format(sat)
+                        if (sat == undefined) {
+                            bang = util.format(sul)
+                        }
+                        return m.reply(bang)
+                }
+                try {
+                    m.reply(util.format(eval(`(async () => { return ${budy.slice(3)} })()`)))
+                } catch (e) {
+                    m.reply(String(e))
+                }
+            }
+            break
+
+///////////////////////////////////////////////////////////
+//                                                       //
+//                   Comandos de ADM                     //
+//                                                       //
+///////////////////////////////////////////////////////////
+
           	case 'kick': {
 	            	if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
@@ -165,18 +237,6 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             		await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
            	}
 	          break
-           case 'block': {
-	             	if (!isCreator) throw mess.owner
-	            	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-	            	await shiro.updateBlockStatus(users, 'block').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-	          }
-          	break
-            case 'unblock': {
-		            if (!isCreator) throw mess.owner
-	             	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		            await shiro.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-	          }
-          	break
 	          case 'setname': case 'setsubject': {
                 if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
@@ -229,11 +289,27 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 }
             }
             break
-            case 'delete': case 'del': {
-                if (!m.quoted) throw false
-                let { chat, fromMe, id, isBaileys } = m.quoted
-                if (!isBaileys) throw 'A mensagem não foi enviada pelo bot!'
-                shiro.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
+
+///////////////////////////////////////////////////////////
+//                                                       //
+//                   Comandos Gerais                     //
+//                                                       //
+///////////////////////////////////////////////////////////
+
+            case 'source': {
+                const fnix = 'https://telegra.ph/file/d7d397bcc9208d6407818.jpg'
+                const msg = `
+┌──⭓ *Shiro Bot* ✨
+│
+|▸ _Bot com intuito de aprendizado_
+|  _em programação usando NodeJS_
+|
+│▸ *Dono*: fnixdev
+│▸ *Source*: https://github.com/fnixdev/ShiroBot
+│
+└───────⭓
+`
+                shiro.sendMessage(m.chat, { image: { url: fnix }, caption: msg }, { quoted: m})
             }
             break
             case 'sticker': case 'stickergif': case 'sgif': {
@@ -301,62 +377,15 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 await fs.unlinkSync(media)
             }
             break
-            case 'public': {
-                if (!isCreator) throw mess.owner
-                shiro.public = true
-                m.reply('Bot agora esta no modo público.')
-            }
-            break
-            case 'self': {
-                if (!isCreator) throw mess.owner
-                shiro.public = false
-                m.reply('Bot agora esta no modo privado')
-            }
-            break
-            case 'ping': case 'botstatus': case 'statusbot': {
-                if (!isCreator) return m.reply(mess.owner)
-                let timestamp = speed()
-                let latensi = speed() - timestamp
-                neww = performance.now()
-                oldd = performance.now()
-                respon = `
-*Ping*: ${latensi.toFixed(4)}ms
-*Uptime*: ${runtime(process.uptime())}
-*RAM*: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}
-
-*NodeJS Usage*
-${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.length)),' ')}: ${formatp(used[key])}`).join('\n')}
-
-                `.trim()
-                m.reply(respon)
-            }
-            break
             case 'owner': case 'creator': case 'dono': {
                 let vcard = 'BEGIN:VCARD\n' // metadata of the contact card
                     + 'VERSION:3.0\n' 
                     + 'N:;fnix.;;;'
-                    + 'FN:Luis Gustavo.\n' // full name
-                    + 'ORG:fnix (KuuhakuTeam);\n' // the organization of the contact
-                    + 'TEL;type=CELL;type=VOICE;waid=553189092420:+55 31 89092420\n' // WhatsApp ID + phone number
+                    + 'FN:Luis Gustavo.\n'
+                    + 'ORG:fnix (KuuhakuTeam);\n'
+                    + 'TEL;type=CELL;type=VOICE;waid=553189092420:+55 31 89092420\n'
                     + 'END:VCARD'
                 shiro.sendMessage(m.chat, { contacts: { displayName: 'fnix.', contacts: [{ vcard }] } }, { quoted: m })
-            }
-            break
-            case 'eval': {
-                if (!isCreator) return m.reply(mess.owner)
-                function Return(sul) {
-                    sat = JSON.stringify(sul, null, 2)
-                    bang = util.format(sat)
-                        if (sat == undefined) {
-                            bang = util.format(sul)
-                        }
-                        return m.reply(bang)
-                }
-                try {
-                    m.reply(util.format(eval(`(async () => { return ${budy.slice(3)} })()`)))
-                } catch (e) {
-                    m.reply(String(e))
-                }
             }
             break
             case 'help': case 'menu': {
@@ -366,53 +395,53 @@ _Por enquanto não faço muita coisa_
 
 ┌──⭓ *Menu Principal*
 │
-│⭔ ${prefix}ping
-│⭔ ${prefix}dono
-│⭔ ${prefix}menu / ${prefix}help 
+│▸ ${prefix}dono
+│▸ ${prefix}menu / ${prefix}help 
 │
 └───────⭓
 
 ┌──⭓ *Menu de Grupo*
 │
-│⭔ ${prefix}linkgrupo
-│⭔ ${prefix}ephemeral [opção]
-│⭔ ${prefix}setpp
-│⭔ ${prefix}setname [texto]
-│⭔ ${prefix}group [opção]
-│⭔ ${prefix}add @user
-│⭔ ${prefix}kick @user
-│⭔ ${prefix}promote @user
-│⭔ ${prefix}demote @user
+│▸ ${prefix}linkgrupo
+│▸ ${prefix}ephemeral [opção]
+│▸ ${prefix}setpp
+│▸ ${prefix}setname [texto]
+│▸ ${prefix}group [opção]
+│▸ ${prefix}add @user
+│▸ ${prefix}kick @user
+│▸ ${prefix}promote @user
+│▸ ${prefix}demote @user
 │
 └───────⭓
 
 ┌──⭓ *Outros Comandos*
 │
-│⭔ ${prefix}mine
-│⭔ ${prefix}discord
-│⭔ ${prefix}neko
-│⭔ ${prefix}waifu
-│⭔ ${prefix}wallpaper
+│▸ ${prefix}mine
+│▸ ${prefix}discord
+│▸ ${prefix}neko
+│▸ ${prefix}waifu
+│▸ ${prefix}wallpaper
 │
 └───────⭓ 
 
 ┌──⭓ *Convert Menu*
 │
-│⭔ ${prefix}toimage
-│⭔ ${prefix}sticker
-│⭔ ${prefix}tovideo
-│⭔ ${prefix}togif
-│⭔ ${prefix}tourl
+│▸ ${prefix}toimage
+│▸ ${prefix}sticker
+│▸ ${prefix}tovideo
+│▸ ${prefix}togif
+│▸ ${prefix}tourl
 │
 └───────⭓ 
 
 ┌──⭓ *Menu Dono*
 │
-│⭔ ${prefix}chat [option]
-│⭔ ${prefix}join [link]
-│⭔ ${prefix}leave
-│⭔ ${prefix}block @user
-│⭔ ${prefix}unblock @user
+│▸ ${prefix}ping
+│▸ ${prefix}chat [option]
+│▸ ${prefix}join [link]
+│▸ ${prefix}leave
+│▸ ${prefix}block @user
+│▸ ${prefix}unblock @user
 │
 └───────⭓
 `
@@ -489,7 +518,6 @@ _Por enquanto não faço muita coisa_
                         m.reply(String(e))
                     }
                 }
-
                 if (budy.startsWith('>')) {
                     if (!isCreator) return m.reply(mess.owner)
                     try {
@@ -510,8 +538,6 @@ _Por enquanto não faço muita coisa_
                     })
                 }
         }
-        
-
     } catch (err) {
         m.reply(util.format(err))
     }
