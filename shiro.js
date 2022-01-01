@@ -211,10 +211,10 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 const msg = 'Usuario removido.'
                 const norm = 'Eu preciso que você marque ou mencione um usuario.'
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-	              if (users){
-	                await shiro.groupParticipantsUpdate(m.chat, [users], 'remove'), m.reply(msg)
+	              if (!users){
+	                  m.reply(norm)
 	              } else {
-	                m.reply(norm)
+	                  await shiro.groupParticipantsUpdate(m.chat, [users], 'remove'), m.reply(msg)
 	              }
           	}
 	          break
