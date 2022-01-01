@@ -158,13 +158,12 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             }
             break
             case 'ping': case 'botstatus': case 'statusbot': {
-                if (!isCreator) return m.reply(mess.owner)
+                if (!isCreator) throw mess.owner
                 let timestamp = speed()
                 let latensi = speed() - timestamp
                 neww = performance.now()
                 oldd = performance.now()
                 respon = `*Ping*: ${latensi.toFixed(4)}ms\n*Uptime*: ${runtime(process.uptime())}\n*RAM*: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}\n\n*NodeJS Usage*\n${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.length)),' ')}: ${formatp(used[key])}`).join('\n')}
-
                 `.trim()
                 m.reply(respon)
             }
