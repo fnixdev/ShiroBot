@@ -97,7 +97,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 ///////////////////////////////////////////////////////////
 
         if (m.message) {
-            console.log(chalk.black(chalk.bgWhite('[ MSG ]')), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Em'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
+            console.log(chalk.black(chalk.bgWhite('[ MSG ]')), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Em'), chalk.green(groupName ? pushname : 'Private Chat', m.chat))
         }
 
 ///////////////////////////////////////////////////////////
@@ -392,7 +392,7 @@ _Por enquanto não faço muita coisa_
 
 ┌──⭓ *Menu Principal*
 │
-│▸ ${prefix}shiro / ${prefix}source
+│▸ ${prefix}shiro / ${prefix}
 │▸ ${prefix}dono
 │▸ ${prefix}menu / ${prefix}help 
 │
