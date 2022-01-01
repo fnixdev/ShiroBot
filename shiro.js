@@ -505,6 +505,27 @@ _Por enquanto não faço muita coisa_
                 shiro.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
+            case 'discord': {
+                const disc = 'https://telegra.ph/file/5202907a4419530e0848d.jpg'
+                anu = `_Clique no botão abaixo para baixar entrar no nosso servidor do Discord_`
+                let message = await prepareWAMessageMedia({ image: { url: disc }}, { upload: shiro.waUploadToServer })
+                const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+                    templateMessage: {
+                        hydratedTemplate: {
+                            imageMessage: message.imageMessage,
+                            hydratedContentText: anu,
+                            hydratedButtons: [{
+                                urlButton: {
+                                    displayText: 'Entrar no Discord',
+                                    url: 'https://discord.gg/PQncrzqHmb'
+                                }
+                            }]
+                        }
+                    }
+                }), { userJid: m.chat, quoted: m })
+                shiro.relayMessage(m.chat, template.message, { messageId: template.key.id })
+            }
+            break
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return m.reply(mess.owner)
