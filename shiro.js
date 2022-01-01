@@ -295,12 +295,12 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 //                                                       //
 ///////////////////////////////////////////////////////////
 
-            case 'source': {
+            case 'source': case 'shiro': {
                 const fnix = 'https://telegra.ph/file/d7d397bcc9208d6407818.jpg'
                 anu = `┌──⭓ *Shiro Bot* ✨
 │
-│▸ _Bot com intuito de aprendizado_
-│  _em programação em JavaScript_
+│▸ _Bot com intuito de aprender_
+│  _programação em JavaScript_
 │
 │▸ *Dono*: fnixdev
 │▸ https://github.com/fnixdev/ShiroBot
@@ -392,6 +392,7 @@ _Por enquanto não faço muita coisa_
 
 ┌──⭓ *Menu Principal*
 │
+│▸ ${prefix}shiro / ${prefix}source
 │▸ ${prefix}dono
 │▸ ${prefix}menu / ${prefix}help 
 │
