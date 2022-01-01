@@ -132,8 +132,8 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             break
             case 'join': {
                 if (!isCreator) throw mess.owner
-                if (!text) throw 'Masukkan Link Group!'
-                if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) throw 'Link Invalid!'
+                if (!text) throw 'Insira o link do grupo!'
+                if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) throw 'Link Invalido!'
                 m.reply(mess.wait)
                 let result = args[0].split('https://chat.whatsapp.com/')[1]
                 await shiro.groupAcceptInvite(result).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
@@ -145,9 +145,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             }
             break
             case 'public': {
-
                 if (!isCreator) throw mess.owner
-
                 shiro.public = true
                 m.reply('Bot agora esta no modo público.')
             }
@@ -183,7 +181,6 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 	          }
           	break
             case 'eval': {
-
                 if (!isCreator) return m.reply(mess.owner)
                 function Return(sul) {
                     sat = JSON.stringify(sul, null, 2)
@@ -211,8 +208,9 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 	            	if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
+                const msg = 'Usuario removido.'
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-	            	await shiro.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	            	await shiro.groupParticipantsUpdate(m.chat, [users], 'remove').catch((err) => m.reply(jsonformat(err)))
           	}
 	          break
 	          case 'add': {
