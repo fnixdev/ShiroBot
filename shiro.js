@@ -210,7 +210,12 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 if (!isGroupAdmins) throw mess.admin
                 const msg = 'Usuario removido.'
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-	            	await shiro.groupParticipantsUpdate(m.chat, [users], 'remove').catch((err) => m.reply(jsonformat(err)))
+	              if (users){
+	                await shiro.groupParticipantsUpdate(m.chat, [users], 'remove')
+	              }
+	              else {
+	                m.reply('Eu preciso que você marque ou mencione um usuario.')
+	              }
           	}
 	          break
 	          case 'add': {
