@@ -98,7 +98,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 
         if (m.message) {
             if (isCmd){
-                console.log(chalk.black(chalk.bgWhite('[ CMD ]')), chalk.black(chalk.cyanBright(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender))}
+                console.log(chalk.black(chalk.bgGreenBright('[ CMD ]')), chalk.black(chalk.cyanBright(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender))}
             if (!command){
                 console.log(chalk.black(chalk.bgWhite('[ MSG ]')), chalk.black(chalk.cyanBright(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender))}
             }
