@@ -21,6 +21,7 @@ const { performance } = require('perf_hooks')
 const { pinterest, wallpaper, wikimedia, porno, neko, hentai, quotesAnime } = require('./lib/scraper')
 const { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./lib/myfunc')
+const { y2mateV, y2mateA } = require('./lib/y2mate')
 
 global.owner = [config.dono]
 
@@ -209,12 +210,11 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
                 const msg = 'Usuario removido.'
-                const norm = 'Eu preciso que você marque ou mencione um usuario.'
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-	              if (!users){
-	                  throw norm
+	              if (users){
+	                await shiro.groupParticipantsUpdate(m.chat, [users], 'remove'), m.reply(msg)
 	              } else {
-	                  await shiro.groupParticipantsUpdate(m.chat, [users], 'remove'), m.reply(msg)
+	                await m.reply('Eu preciso que você marque ou mencione um usuario.')
 	              }
           	}
 	          break
