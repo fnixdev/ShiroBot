@@ -214,7 +214,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 	              if (users){
 	                await shiro.groupParticipantsUpdate(m.chat, [users], 'remove'), m.reply(msg)
 	              } else {
-	                await m.reply('Eu preciso que você marque ou mencione um usuario.')
+	                await m.reply('Eu preciso que você marque ou mencione um usuario')
 	              }
           	}
 	          break
