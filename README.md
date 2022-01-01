@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://c.tenor.com/AQw5BIsQFRAAAAAC/shiro-ngnl.gif" width="400" height="400"/>
+  <img src="https://c.tenor.com/AQw5BIsQFRAAAAAC/shiro-ngnl.gif" width="498" height="278"/>
 </p>
 <h2 align="center">
   <b>Shiro Bot ✨</b>
