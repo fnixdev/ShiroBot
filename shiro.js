@@ -482,10 +482,10 @@ _Por enquanto não faço muita coisa_
                 if (!text) throw 'Insira o link do video!'
                 if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
                 m.reply(mess.wait)
-                res = await axios.get(`https://freerestapi.herokuapp.com/api/ytmp3?url=${text}`).catch(e => {
+                res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp3?url=${text}`).catch(e => {
                         reply('_[ ! ] O erro de consulta inserido não existe_')
                     })
-                result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res.data.title}_\nCanal : ${res.data.channel}\nViews : ${res.data.views}`
+                result = `*Título* : _${res.data.title}_\n*Canal* : _${res.data.channel}_\n*Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
                 m.reply(result)
                 shiro.sendMessage(m.chat, { audio: { url: res.data.url }, }, { quoted: m})
             }
@@ -494,10 +494,11 @@ _Por enquanto não faço muita coisa_
                 if (!text) throw 'Insira o link do video!'
                 if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
                 m.reply(mess.wait)
-                res = await axios.get(`https://freerestapi.herokuapp.com/api/ytmp4?url=${text}`).catch(e => {
+                res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp4?url=${text}`).catch(e => {
                         reply('_[ ! ] O erro de consulta inserido não existe_')
                     })
-                result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res.data.title}_\nCanal : ${res.data.channel}\nViews : ${res.data.views}`
+                
+                result = `*Título* : _${res.data.title}_\n*Canal* : _${res.data.channel}_\n*Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
                 m.reply(result)
                 shiro.sendMessage(m.chat, { video: { url: res.data.url }, }, { quoted: m})
             }
