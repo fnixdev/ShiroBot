@@ -462,7 +462,7 @@ _Por enquanto não faço muita coisa_
                 if (!text) throw 'Insira o link do video!'
                 if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
                 m.reply(mess.wait)
-                res = await y2mateA(text).catch(e => {
+                res = await y2mateV(text).catch(e => {
                     m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
                 })
                 result = `*Dados obtidos com sucesso!*\nTítulo : ${res[0].judul}\nExt : MP4\nTamanho : ${res[0].size}`
