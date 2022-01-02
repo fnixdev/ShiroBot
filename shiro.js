@@ -16,6 +16,7 @@ const { fromBuffer } = require('file-type')
 const path = require('path')
 const os = require('os')
 const speed = require('performance-now')
+const yts = require('yt-search')
 const config = JSON.parse(fs.readFileSync('./src/config.json'))
 const { performance } = require('perf_hooks')
 const { pinterest, wallpaper, wikimedia, porno, neko, hentai, quotesAnime } = require('./lib/scraper')
@@ -449,9 +450,10 @@ _Por enquanto não faço muita coisa_
 
             case 'yta': {
                 if (!text) throw 'Insira o link do video!'
-                if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
-                m.reply(mess.wait)
-                res = await y2mateA(text).catch(e => {
+                res = await yts(`${text}`).catch(e => {
+                  m.reply('_[ ! ] O erro de consulta inserido não existe_')
+                })
+                resp = await y2mateA(resp).catch(e => {
                     m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
                 })
                 result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res[0].judul}_\nFormato : Áudio\nTamanho : ${res[0].size}`
