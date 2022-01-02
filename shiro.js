@@ -485,7 +485,7 @@ _Por enquanto não faço muita coisa_
             case 'mp3': {
                 if (!text) throw 'Insira o link do video!'
                 const search = await yts.search(text)
-                const ids = search.data.videos.id;
+                const ids = search.videos.id;
                 m.reply(mess.wait)
                 res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp3?url=https://www.youtube.com/watch?v=${ids}`)
                 result = `*Título* : _${res.data.title}_\n*Canal* : _${res.data.channel}_\n*Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
