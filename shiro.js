@@ -18,6 +18,7 @@ const os = require('os')
 const speed = require('performance-now')
 const yts = require('yt-search')
 const config = JSON.parse(fs.readFileSync('./src/config.json'))
+const Innertube = require('youtubei.js');
 const { performance } = require('perf_hooks')
 const { pinterest, wallpaper, wikimedia, porno, neko, hentai, quotesAnime } = require('./lib/scraper')
 const { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
@@ -53,6 +54,9 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : ''
       	const isBotAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
         const isGroupAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
+        
+        // Youtube
+        const yts = await new Innertube(); 
 
         // Bot Status
         const used = process.memoryUsage()
@@ -480,16 +484,17 @@ _Por enquanto não faço muita coisa_
             // Yt em testes
             case 'mp3': {
                 if (!text) throw 'Insira o link do video!'
-                if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
+                const search = await youtube.search(text)
+                ids = search.videos.id
                 m.reply(mess.wait)
-                res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp3?url=${text}`).catch(e => {
+                res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp3?url=https://www.youtube.com/watch?v=${ids}`).catch(e => {
                         reply('_[ ! ] O erro de consulta inserido não existe_')
                     })
                 result = `*Título* : _${res.data.title}_\n*Canal* : _${res.data.channel}_\n*Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
                 m.reply(result)
                 shiro.sendMessage(m.chat, { audio: { url: res.data.url }, }, { quoted: m})
             }
-            break
+            break/*
             case 'mp4': {
                 if (!text) throw 'Insira o link do video!'
                 if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
@@ -502,7 +507,7 @@ _Por enquanto não faço muita coisa_
                 m.reply(result)
                 shiro.sendMessage(m.chat, { video: { url: res.data.url }, }, { quoted: m})
             }
-            break
+            break*/
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return m.reply(mess.owner)
