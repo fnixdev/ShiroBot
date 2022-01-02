@@ -447,17 +447,14 @@ _Por enquanto não faço muita coisa_
 //                                                       //
 ///////////////////////////////////////////////////////////
 
-            case 'ytmp3': {
+            case 'yta': {
                 if (!text) throw 'Insira o link do video!'
                 if (!isUrl(args[0]) && !args[0].includes('yout')) throw 'Link Invalido!'
                 m.reply(mess.wait)
                 res = await y2mateA(text).catch(e => {
                     m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
                 })
-                result = `*Dados obtidos com sucesso!*
-༄ Título : ${res[0].judul}༆
-༄ Ext : MP3༆
-༄ Tamanho : ${res[0].size}༆`
+                result = `*Dados obtidos com sucesso!*\n༄ Título : ${res[0].judul}༆\n༄ Ext : MP3༆\n༄ Tamanho : ${res[0].size}༆`
                 m.reply(result)
             }
             break
