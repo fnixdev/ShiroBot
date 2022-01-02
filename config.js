@@ -8,15 +8,6 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-// Site API
-global.APIs = {
-	zenz: 'https://zenzapi.xyz',
-}
-
-// Apikey
-global.APIKeys = {
-	'https://zenzapi.xyz': 'Sua Key API',
-}
 
 // Outros
 global.prefa = ['','!']
