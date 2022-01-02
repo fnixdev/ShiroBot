@@ -469,7 +469,7 @@ _Por enquanto não faço muita coisa_
                 })
                 result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res[0].judul}_\nFormato : Vídeo\nTamanho : ${res[0].size}`
                 m.reply(result)
-                shiro.sendMessage(m.chat, { audio: { url: res[0].link }, }, { quoted: m})
+                shiro.sendMessage(m.chat, { video: { url: res[0].link }, }, { quoted: m})
             }
             break
             default:
