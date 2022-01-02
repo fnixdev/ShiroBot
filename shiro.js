@@ -113,21 +113,11 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         switch(command) {
             case 'chat': {
                 if (!isCreator) throw mess.owner
-                if (!q) throw 'Option : 1. mute\n2. unmute\n3. archive\n4. unarchive\n5. read\n6. unread\n7. delete'
+                if (!q) throw 'Opções :\n 1 - mute\n2 - unmute'
                 if (args[0] === 'mute') {
                     shiro.chatModify({ mute: 'Infinity' }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
                 } else if (args[0] === 'unmute') {
                     shiro.chatModify({ mute: null }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-                } else if (args[0] === 'archive') {
-                    shiro.chatModify({  archive: true }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-                } else if (args[0] === 'unarchive') {
-                    shiro.chatModify({ archive: false }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-                } else if (args[0] === 'read') {
-                    shiro.chatModify({ markRead: true }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-                } else if (args[0] === 'unread') {
-                    shiro.chatModify({ markRead: false }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-                } else if (args[0] === 'delete') {
-                    shiro.chatModify({ clear: { message: { id: m.quoted.id, fromMe: true }} }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
                 }
             }
             break
@@ -180,23 +170,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 		            await shiro.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 	          }
           	break
-            case 'eval': {
-                if (!isCreator) return m.reply(mess.owner)
-                function Return(sul) {
-                    sat = JSON.stringify(sul, null, 2)
-                    bang = util.format(sat)
-                        if (sat == undefined) {
-                            bang = util.format(sul)
-                        }
-                        return m.reply(bang)
-                }
-                try {
-                    m.reply(util.format(eval(`(async () => { return ${budy.slice(3)} })()`)))
-                } catch (e) {
-                    m.reply(String(e))
-                }
-            }
-            break
+
 
 ///////////////////////////////////////////////////////////
 //                                                       //
@@ -206,7 +180,6 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 
           	case 'kick': {
 	            	if (!m.isGroup) throw mess.group
-                if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
                 const msg = 'Usuario removido.'
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -241,40 +214,6 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             		await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
            	}
 	          break
-	          case 'setname': case 'setsubject': {
-                if (!m.isGroup) throw mess.group
-                if (!isBotAdmins) throw mess.botAdmin
-                if (!isGroupAdmins) throw mess.admin
-                if (!text) throw 'Text ?'
-                await shiro.groupUpdateSubject(m.chat, text).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-            }
-            break
-            case 'setprofile': case 'setpic': {
-                if (!isCreator) throw mess.owner
-                if (!quoted) throw 'Responda a uma imagem'
-                if (/image/.test(mime)) throw `Responda a uma foto com *${prefix + command}*`
-                let media = await shiro.downloadAndSaveMediaMessage(quoted)
-                if (!m.isGroup && !isBotAdmins && !isGroupAdmins) {
-                await shiro.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
-		            await fs.unlinkSync(media)
-                } else if (!isCreator) {
-                await shiro.updateProfilePicture(shiro.user.id, { url: media }).catch((err) => fs.unlinkSync(media))
-	        	    await fs.unlinkSync(media)
-                }
-            }
-            break
-            case 'group': case 'grup': {
-                if (!m.isGroup) throw mess.group
-                if (!isBotAdmins) throw mess.botAdmin
-                if (!isGroupAdmins) throw mess.admin
-                if (!text) throw 'Masukkan value open/close'
-                if (args[0].toLowerCase() === 'close') {
-                    await shiro.groupSettingUpdate(m.chat, 'announcement').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-                } else if (args[0].toLowerCase() === 'open') {
-                    await shiro.groupSettingUpdate(m.chat, 'not_announcement').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-                }
-            }
-            break
             case 'linkgrupo': case 'linkgc': {
                 if (!m.isGroup) throw mess.group
                 let response = await shiro.groupInviteCode(m.chat)
@@ -290,31 +229,23 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 
             case 'source': case 'shiro': {
                 const fnix = 'https://telegra.ph/file/d7d397bcc9208d6407818.jpg'
-                anu = `┌──⭓ *Shiro Bot* ✨
-│
-│▸ _Bot com intuito de aprender_
-│  _programação em JavaScript_
-│
-│▸ *Dono*: fnixdev
-│▸ https://github.com/fnixdev/ShiroBot
-│
-└───────⭓`
-            shiro.sendMessage(m.chat, { image: { url: fnix }, caption: anu }, { quoted: m })
+                anu = `┌──⭓ *Shiro Bot* ✨\n│\n│▸ _Bot com intuito de aprender_\n│  _programação em JavaScript_\n│\n│▸ *Dono*: fnixdev\n│▸ https://github.com/fnixdev/ShiroBot\n│\n└───────⭓\n`
+                shiro.sendMessage(m.chat, { image: { url: fnix }, caption: anu }, { quoted: m })
                 }
             break
             case 'sticker': case 'stickergif': case 'sgif': {
-            if (!quoted) throw `Responda a uma imagem/video ${prefix + command}`
-            m.reply(mess.wait)
-                    if (/image/.test(mime)) {
-                let media = await quoted.download()
-                let encmedia = await shiro.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
+                if (!quoted) throw `Responda a uma imagem/video ${prefix + command}`
+                m.reply(mess.wait)
+                if (/image/.test(mime)) {
+                    let media = await quoted.download()
+                    let encmedia = await shiro.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
                 await fs.unlinkSync(encmedia)
-            } else if (/video/.test(mime)) {
-                if ((quoted.msg || quoted).seconds > 11) return m.reply('10 segundos no máximo!')
-                let media = await quoted.download()
-                let encmedia = await shiro.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
+                } else if (/video/.test(mime)) {
+                if ((quoted.msg || quoted).seconds > 11)   return m.reply('10 segundos no máximo!')
+                    let media = await quoted.download()
+                    let encmedia = await shiro.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
                 await fs.unlinkSync(encmedia)
-            } else {
+                } else {
                         throw `Envie uma foto/video ${prefix + command}\nO video deve ter de 1 a 9 segundos`
                 }
             }
@@ -379,14 +310,13 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             }
             break
             case 'help': case 'menu': {
-                anu = `
-    _Oi, eu sou ShiroBot ✨_
+                anu = `    _Oi, eu sou ShiroBot ✨_
 _Por enquanto não faço muita coisa_
 
 ┌──⭓ *Menu Principal*
 │
-│▸ ${prefix}shiro / ${prefix}
 │▸ ${prefix}dono
+│▸ ${prefix}shiro / ${prefix}source
 │▸ ${prefix}menu / ${prefix}help 
 │
 └───────⭓
@@ -394,9 +324,6 @@ _Por enquanto não faço muita coisa_
 ┌──⭓ *Menu de Grupo*
 │
 │▸ ${prefix}linkgrupo
-│▸ ${prefix}setpic
-│▸ ${prefix}setname [texto]
-│▸ ${prefix}group [opção]
 │▸ ${prefix}add @user
 │▸ ${prefix}kick @user
 │▸ ${prefix}promote @user
@@ -434,7 +361,7 @@ _Por enquanto não faço muita coisa_
 │▸ ${prefix}unblock @user
 │
 └───────⭓
-`
+
                 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/shiro.jpg') }, { upload: shiro.waUploadToServer })
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                     templateMessage: {
