@@ -449,7 +449,8 @@ _Por enquanto não faço muita coisa_
 ///////////////////////////////////////////////////////////
 
 
-            // Reservado
+            /* Reservado
+            
             case 'yta': {
                 if (!text) throw 'Insira o link do video!'
                 res = await yts(`${text}`).catch(e => {
@@ -474,7 +475,7 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { video: { url: res[0].link }, }, { quoted: m})
             }
             break
-            // Reservado
+            */
 
             // Yt em testes
             case 'mp3': {
@@ -484,12 +485,23 @@ _Por enquanto não faço muita coisa_
                 res = await axios.get(`https://freerestapi.herokuapp.com/api/ytmp3?url=${text}`).catch(e => {
                         reply('_[ ! ] O erro de consulta inserido não existe_')
                     })
-                result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res.data.title}_\nFormato : Audio\nLink : ${res.data.url}`
+                result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res.data.title}_\nCanal : ${res.data.channel}\nViews : ${res.data.views}`
                 m.reply(result)
                 shiro.sendMessage(m.chat, { audio: { url: res.data.url }, }, { quoted: m})
             }
             break
-
+            case 'mp4': {
+                if (!text) throw 'Insira o link do video!'
+                if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
+                m.reply(mess.wait)
+                res = await axios.get(`https://freerestapi.herokuapp.com/api/ytmp4?url=${text}`).catch(e => {
+                        reply('_[ ! ] O erro de consulta inserido não existe_')
+                    })
+                result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res.data.title}_\nCanal : ${res.data.channel}\nViews : ${res.data.views}`
+                m.reply(result)
+                shiro.sendMessage(m.chat, { video: { url: res.data.url }, }, { quoted: m})
+            }
+            break
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return m.reply(mess.owner)
