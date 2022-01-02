@@ -449,16 +449,26 @@ _Por enquanto não faço muita coisa_
 
             case 'yta': {
                 if (!text) throw 'Insira o link do video!'
-                if (!isUrl(args[0]) && !args[0].includes('yout')) throw 'Link Invalido!'
+                if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
                 m.reply(mess.wait)
                 res = await y2mateA(text).catch(e => {
                     m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
                 })
-                result = `*Dados obtidos com sucesso!*\n༄ Título : ${res[0].judul}༆\n༄ Ext : MP3༆\n༄ Tamanho : ${res[0].size}༆`
+                result = `*Dados obtidos com sucesso!*\nTítulo : ${res[0].judul}\nExt : MP3\nTamanho : ${res[0].size}`
                 m.reply(result)
             }
             break
-
+            case 'ytv': {
+                if (!text) throw 'Insira o link do video!'
+                if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
+                m.reply(mess.wait)
+                res = await y2mateA(text).catch(e => {
+                    m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
+                })
+                result = `*Dados obtidos com sucesso!*\nTítulo : ${res[0].judul}\nExt : MP4\nTamanho : ${res[0].size}`
+                m.reply(result)
+            }
+            break
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return m.reply(mess.owner)
