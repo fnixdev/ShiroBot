@@ -486,6 +486,7 @@ _Por enquanto não faço muita coisa_
                     })
                 result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res.data.title}_\nFormato : Audio\nLink : ${res.data.url}`
                 m.reply(result)
+                shiro.sendMessage(m.chat, { audio: { url: res.data.url }, }, { quoted: m})
             }
             break
 
