@@ -484,7 +484,8 @@ _Por enquanto não faço muita coisa_
                 res = await axios.get(`https://freerestapi.herokuapp.com/api/ytmp3?url=${text}`).catch(e => {
                         reply('_[ ! ] O erro de consulta inserido não existe_')
                     })
-                m.reply(res)
+                result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res.data.title}_\nFormato : Audio\nLink : ${res.data.url}`
+                m.reply(result)
             }
             break
 
