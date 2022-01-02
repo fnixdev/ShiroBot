@@ -454,7 +454,7 @@ _Por enquanto não faço muita coisa_
                 res = await y2mateA(text).catch(e => {
                     m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
                 })
-                result = `*Dados obtidos com sucesso!*\nTítulo : ${res[0].judul}\nExt : MP3\nTamanho : ${res[0].size}`
+                result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res[0].judul}_\nFormato : Áudio\nTamanho : ${res[0].size}`
                 m.reply(result)
             }
             break
@@ -465,7 +465,7 @@ _Por enquanto não faço muita coisa_
                 res = await y2mateV(text).catch(e => {
                     m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
                 })
-                result = `*Dados obtidos com sucesso!*\nTítulo : ${res[0].judul}\nExt : MP4\nTamanho : ${res[0].size}`
+                result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res[0].judul}_\nFormato : Vídeo\nTamanho : ${res[0].size}`
                 m.reply(result)
             }
             break
