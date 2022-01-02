@@ -113,7 +113,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         switch(command) {
             case 'chat': {
                 if (!isCreator) throw mess.owner
-                if (!q) throw 'Opções :\n 1 - mute\n2 - unmute'
+                if (!q) throw 'Opções :\n1 - mute\n2 - unmute'
                 if (args[0] === 'mute') {
                     shiro.chatModify({ mute: 'Infinity' }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
                 } else if (args[0] === 'unmute') {
@@ -180,6 +180,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 
           	case 'kick': {
 	            	if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
                 const msg = 'Usuario removido.'
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -439,6 +440,28 @@ _Por enquanto não faço muita coisa_
                 shiro.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
+
+///////////////////////////////////////////////////////////
+//                                                       //
+//                      Youtube                          //
+//                                                       //
+///////////////////////////////////////////////////////////
+
+            case 'ytmp3': {
+                if (!text) throw 'Insira o link do video!'
+                if (!isUrl(args[0]) && !args[0].includes('yout')) throw 'Link Invalido!'
+                m.reply(mess.wait)
+                res = await y2mateA(text).catch(e => {
+                    m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
+                })
+                result = `*Dados obtidos com sucesso!*
+༄ Título : ${res[0].judul}༆
+༄ Ext : MP3༆
+༄ Tamanho : ${res[0].size}༆`
+                m.reply(result)
+            }
+            break
+
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return m.reply(mess.owner)
