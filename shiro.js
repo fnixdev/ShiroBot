@@ -453,7 +453,7 @@ _Por enquanto não faço muita coisa_
                 res = await yts(`${text}`).catch(e => {
                   m.reply('_[ ! ] O erro de consulta inserido não existe_')
                 })
-                resp = await y2mateA(resp).catch(e => {
+                res = await y2mateA(res).catch(e => {
                     m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
                 })
                 result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res.all[0].title}_\nFormato : Áudio`
