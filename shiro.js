@@ -448,6 +448,8 @@ _Por enquanto não faço muita coisa_
 //                                                       //
 ///////////////////////////////////////////////////////////
 
+
+            // Reservado
             case 'yta': {
                 if (!text) throw 'Insira o link do video!'
                 res = await yts(`${text}`).catch(e => {
@@ -472,7 +474,9 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { video: { url: res[0].link }, }, { quoted: m})
             }
             break
+            // Reservado
 
+            // Yt em testes
             case 'mp3': {
                 if (!text) throw 'Insira o link do video!'
                 if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
