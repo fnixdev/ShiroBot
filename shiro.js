@@ -478,7 +478,7 @@ _Por enquanto não faço muita coisa_
                 if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
                 m.reply(mess.wait)
                 const ytmp3 = await axios.get('https://freerestapi.herokuapp.com/api/ytmp3?url=', text)
-                const mp3 = neko.data.url
+                const mp3 = ytmp3.data.url
                 shiro.sendMessage(m.chat, { audio: { url: mp3 }, mimetype: 'audio/mp4' }, { quoted: m})
             }
             break
