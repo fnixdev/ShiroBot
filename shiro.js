@@ -484,7 +484,7 @@ _Por enquanto não faço muita coisa_
             // Yt em testes
             case 'mp3': {
                 if (!text) throw 'Insira o link do video!'
-                const search = await youtube.search(text)
+                const search = await yts.search(text)
                 ids = search.videos.id
                 m.reply(mess.wait)
                 res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp3?url=https://www.youtube.com/watch?v=${ids}`).catch(e => {
