@@ -489,7 +489,7 @@ _Por enquanto não faço muita coisa_
                 res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp3?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
                 result = `*Título* : _${res.data.title}_\n*Canal* : _${res.data.channel}_\n*Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
                 m.reply(result)
-                // shiro.sendMessage(m.chat, { audio: { url: res.data.url }, }, { quoted: m})
+                shiro.sendMessage(m.chat, { audio: { url: res.data.url }, }, { quoted: m})
             }
             break/*
             case 'mp4': {
