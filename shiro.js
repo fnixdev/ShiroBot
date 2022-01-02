@@ -479,7 +479,7 @@ _Por enquanto não faço muita coisa_
             // Yt em testes
             case 'mp3': {
                 if (!text) throw 'Insira o link do video!'
-                if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
+                
                 m.reply(mess.wait)
                 res = await yts(`${text}`).catch(e => {
                         reply('_[ ! ] O erro de consulta inserido não existe_')
