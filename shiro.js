@@ -180,7 +180,6 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 
           	case 'kick': {
 	            	if (!m.isGroup) throw mess.group
-                if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
                 const msg = 'Usuario removido.'
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -361,8 +360,7 @@ _Por enquanto não faço muita coisa_
 │▸ ${prefix}block @user
 │▸ ${prefix}unblock @user
 │
-└───────⭓
-
+└───────⭓`
                 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/shiro.jpg') }, { upload: shiro.waUploadToServer })
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                     templateMessage: {
