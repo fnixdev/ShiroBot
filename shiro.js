@@ -481,9 +481,10 @@ _Por enquanto não faço muita coisa_
                 if (!text) throw 'Insira o link do video!'
                 if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
                 m.reply(mess.wait)
-                const ytmp3 = await axios.get('https://freerestapi.herokuapp.com/api/ytmp3?url=', text)
-                const mp3 = ytmp3.data.url
-                shiro.sendMessage(m.chat, { audio: { url: mp3 }, mimetype: 'audio/mp4' }, { quoted: m})
+                res = await yts(`${text}`).catch(e => {
+                        reply('_[ ! ] O erro de consulta inserido não existe_')
+                    })
+                m.reply(res)
             }
             break
 
