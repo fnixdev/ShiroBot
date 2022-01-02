@@ -472,6 +472,17 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { video: { url: res[0].link }, }, { quoted: m})
             }
             break
+
+            case 'mp3': {
+                if (!text) throw 'Insira o link do video!'
+                if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
+                m.reply(mess.wait)
+                const ytmp3 = await axios.get('https://freerestapi.herokuapp.com/api/ytmp3?url=', text)
+                const mp3 = neko.data.url
+                shiro.sendMessage(m.chat, { audio: { url: mp3 }, mimetype: 'audio/mp4' }, { quoted: m})
+            }
+            break
+
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return m.reply(mess.owner)
