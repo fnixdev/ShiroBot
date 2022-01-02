@@ -56,7 +56,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         const isGroupAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
         
         // Youtube
-        const yts = await new Innertube(); 
+        const ytss = await new Innertube(); 
 
         // Bot Status
         const used = process.memoryUsage()
@@ -484,7 +484,7 @@ _Por enquanto não faço muita coisa_
             // Yt em testes
             case 'mp3': {
                 if (!text) throw 'Insira o link do video!'
-                const search = await yts.search(text)
+                const search = await ytss.search(text)
                 const ids = search.videos.id;
                 m.reply(mess.wait)
                 res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp3?url=https://www.youtube.com/watch?v=${ids}`)
