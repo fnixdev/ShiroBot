@@ -453,20 +453,20 @@ _Por enquanto não faço muita coisa_
 ///////////////////////////////////////////////////////////
 
 
-            /* Reservado
+            // Reservado
             
             case 'yta': {
                 if (!text) throw 'Insira o link do video!'
-                res = await yts(`${text}`).catch(e => {
-                  m.reply('_[ ! ] O erro de consulta inserido não existe_')
-                })
-                resp = await y2mateA(res).catch(e => {
+                const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_') })
+                m.reply(mess.wait)
+                res = await y2mateA(search.all[0].url).catch(e => {
                     m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
                 })
                 result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res.all[0].title}_\nFormato : Áudio`
                 m.reply(result)
             }
             break
+            /*
             case 'ytv': {
                 if (!text) throw 'Insira o link do video!'
                 if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
