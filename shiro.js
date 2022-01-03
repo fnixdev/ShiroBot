@@ -498,10 +498,10 @@ _Por enquanto não faço muita coisa_
                 if (!text) throw 'Insira o link do video!'
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 m.reply(mess.wait)
-                res = await axios.get(`https://meguxapi.herokuapp.com/api/play?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
-                result = `_Processando o download aguarde._`
+                res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp4?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
+                result = `✨ *Título* : _${res.data.title}_\n👤 *Canal* : _${res.data.channel}_\n👁️ *Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
                 m.reply(result)
-                shiro.sendMessage(m.chat, { video: { url: res }, }, { quoted: m})
+                shiro.sendMessage(m.chat, { video: { url: res.data.url }, mimetype: 'video/mp4'}, { quoted: m})
             }
             break
             default:
