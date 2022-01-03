@@ -459,7 +459,7 @@ _Por enquanto não faço muita coisa_
 //                                                       //
 ///////////////////////////////////////////////////////////
 
-            case 'mp3': case 'yta': {
+            case 'mp3': {
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 m.reply(mess.wait)
@@ -469,7 +469,6 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { audio: { url: res.data.url }, }, { quoted: m})
             }
             break
-            
             case 'mp4': {
                 m.reply('_Função ainda em desenvolvimento._')
                 /*
