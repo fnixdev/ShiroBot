@@ -458,8 +458,9 @@ _Por enquanto não faço muita coisa_
             case 'yta': {
                 if (!text) throw 'Insira o link do video!'
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_') })
+                vid = ``
                 m.reply(mess.wait)
-                res = await y2mateA(search.all[0].url).catch(e => {
+                res = await y2mateA(`https://www.youtube.com/watch?v=${search.all[0].videoId}`).catch(e => {
                     m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
                 })
                 result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res.all[0].title}_\nFormato : Áudio`
