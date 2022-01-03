@@ -498,7 +498,7 @@ _Por enquanto não faço muita coisa_
                 if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
                 m.reply(mess.wait)
                 res = await axios.get(`https://meguxrest.herokuapp.com/api/tiktok?url=${text}`)
-                result = `${res.data.Judul}_`
+                result = `_${res.data.Judul}_`
                 shiro.sendMessage(m.chat, { video: { url: res.data.Video_URL.WithWM }, caption: result}, { quoted: m})
             }
             break
