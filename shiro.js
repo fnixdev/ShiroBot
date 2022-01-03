@@ -337,6 +337,13 @@ _Por enquanto não faço muita coisa_
 │
 └───────⭓
 
+┌──⭓ *Download Youtube*
+│
+│▸ ${prefix}mp3 / ${prefix}yta
+│▸ ${prefix}mp4 / ${prefix}ytv
+│
+└───────⭓ 
+
 ┌──⭓ *Outros Comandos*
 │
 │▸ ${prefix}mine
@@ -452,56 +459,27 @@ _Por enquanto não faço muita coisa_
 //                                                       //
 ///////////////////////////////////////////////////////////
 
-
-            // Reservado
-            
-            case 'yta': {
-                if (!text) throw 'Insira o link do video!'
-                const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_') })
-                vid = ``
-                m.reply(mess.wait)
-                res = await y2mateA(`https://www.youtube.com/watch?v=${search.all[0].videoId}`).catch(e => {
-                    m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
-                })
-                result = `*Dados obtidos com sucesso!*`
-                m.reply(result)
-                shiro.sendMessage(m.chat, { audio: { url: res[0].link }, }, { quoted: m})
-            }
-            break
-            /*
-            case 'ytv': {
-                if (!text) throw 'Insira o link do video!'
-                if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
-                m.reply(mess.wait)
-                res = await y2mateV(text).catch(e => {
-                    m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
-                })
-                result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res[0].judul}_\nFormato : Vídeo\nTamanho : ${res[0].size}`
-                m.reply(result)
-                shiro.sendMessage(m.chat, { video: { url: res[0].link }, }, { quoted: m})
-            }
-            break
-            */
-
-            // Yt em testes
-            case 'mp3': {
-                if (!text) throw 'Insira o link do video!'
+            case 'mp3': case 'yta': {
+                if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 m.reply(mess.wait)
                 res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp3?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
                 result = `✨ *Título* : _${res.data.title}_\n👤 *Canal* : _${res.data.channel}_\n👁️ *Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
-                m.reply(result)
+                shiro.sendMessage(m.chat, { image: { url: res.data.thumb }, caption: result }, { quoted: m})
                 shiro.sendMessage(m.chat, { audio: { url: res.data.url }, }, { quoted: m})
             }
             break
+            
             case 'mp4': {
+                m.reply('_Função ainda em desenvolvimento._')
+                /*
                 if (!text) throw 'Insira o link do video!'
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 m.reply(mess.wait)
                 res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp4?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
                 result = `✨ *Título* : _${res.data.title}_\n👤 *Canal* : _${res.data.channel}_\n👁️ *Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
                 m.reply(result)
-                shiro.sendMessage(m.chat, { video: { url: res.data.url }, mimetype: 'video/mp4'}, { quoted: m})
+                shiro.sendMessage(m.chat, { video: { url: res.data.url }, mimetype: 'video/mp4'}, { quoted: m})*/
             }
             break
             default:
