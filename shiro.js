@@ -445,7 +445,7 @@ _Por enquanto não faço muita coisa_
             case 'anime': {
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
-                const res = await axios.get(`https://api.jikan.moe/v3/search/anime?q=${text}`).json()
+                const res = await axios.get(`https://api.jikan.moe/v3/search/anime?q=${text}`)
                 animeinfo = `✨️ *Título:* ${res.results[0].title}\n🎆️ *Episódios:* ${res.results[0].episodes}\n💌️ *Avaliação:* ${res.results[0].rated}\n❤️ *Score:* ${res.results[0].score}\n💚️ *Descrição:* ${res.results[0].synopsis}\n`
                 shiro.sendMessage(m.chat, { image: { url: res.results[0].image_url }, caption: animeinfo }, { quoted: m})
             }
