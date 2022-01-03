@@ -18,12 +18,10 @@ const os = require('os')
 const speed = require('performance-now')
 const yts = require('yt-search')
 const config = JSON.parse(fs.readFileSync('./src/config.json'))
-const Innertube = require('youtubei.js');
 const { performance } = require('perf_hooks')
 const { pinterest, wallpaper, wikimedia, porno, neko, hentai, quotesAnime } = require('./lib/scraper')
 const { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./lib/myfunc')
-const { y2mateV, y2mateA } = require('./lib/y2mate')
 
 global.owner = [config.dono]
 
@@ -54,9 +52,6 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : ''
       	const isBotAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
         const isGroupAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
-        
-        // Youtube
-        const ytss = await new Innertube(); 
 
         // Bot Status
         const used = process.memoryUsage()
@@ -177,7 +172,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
           	break
             case 'update': {
               if (!isCreator) throw mess.owner
-              let stdout = execSync('git remote set-url origin https://github.com/fnixdev/ShiroBot.git && git pull')
+              stdout = execSync('git remote set-url origin https://github.com/fnixdev/ShiroBot.git && git pull')
               m.reply(stdout.toString())
             }
             break
