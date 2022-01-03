@@ -242,7 +242,6 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             break
             case 'sticker': case 'stickergif': case 'sgif': {
                 if (!quoted) throw `Responda a uma imagem/video ${prefix + command}`
-                m.reply(mess.wait)
                 if (/image/.test(mime)) {
                     let media = await quoted.download()
                     let encmedia = await shiro.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
@@ -492,6 +491,15 @@ _Por enquanto não faço muita coisa_
                 result = `✨ *Título* : _${res.data.title}_\n👤 *Canal* : _${res.data.channel}_\n👁️ *Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
                 m.reply(result)
                 shiro.sendMessage(m.chat, { video: { url: res.data.url }, mimetype: 'video/mp4'}, { quoted: m})*/
+            }
+            break
+            case 'tiktok': {
+                if (!text) throw 'Eu preciso que você insira um link!'
+                if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
+                m.reply(mess.wait)
+                res = await axios.get(`https://meguxrest.herokuapp.com/api/tiktok?url=${text}`)
+                result = `${res.data.Judul}_`
+                shiro.sendMessage(m.chat, { video: { url: res.data.Video_URL.WithWM }, caption: result}, { quoted: m})
             }
             break
             default:
