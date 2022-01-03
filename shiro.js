@@ -191,7 +191,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 const msg = 'Usuario removido.'
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 	              if (users){
-	                await shiro.groupParticipantsUpdate(m.chat, [users], 'remove'), shiro.sendMessage(m.chat, { audio: { url: "./src/banido.m4a" }, }, { quoted: m})
+	                await shiro.groupParticipantsUpdate(m.chat, [users], 'remove'), shiro.sendMessage(m.chat, { video: { url: "./src/banido.mp4" }, caption: 'Banido, banido, banido' }, { quoted: m})
 	              } else {
 	                await m.reply('Eu preciso que você marque ou mencione um usuario')
 	              }
