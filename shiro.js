@@ -221,12 +221,6 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             		await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
            	}
 	          break
-            case 'linkgrupo': case 'linkgc': {
-                if (!m.isGroup) throw mess.group
-                let response = await shiro.groupInviteCode(m.chat)
-                shiro.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nLink do grupo : ${groupMetadata.subject}`, m, { detectLink: true })
-            }
-            break
 
 ///////////////////////////////////////////////////////////
 //                                                       //
@@ -234,6 +228,12 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 //                                                       //
 ///////////////////////////////////////////////////////////
 
+            case 'linkgrupo': case 'linkgc': {
+                if (!m.isGroup) throw mess.group
+                let response = await shiro.groupInviteCode(m.chat)
+                shiro.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nLink do grupo : ${groupMetadata.subject}`, m, { detectLink: true })
+            }
+            break
             case 'source': case 'shiro': {
                 const fnix = 'https://telegra.ph/file/d7d397bcc9208d6407818.jpg'
                 anu = `┌──⭓ *Shiro Bot* ✨\n│\n│▸ _Bot com intuito de aprender_\n│  _programação em JavaScript_\n│\n│▸ *Dono*: fnixdev\n│▸ https://github.com/fnixdev/ShiroBot\n│\n└───────⭓\n`
@@ -393,21 +393,6 @@ _Por enquanto não faço muita coisa_
                 shiro.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
-            case 'neko': {
-                const neko = await axios.get('https://nekos.life/api/v2/img/neko')
-                shiro.sendMessage(m.chat, { image: { url: neko.data.url }, caption: `_Vai bater pra 2d ne safado_` }, { quoted: m})
-            }
-            break
-            case 'wallpaper': {
-                const neko = await axios.get('https://nekos.life/api/v2/img/wallpaper')
-                shiro.sendMessage(m.chat, { image: { url: neko.data.url }, }, { quoted: m})
-            }
-            break
-            case 'waifu': {
-                const neko = await axios.get('https://api.waifu.pics/sfw/waifu')
-                shiro.sendMessage(m.chat, { image: { url: neko.data.url }, }, { quoted: m})
-            }
-            break
             case 'mine': {
                 const min = 'https://telegra.ph/file/0c97e206340a796a1e0cc.jpg'
                 anu = `_Clique no botão abaixo para baixar a ultima versão do minecraft_`
@@ -448,6 +433,37 @@ _Por enquanto não faço muita coisa_
                     }
                 }), { userJid: m.chat, quoted: m })
                 shiro.relayMessage(m.chat, template.message, { messageId: template.key.id })
+            }
+            break
+
+///////////////////////////////////////////////////////////
+//                                                       //
+//                      Anime                            //
+//                                                       //
+///////////////////////////////////////////////////////////
+
+            case 'anime': {
+                if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
+                m.reply(mess.wait)
+                const anime = await axios.get(`https://api.jikan.moe/v3/search/anime?q=${text}`)
+                res = anime.results[0]
+                animeinfo = `✨️ *Título:* ${res.title}\n🎆️ *Episódios:* ${res.episodes}\n💌️ *Avaliação:* ${res.rated}\n❤️ *Score:* ${res.score}\n💚️ *Descrição:* ${res.synopsis}\n`
+                shiro.sendMessage(m.chat, { image: { url: res.image_url }, caption: animeinfo }, { quoted: m})
+            }
+            break
+            case 'neko': {
+                const neko = await axios.get('https://nekos.life/api/v2/img/neko')
+                shiro.sendMessage(m.chat, { image: { url: neko.data.url }, caption: `_Vai bater pra 2d ne safado_` }, { quoted: m})
+            }
+            break
+            case 'wallpaper': {
+                const neko = await axios.get('https://nekos.life/api/v2/img/wallpaper')
+                shiro.sendMessage(m.chat, { image: { url: neko.data.url }, }, { quoted: m})
+            }
+            break
+            case 'waifu': {
+                const neko = await axios.get('https://api.waifu.pics/sfw/waifu')
+                shiro.sendMessage(m.chat, { image: { url: neko.data.url }, }, { quoted: m})
             }
             break
 
