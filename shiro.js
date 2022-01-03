@@ -463,8 +463,9 @@ _Por enquanto não faço muita coisa_
                 res = await y2mateA(`https://www.youtube.com/watch?v=${search.all[0].videoId}`).catch(e => {
                     m.reply('_[ ! ] Erro ao acessar Y2mate Web_')
                 })
-                result = `*Dados obtidos com sucesso!*\n\nTítulo : _${res.all[0].title}_\nFormato : Áudio`
+                result = `*Dados obtidos com sucesso!*`
                 m.reply(result)
+                shiro.sendMessage(m.chat, { audio: { url: res[0].link }, }, { quoted: m})
             }
             break
             /*
