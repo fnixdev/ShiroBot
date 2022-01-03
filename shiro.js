@@ -487,24 +487,21 @@ _Por enquanto não faço muita coisa_
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 m.reply(mess.wait)
                 res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp3?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
-                result = `*Título* : _${res.data.title}_\n*Canal* : _${res.data.channel}_\n*Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
+                result = `✨ *Título* : _${res.data.title}_\n👤 *Canal* : _${res.data.channel}_\n👁️ *Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
                 m.reply(result)
                 shiro.sendMessage(m.chat, { audio: { url: res.data.url }, }, { quoted: m})
             }
-            break/*
+            break
             case 'mp4': {
                 if (!text) throw 'Insira o link do video!'
-                if (!isUrl(args[0]) && !args[0].includes('youtu')) throw 'Link Invalido!'
+                const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 m.reply(mess.wait)
-                res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp4?url=${text}`).catch(e => {
-                        reply('_[ ! ] O erro de consulta inserido não existe_')
-                    })
-                
-                result = `*Título* : _${res.data.title}_\n*Canal* : _${res.data.channel}_\n*Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
+                res = await axios.get(`https://meguxapi.herokuapp.com/api/play?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
+                result = `_Processando o download aguarde._`
                 m.reply(result)
-                shiro.sendMessage(m.chat, { video: { url: res.data.url }, }, { quoted: m})
+                shiro.sendMessage(m.chat, { video: { url: res }, }, { quoted: m})
             }
-            break*/
+            break
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return m.reply(mess.owner)
