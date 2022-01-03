@@ -340,8 +340,8 @@ _Por enquanto não faço muita coisa_
 
 ┌──⭓ *Download Youtube*
 │
-│▸ ${prefix}mp3 / ${prefix}yta
-│▸ ${prefix}mp4 / ${prefix}ytv
+│▸ ${prefix}mp3 
+│▸ ${prefix}mp4
 │
 └───────⭓ 
 
