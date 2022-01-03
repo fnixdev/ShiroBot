@@ -34,8 +34,9 @@
     "request": "^2.88.2",
     "util": "^0.12.4",
     "yargs": "^17.2.1",
-    "youtubei.js": "1.2.8-npm"
-  },
+    "youtubei.js": "^1.2.8-npm",
+    "mongoose": "^6.1.4"
+  }, 
   "directories": {
     "lib": "lib"
   },

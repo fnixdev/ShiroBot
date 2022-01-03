@@ -175,6 +175,12 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 		            await shiro.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 	          }
           	break
+            case 'update': {
+              if (!isCreator) throw mess.owner
+              let stdout = execSync('git remote set-url origin https://github.com/fnixdev/ShiroBot.git && git pull')
+              m.reply(stdout.toString())
+            }
+            break
 
 
 ///////////////////////////////////////////////////////////
@@ -394,20 +400,17 @@ _Por enquanto não faço muita coisa_
             break
             case 'neko': {
                 const neko = await axios.get('https://nekos.life/api/v2/img/neko')
-                const nekoimg = neko.data.url
-                shiro.sendMessage(m.chat, { image: { url: nekoimg }, caption: `_Vai bater pra 2d ne safado_` }, { quoted: m})
+                shiro.sendMessage(m.chat, { image: { url: neko.data.url }, caption: `_Vai bater pra 2d ne safado_` }, { quoted: m})
             }
             break
             case 'wallpaper': {
                 const neko = await axios.get('https://nekos.life/api/v2/img/wallpaper')
-                const nekoimg = neko.data.url
-                shiro.sendMessage(m.chat, { image: { url: nekoimg }, }, { quoted: m})
+                shiro.sendMessage(m.chat, { image: { url: neko.data.url }, }, { quoted: m})
             }
             break
             case 'waifu': {
                 const neko = await axios.get('https://api.waifu.pics/sfw/waifu')
-                const nekoimg = neko.data.url
-                shiro.sendMessage(m.chat, { image: { url: nekoimg }, }, { quoted: m})
+                shiro.sendMessage(m.chat, { image: { url: neko.data.url }, }, { quoted: m})
             }
             break
             case 'mine': {
@@ -461,8 +464,8 @@ _Por enquanto não faço muita coisa_
 
             case 'mp3': {
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
-                const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 m.reply(mess.wait)
+                const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp3?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
                 result = `*Título* ➠ _${res.data.title}_\n*Canal* ➠ _${res.data.channel}_\n*Views* ➠ _${res.data.views}_\n\n_Processando o download aguarde._`
                 shiro.sendMessage(m.chat, { image: { url: res.data.thumb }, caption: result }, { quoted: m})
