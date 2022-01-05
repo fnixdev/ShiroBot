@@ -47,7 +47,7 @@ async function startShiro() {
     })
 
     shiro.ev.on('group-participants.update', async (anu) => {
-        if (!welkom.includes(anu.jid)) return
+        if (!welkom.includes(anu.id)) return
         console.log(anu)
         try {
             let metadata = await shiro.groupMetadata(anu.id)
@@ -67,6 +67,7 @@ async function startShiro() {
                 }
                 if (anu.action == 'add') {
                     shiro.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Opa @${num.split("@")[0]}, bem vindo ao grupo ${metadata.subject}. Espero que tenha uma boa estadia.` })
+                
                 } else if (anu.action == 'remove') {
                     shiro.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Saiu e foi joga no vasco.` })
                 }
