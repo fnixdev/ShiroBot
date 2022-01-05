@@ -239,12 +239,12 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
                 if (!text) return m.reply('!welcome on/off')
-                if ((text[0]) === 'on') {
+                if ((text) === 'on') {
                     if (isWelkom) return m.reply('Já ativo')
                     welkom.push(from)
                     fs.writeFileSync('./lib/welkom.json', JSON.stringify(welkom))
                     m.reply('O recurso de boas vindas foi ativado')
-                } else if ((text[0]) === 'off') {
+                } else if ((text) === 'off') {
                     welkom.splice(from, 1)
                     fs.writeFileSync('./lib/welkom.json', JSON.stringify(welkom))
                     m.reply('O recuso de boas vindas foi desativado.')
