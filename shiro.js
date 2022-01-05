@@ -234,8 +234,10 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
            	}
 	          break
 		    		case 'welcome':
-		      			if (!m.isGroup) return m.reply(mess.group)
-			      		
+		            if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
+                if (!isGroupAdmins) throw mess.admin
+                
 		      			if (text.length < 1) return m.reply('Hmmmm')
 		      		  
 		      			if (Number(text[0]) === 1) {
