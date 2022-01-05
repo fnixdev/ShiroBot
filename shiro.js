@@ -472,7 +472,7 @@ _Por enquanto não faço muita coisa_
 //                                                       //
 ///////////////////////////////////////////////////////////
 
-            /*case 'mp3': { // Reservado caso cair Y2mate
+            case 'mp3': { // Reservado caso cair Y2mate
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
@@ -481,7 +481,7 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { image: { url: res.data.thumb }, caption: result }, { quoted: m})
                 shiro.sendMessage(m.chat, { audio: { url: res.data.url }, }, { quoted: m})
             }
-            break
+            break /*
             case 'mp4': {
                 m.reply('_Função ainda em desenvolvimento._')
                 
@@ -502,7 +502,7 @@ _Por enquanto não faço muita coisa_
                 result = `_${res.data.Judul}_`
                 shiro.sendMessage(m.chat, { video: { url: res.data.Video_URL.WithWM }, caption: result}, { quoted: m})
             }
-            break
+            break /*
             case 'mp3':
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
@@ -514,7 +514,7 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { image: { url: res[0].thumb }, caption: result }, { quoted: m }).then((lalu) => {
                 shiro.sendMessage(m.chat, { audio: { url: res[0].link }, }, { quoted: m })
                 })
-            break
+            break */
             case 'mp4':
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
@@ -522,7 +522,7 @@ _Por enquanto não faço muita coisa_
                 res = await y2mateV(`https://www.youtube.com/watch?v=${ssv.all[0].videoId}`).catch(e => {
                 m.reply('_[ ! ] Erro Ao Entrar Em Contato Com Y2mate_')
                 })
-                result = `*YOUTUBE MP3*\n\n*•Titulo* : _${res[0].judul}_\n*•Formato* : _MP4_\n*•Tamanho* : _${res[0].size}_\n\n_Aguarde o download_`
+                result = `*YOUTUBE MP4*\n\n*•Titulo* : _${res[0].judul}_\n*•Formato* : _MP4_\n*•Tamanho* : _${res[0].size}_\n\n_Aguarde o download_`
                 shiro.sendMessage(m.chat, { image: { url: res[0].thumb }, caption: result }, { quoted: m }).then((lalu) => {
                 shiro.sendMessage(m.chat, { video: { url: res[0].link }, caption: res[0].judul }, { quoted: m })
                 })
