@@ -482,18 +482,18 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { audio: { url: res.data.url }, }, { quoted: m})
             }
             break
-            case 'mp4': {
+            /* case 'mp4': {
                 m.reply('_Função ainda em desenvolvimento._')
-                /*
+                
                 if (!text) throw 'Insira o link do video!'
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 m.reply(mess.wait)
                 res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp4?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
                 result = `✨ *Título* : _${res.data.title}_\n👤 *Canal* : _${res.data.channel}_\n👁️ *Views* : _${res.data.views}_\n\n_Processando o download aguarde._`
                 m.reply(result)
-                shiro.sendMessage(m.chat, { video: { url: res.data.url }, mimetype: 'video/mp4'}, { quoted: m})*/
+                shiro.sendMessage(m.chat, { video: { url: res.data.url }, mimetype: 'video/mp4'}, { quoted: m})
             }
-            break
+            break*/
             case 'tiktok': {
                 if (!text) throw 'Eu preciso que você insira um link!'
                 if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
@@ -503,20 +503,15 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { video: { url: res.data.Video_URL.WithWM }, caption: result}, { quoted: m})
             }
             break
-            case 'ytmp4':
-                if (!text) throw ('Link Nya Mana?')
-                if(!isUrl(args[0]) && !args[0].includes('youtu')) return m.reply('error link')
-                //let teks = args.join(' ')
+            case 'mp4':
+                if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
-                res = await y2mateV(q).catch(e => {
-                m.reply('_[ ! ] Error Gagal Dalam Memasuki Web Y2mate_')
+                const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
+                m.reply(mess.wait)
+                res = await y2mateV(`https://www.youtube.com/watch?v=${search.all[0].videoId}`).catch(e => {
+                m.reply('_[ ! ] Erro Ao Entrar Em Contato Com Y2mate_')
                 })
-                result = `*YOUTUBE MP4*
-
-*•Titulo : ${res[0].judul}*
-*•Formato : MP4*
-*•Tamanho : ${res[0].size}*
-_Aguarde o download_`
+                result = `*YOUTUBE MP4*\n\n*•Titulo* : _${res[0].judul}_\n*•Formato* : _MP4_\n*•Tamanho* : _${res[0].size}_\n\n_Aguarde o download_`
                 shiro.sendMessage(m.chat, { image: { url: res[0].thumb }, caption: result }, { quoted: m }).then((lalu) => {
                 shiro.sendMessage(m.chat, { video: { url: res[0].link }, caption: res[0].judul }, { quoted: m })
                 })
