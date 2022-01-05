@@ -45,7 +45,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         const command = isCmd ? body.slice(1).trim().split(' ')[0].toLowerCase() : ''
         //
         
-        const  = body.trim().split(/ +/).slice(1)
+        const args = body.trim().split(/ +/).slice(1)
         const pushname = m.pushName || "No Name"
         const isCreator = [shiro.user.id, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const itsMe = m.sender == shiro.user.id ? true : false
