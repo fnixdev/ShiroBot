@@ -506,7 +506,7 @@ _Por enquanto não faço muita coisa_
             case 'mp3':
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
-                const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
+                search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 res = await y2mateA(`https://www.youtube.com/watch?v=${search.all[0].videoId}`).catch(e => {
                 m.reply('_[ ! ] Erro Ao Entrar Em Contato Com Y2mate_')
                 })
@@ -518,7 +518,7 @@ _Por enquanto não faço muita coisa_
             case 'mp4':
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
-                const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
+                search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 res = await y2mateV(`https://www.youtube.com/watch?v=${search.all[0].videoId}`).catch(e => {
                 m.reply('_[ ! ] Erro Ao Entrar Em Contato Com Y2mate_')
                 })
