@@ -18,6 +18,7 @@ const os = require('os')
 const speed = require('performance-now')
 const yts = require('yt-search')
 const config = JSON.parse(fs.readFileSync('./src/config.json'))
+const { y2mateA, y2mateV } = require('./lib/y2mate')
 const { performance } = require('perf_hooks')
 const { pinterest, wallpaper, wikimedia, porno, neko, hentai, quotesAnime } = require('./lib/scraper')
 const { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
@@ -501,6 +502,24 @@ _Por enquanto não faço muita coisa_
                 result = `_${res.data.Judul}_`
                 shiro.sendMessage(m.chat, { video: { url: res.data.Video_URL.WithWM }, caption: result}, { quoted: m})
             }
+            break
+            case 'ytmp4':
+                if (!text) throw ('Link Nya Mana?')
+                if(!isUrl(args[0]) && !args[0].includes('youtu')) return m.reply('error link')
+                //let teks = args.join(' ')
+                m.reply(mess.wait)
+                res = await y2mateV(q).catch(e => {
+                m.reply('_[ ! ] Error Gagal Dalam Memasuki Web Y2mate_')
+                })
+                result = `*YOUTUBE MP4*
+
+*•Titulo : ${res[0].judul}*
+*•Formato : MP4*
+*•Tamanho : ${res[0].size}*
+_Aguarde o download_`
+                shiro.sendMessage(m.chat, { image: { url: res[0].thumb }, caption: result }, { quoted: m }).then((lalu) => {
+                shiro.sendMessage(m.chat, { video: { url: res[0].link }, caption: res[0].judul }, { quoted: m })
+                })
             break
             default:
                 if (budy.startsWith('=>')) {
