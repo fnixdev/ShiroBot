@@ -17,12 +17,20 @@ const path = require('path')
 const os = require('os')
 const speed = require('performance-now')
 const yts = require('yt-search')
+
+// SRC
 const config = JSON.parse(fs.readFileSync('./src/config.json'))
+const welkom = JSON.parse(fs.readFileSync('./src/welkom.json'))
+
+// LIB
+
 const { y2mateA, y2mateV } = require('./lib/y2mate')
 const { performance } = require('perf_hooks')
 const { pinterest, wallpaper, wikimedia, porno, neko, hentai, quotesAnime } = require('./lib/scraper')
 const { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./lib/myfunc')
+
+
 
 global.owner = [config.dono]
 
@@ -37,7 +45,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         const command = isCmd ? body.slice(1).trim().split(' ')[0].toLowerCase() : ''
         //
         
-        const args = body.trim().split(/ +/).slice(1)
+        const  = body.trim().split(/ +/).slice(1)
         const pushname = m.pushName || "No Name"
         const isCreator = [shiro.user.id, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const itsMe = m.sender == shiro.user.id ? true : false
@@ -53,6 +61,9 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : ''
       	const isBotAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
         const isGroupAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
+        
+        // Welcome 
+        const isWelkom = m.isGroup ? welkom.includes(m.chat) : false
 
         // Bot Status
         const used = process.memoryUsage()
@@ -222,6 +233,24 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             		await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
            	}
 	          break
+		    		case 'welcome':
+		      			if (!m.isGroup) return m.reply(mess.group)
+			      		if (!m.isGroupAdmins) return m.reply(mess.admin)
+		      			if (text.length < 1) return m.reply('Hmmmm')
+		      		  
+		      			if (Number(text[0]) === 1) {
+		     				if (isWelkom) return m.reply('Welcome ja está ativo.')
+	    					welkom.push(m.chat)
+	    					fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
+    						m.reply('Welcome foi ativado ✅')
+      					} else if (Number(args[0]) === 0) {
+		    				welkom.splice(m.chat, 1)
+    						fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
+				    		m.reply('Welcome foi desativado ❎')
+	    				  } else {
+				    		m.reply('Digite 1 para ativar e 0 para desativar.')
+    					  }
+            break
 
 ///////////////////////////////////////////////////////////
 //                                                       //

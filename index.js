@@ -14,6 +14,8 @@ const chalk = require('chalk')
 const fetch = require('node-fetch')
 const FileType = require('file-type')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
+const welkom = JSON.parse(fs.readFileSync('./src/welkom.json'))
+
 const { smsg, isUrl, generateMessageTag } = require('./lib/myfunc')
 const hora = new Date();
 
@@ -45,6 +47,7 @@ async function startShiro() {
     })
 
     shiro.ev.on('group-participants.update', async (anu) => {
+        if (!welkom.includes(anu.jid)) return
         console.log(anu)
         try {
             let metadata = await shiro.groupMetadata(anu.id)
