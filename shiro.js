@@ -233,23 +233,25 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             		await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
            	}
 	          break
-            case 'welcome':
+		    		case 'welcome':
 		            if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
-                if (!text) throw ('!welcome on/off')
-                if ((text) === 'on') {
-                    if (isWelkom) return m.reply('Já ativo')
-                    welkom.push(from)
-                    fs.writeFileSync('./lib/welkom.json', JSON.stringify(welkom))
-                    m.reply('O recurso de boas vindas foi ativado')
-                } else if ((text) === 'off') {
-                    welkom.splice(from, 1)
-                    fs.writeFileSync('./lib/welkom.json', JSON.stringify(welkom))
-                    m.reply('O recuso de boas vindas foi desativado.')
-                } else {
-                    m.reply('on para habilitar, off para desabilitar')
-                }
-                break
+                
+		      			if (text.length < 1) return m.reply('Hmmmm')
+		      			if (Number(text[0]) === 1) {
+		     				if (isWelkom) return m.reply('Welcome ja está ativo.')
+	    					welkom.push(m.chat)
+	    					fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
+    						m.reply('Welcome foi ativado ✅')
+      					} else if (Number(args[0]) === 0) {
+		    				welkom.splice(m.chat, 1)
+    						fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
+				    		m.reply('Welcome foi desativado ❎')
+	    				  } else {
+				    		m.reply('Digite 1 para ativar e 0 para desativar.')
+    					  }
+            break
 
 ///////////////////////////////////////////////////////////
 //                                                       //
