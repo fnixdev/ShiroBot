@@ -26,7 +26,6 @@ const welkom = JSON.parse(fs.readFileSync('./src/welkom.json'))
 
 const { y2mateA, y2mateV } = require('./lib/y2mate')
 const { performance } = require('perf_hooks')
-const { pinterest, wallpaper, wikimedia, porno, neko, hentai, quotesAnime } = require('./lib/scraper')
 const { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./lib/myfunc')
 
@@ -47,6 +46,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         
         const args = body.trim().split(/ +/).slice(1)
         const pushname = m.pushName || "No Name"
+        
         const isCreator = [shiro.user.id, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const itsMe = m.sender == shiro.user.id ? true : false
         const text = q = args.join(" ")
@@ -112,9 +112,9 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 
         if (m.message) {
             if (isCmd){
-                console.log(chalk.black(chalk.bgGreenBright('[ CMD ]')), chalk.black(chalk.cyanBright(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender))}
+                console.log(chalk.black(chalk.bgGreenBright('[ CMD ]')), chalk.black(chalk.cyanBright(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender)) + '\n' + chalk.magenta('=> Em'), chalk.blueBright(groupName)}
             if (!command){
-                console.log(chalk.black(chalk.bgWhite('[ MSG ]')), chalk.black(chalk.cyanBright(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender))}
+                console.log(chalk.black(chalk.bgWhite('[ MSG ]')), chalk.black(chalk.cyanBright(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender)) + '\n' + chalk.magenta('=> Em'), chalk.blueBright(groupName)}
             }
 
 ///////////////////////////////////////////////////////////
@@ -201,7 +201,6 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 	            	if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
-                const msg = 'Usuario removido.'
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 	              if (users){
 	                await shiro.groupParticipantsUpdate(m.chat, [users], 'remove'), shiro.sendMessage(m.chat, { video: { url: "./src/banido.mp4" }, caption: 'Banido, banido, banido' }, { quoted: m})

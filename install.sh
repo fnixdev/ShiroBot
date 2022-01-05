@@ -2,7 +2,7 @@
 
 apt-get update
 apt-get upgrade
-apt-get install -y nodejs libwebp ffmpeg wget git
+apt-get install -y nodejs npm libwebp ffmpeg wget git
 
 npm install
 
