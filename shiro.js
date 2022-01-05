@@ -455,8 +455,8 @@ _Por enquanto não faço muita coisa_
             }
             break
             case 'wallpaper': {
-                const neko = await axios.get('https://nekos.life/api/v2/img/wallpaper')
-                shiro.sendMessage(m.chat, { image: { url: neko.data.url }, }, { quoted: m})
+                const neko = await getBuffer('https://nekos.life/api/v2/img/wallpaper')
+                shiro.sendMessage(m.chat, { image: { url: neko }, }, { quoted: m})
             }
             break
             case 'waifu': {
