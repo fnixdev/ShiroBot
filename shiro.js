@@ -455,7 +455,7 @@ _Por enquanto não faço muita coisa_
             }
             break
             case 'wallpaper': {
-                let neko = await getBuffer(api('https://nekos.life/api/v2/img/wallpaper'))
+                let neko = await getBuffer('https://nekos.life/api/v2/img/wallpaper')
                 shiro.sendMessage(m.chat, { image: { url: neko }, }, { quoted: m})
             }
             break
