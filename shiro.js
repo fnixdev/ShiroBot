@@ -110,12 +110,12 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 //                                                       //
 ///////////////////////////////////////////////////////////
 
-        if (m.message) {
             if (isCmd){
-                console.log(chalk.black(chalk.bgGreenBright('[ CMD ]')), chalk.black(chalk.cyanBright(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender)) + '\n' + chalk.magenta('=> Em'), chalk.blue(`${groupMetadata.subject}`)}
-            if (m.message) {
-                  console.log(chalk.black(chalk.bgWhite('[ MSG ]')), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Em'), chalk.green(m.isGroup ? groupName : groupName))
-            }}
+                  console.log(chalk.black(chalk.bgCyan.bold('[ CMD ]')), chalk.black(chalk.cyan.bold(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.magenta('=> Em'), chalk.green(m.isGroup ? groupName : groupName))
+                }
+                else {
+                  console.log(chalk.black(chalk.bgCyan.bold('[ MSG ]')), chalk.black(chalk.cyan.bold(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.magenta('=> Em'), chalk.green(m.isGroup ? groupName : groupName))
+                  }
 
 ///////////////////////////////////////////////////////////
 //                                                       //
