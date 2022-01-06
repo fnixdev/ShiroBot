@@ -18,7 +18,7 @@ global.sp = '⭔'
 global.mess = {
     admin: 'Apenas administradores podem usar esse comando!',
     botAdmin: 'Eu preciso ser administrador pra fazer isso!',
-    owner: 'Este recurso é exclusivo do dono do bot',
+    owner: 'Apenas meu dono pode usar isso!',
     group: 'Isso só pode ser usado em um grupo!',
     private: 'Isso só pode ser usado no privado',
     bot: 'Recursos especial do bot',

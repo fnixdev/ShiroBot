@@ -126,7 +126,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         switch(command) {
             case 'chat': {
                 if (!isCreator) throw mess.owner
-                if (!q) throw 'Opções :\n1 - mute\n2 - unmute'
+                if (!q) throw '_Opções :\n1 - mute\n2 - unmute_'
                 if (args[0] === 'mute') {
                     shiro.chatModify({ mute: 'Infinity' }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
                 } else if (args[0] === 'unmute') {
@@ -198,7 +198,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 if (!isGroupAdmins) throw mess.admin
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 	              if (users){
-	                await shiro.groupParticipantsUpdate(m.chat, [users], 'remove'), shiro.sendMessage(m.chat, { video: { url: "./src/banido.mp4" }, caption: 'Banido, banido, banido' }, { quoted: m})
+	                await shiro.sendMessage(m.chat, { video: { url: "./src/banido.mp4" }, caption: 'Banido, banido, banido' }, { quoted: m}) ,shiro.groupParticipantsUpdate(m.chat, [users], 'remove')
 	              } else {
 	                await m.reply('Eu preciso que você marque ou mencione um usuario')
 	              }
