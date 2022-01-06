@@ -114,7 +114,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             if (isCmd){
                 console.log(chalk.black(chalk.bgGreenBright('[ CMD ]')), chalk.black(chalk.cyanBright(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender)) + '\n' + chalk.magenta('=> Em'), chalk.blue(`${groupMetadata.subject}`)}
             if (!command){
-                console.log(chalk.black(chalk.bgWhite('[ MSG ]')), chalk.black(chalk.cyanBright(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender)) + '\n' + chalk.magenta('=> Em'), chalk.blue(`${groupMetadata.subject}`)}
+                console.log(chalk.black(chalk.bgWhite('[ MSG ]')), chalk.black(chalk.cyanBright(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender)) + '\n' + chalk.blueBright('=> Em'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat)}
             }
 
 ///////////////////////////////////////////////////////////
@@ -143,11 +143,6 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 await shiro.groupAcceptInvite(result).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
             }
             break
-            case 'leave': {
-                if (!isCreator) throw mess.owner
-                await shiro.groupLeave(m.chat).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-            }
-            break
             case 'public': {
                 if (!isCreator) throw mess.owner
                 shiro.public = true
@@ -174,20 +169,20 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
            case 'block': {
 	             	if (!isCreator) throw mess.owner
 	            	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-	            	await shiro.updateBlockStatus(users, 'block').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	            	await shiro.updateBlockStatus(users, 'block').then((res) => m.reply('_Usuario bloquedo_')).catch((err) => m.reply(jsonformat(err)))
 	          }
           	break
             case 'unblock': {
 		            if (!isCreator) throw mess.owner
 	             	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		            await shiro.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+		            await shiro.updateBlockStatus(users, 'unblock').then((res) => m.reply('_Usuario desbloqueado_')).catch((err) => m.reply(jsonformat(err)))
 	          }
           	break
             case 'update': {
-              if (!isCreator) throw mess.owner
-              stdout = execSync('git remote set-url origin https://github.com/fnixdev/ShiroBot.git && git pull')
-              m.reply(stdout.toString())
-            }
+                if (!isCreator) throw mess.owner
+                stdout = execSync('git remote set-url origin https://github.com/fnixdev/ShiroBot.git && git pull')
+                m.reply(stdout.toString())
+                }
             break
 
 
@@ -222,7 +217,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
 	            	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-	            	await shiro.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	            	await shiro.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply('_Usuario Promovido_')).catch((err) => m.reply(jsonformat(err)))
           	}
           	break
           	case 'demote': {
@@ -230,7 +225,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-            		await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+            		await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply('_Usuario foi rebaixado a membro comum_')).catch((err) => m.reply(jsonformat(err)))
            	}
 	          break
 		    		case 'welcome':
@@ -259,7 +254,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 //                                                       //
 ///////////////////////////////////////////////////////////
 
-            case 'linkgrupo': case 'linkgc': {
+            case 'linkgrupo': case 'link': {
                 if (!m.isGroup) throw mess.group
                 let response = await shiro.groupInviteCode(m.chat)
                 shiro.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nLink do grupo : ${groupMetadata.subject}`, m, { detectLink: true })
@@ -283,7 +278,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                     let encmedia = await shiro.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
                 await fs.unlinkSync(encmedia)
                 } else {
-                        throw `Envie uma foto/video ${prefix + command}\nO video deve ter de 1 a 9 segundos`
+                        throw `Envie uma foto/video\nO video deve ter de 1 a 9 segundos`
                 }
             }
             break
@@ -354,24 +349,27 @@ _Por enquanto não faço muita coisa_
 │
 │▸ ${prefix}dono
 │▸ ${prefix}shiro / ${prefix}source
-│▸ ${prefix}menu / ${prefix}help 
+│▸ ${prefix}menu / ${prefix}help
+│▸ ${prefix}menuanime
 │
 └───────⭓
 
 ┌──⭓ *Menu de Grupo*
 │
-│▸ ${prefix}linkgrupo
+│▸ ${prefix}link
 │▸ ${prefix}add @user
 │▸ ${prefix}kick @user
 │▸ ${prefix}promote @user
 │▸ ${prefix}demote @user
+│▸ ${prefix}welcome [opção]
 │
 └───────⭓
 
-┌──⭓ *Download Youtube*
+┌──⭓ *Download Menu*
 │
 │▸ ${prefix}mp3 
 │▸ ${prefix}mp4
+│▸ ${prefix}tiktok [link]
 │
 └───────⭓ 
 
@@ -398,7 +396,7 @@ _Por enquanto não faço muita coisa_
 ┌──⭓ *Menu Dono*
 │
 │▸ ${prefix}ping
-│▸ ${prefix}chat [option]
+│▸ ${prefix}chat [opção]
 │▸ ${prefix}join [link]
 │▸ ${prefix}leave
 │▸ ${prefix}block @user
