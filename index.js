@@ -47,7 +47,7 @@ async function startShiro() {
     })
 
     shiro.ev.on('group-participants.update', async (anu) => {
-        if (!welkom.includes(anu.id)) {
+        if (!welkom.includes(m.chat)) {
           return
         } else {
         console.log(anu)
