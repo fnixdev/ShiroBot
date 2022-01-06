@@ -115,7 +115,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 console.log(chalk.black(chalk.bgGreenBright('[ CMD ]')), chalk.black(chalk.cyanBright(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender)) + '\n' + chalk.magenta('=> Em'), chalk.blue(`${groupMetadata.subject}`)}
             if (m.message) {
                   console.log(chalk.black(chalk.bgWhite('[ MSG ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> De'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Em'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
-            }
+            }}
 
 ///////////////////////////////////////////////////////////
 //                                                       //
