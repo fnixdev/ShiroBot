@@ -47,7 +47,9 @@ async function startShiro() {
     })
 
     shiro.ev.on('group-participants.update', async (anu) => {
-        if (!welkom.includes(anu.id)) return
+        if (!welkom.includes(anu.id)) {
+          return
+        } else {
         console.log(anu)
         try {
             let metadata = await shiro.groupMetadata(anu.id)
@@ -72,7 +74,7 @@ async function startShiro() {
         } catch (err) {
             console.log(err)
         }
-    })
+    }})
 	
     // Setting
     shiro.public = true
