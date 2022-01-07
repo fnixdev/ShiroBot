@@ -17,6 +17,7 @@ const path = require('path')
 const os = require('os')
 const speed = require('performance-now')
 const yts = require('yt-search')
+import fetch from 'node-fetch';
 
 // SRC
 const config = JSON.parse(fs.readFileSync('./src/config.json'))
@@ -563,8 +564,9 @@ _Por enquanto não faço muita coisa_
                 if (!text) throw 'Eu preciso que você insira um link!'
                 if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
                 m.reply(mess.wait)
+                capt = 'Send by ShiroBot'
                 res = await axios.get(`http://hadi-api.herokuapp.com/api/tiktok?url=${text}`)
-                shiro.sendMessage(m.chat, { video: { url: res.result.video.mp4 }, mimetype: 'video/mp4'}, { quoted: m})
+                shiro.sendMessage(m.chat, { video: { url: res.data.result.video.original }, mimetype: 'video/mp4', caption: capt}, { quoted: m})
             }
             break
             /*
