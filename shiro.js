@@ -542,8 +542,8 @@ _Por enquanto não faço muita coisa_
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
-                res = await axios.get(`http://hadi-api.herokuapp.com/api/yt2/audio?url=https://youtu.be/${search.all[0].videoId}`)
-                result = `*Título* ➠ _${res.data.result.title}_\n*Tamanho* ➠ _${res.data.result.size}_\n\n_Processando o download aguarde._`
+                res = await axios.get(`http://hadi-api.herokuapp.com/api/ytaudio?url=https://youtu.be/${search.all[0].videoId}`)
+                result = `*Título* • _${res.data.result.title}_\n*Views* • _${res.data.result.viewer}_\n\n_Processando o download aguarde._`
                 shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
                 shiro.sendMessage(m.chat, { audio: { url: res.data.result.download_audio }, }, { quoted: m})
             }
