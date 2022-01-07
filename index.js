@@ -14,14 +14,10 @@ const chalk = require('chalk')
 const fetch = require('node-fetch')
 const FileType = require('file-type')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
-const welkom = JSON.parse(fs.readFileSync('./src/welkom.json'))
-
 const { smsg, isUrl, generateMessageTag } = require('./lib/myfunc')
 const hora = new Date();
 
-global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
-
-
+// Client Bot
 async function startShiro() {
     const shiro = makeWASocket({
         logger: pino({ level: 'silent' }),
@@ -48,8 +44,6 @@ async function startShiro() {
 
     shiro.ev.on('group-participants.update', async (anu) => {
         let metadata = await shiro.groupMetadata(anu.id)
-        if (!welkom.includes(metadata.id)) {return}
-        else{
         console.log(anu)
         try {
             let welkomgif = 'https://telegra.ph/file/f41a458206dcdec65d065.gif'
@@ -60,7 +54,7 @@ async function startShiro() {
               }}
             } catch (err) {
             console.log(err)
-        }}
+        }
     })
 	
     // Setting

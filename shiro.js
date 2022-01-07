@@ -20,7 +20,7 @@ const yts = require('yt-search')
 
 // SRC
 const config = JSON.parse(fs.readFileSync('./src/config.json'))
-const welkom = JSON.parse(fs.readFileSync('./src/welkom.json'))
+const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
 
 // LIB
 
@@ -62,9 +62,8 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
       	const isBotAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
         const isGroupAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
         
-        // Welcome 
-        const from = m.chat
-        const isWelkom = m.isGroup ? welkom.includes(from) : false
+        // NSFW
+        const isNsfw = m.isGroup ? nsfw.includes(groupMetadata.id) : false
 
         // Bot Status
         const used = process.memoryUsage()
@@ -228,26 +227,25 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             		await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply('_Usuario foi rebaixado a membro comum_')).catch((err) => m.reply(jsonformat(err)))
            	}
 	          break
-		    		case 'welcome':
+		    		case 'nsfw':
 		            if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
-                
-		      			if (text.length < 1) return m.reply('Hmmmm')
-		      			if (Number(text[0]) === 1) {
-		     				if (isWelkom) return m.reply('Welcome ja está ativo.')
-	    					welkom.push(groupMetadata.id)
-	    					fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
-    						m.reply('Welcome foi ativado ✅')
-      					} else if (Number(args[0]) === 0) {
-		    				welkom.splice(groupMetadata.id, 1)
-    						fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
-				    		m.reply('Welcome foi desativado ❎')
+		      			if (!text) return m.reply('Hmmmm')
+		      			if (text[0] === 'on') {
+		     				if (isNsfw) return m.reply('Welcome ja está ativo.')
+	    					nsfw.push(groupMetadata.id)
+	    					fs.writeFileSync('./src/nsfw.json', JSON.stringify(nsfw))
+    						m.reply('A putaria foi liberada 😈')
+      					} else if (args[0] === 'on') {
+		    				nsfw.splice(groupMetadata.id, 1)
+    						fs.writeFileSync('./src/nsfw.json', JSON.stringify(nsfw))
+				    		m.reply('Nsfw foi desativado no grupo')
 	    				  } else {
-				    		m.reply('Digite 1 para ativar e 0 para desativar.')
+				    		m.reply('Digite on para ativar ou off para desativar.')
     					  }
             break
-
+            
 ///////////////////////////////////////////////////////////
 //                                                       //
 //                   Comandos Gerais                     //
