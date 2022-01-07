@@ -54,9 +54,11 @@ async function startShiro() {
         try {
             let metadata = await shiro.groupMetadata(anu.id)
             let welkomgif = 'https://telegra.ph/file/f41a458206dcdec65d065.gif'
-            if (anu.action == 'add') {
-                shiro.sendMessage(anu.id, { video: { url: welkomgif }, contextInfo: { mentionedJid: [num] }, caption: `Opa @${num.split("@")[0]}, bem vindo ao grupo ${metadata.subject}. Espero que tenha uma boa estadia.`, gifPlayback: true })
-              } 
+            let participants = anu.participants
+            for (let num of participants) {
+                if (anu.action == 'add') {
+                    shiro.sendMessage(anu.id, { video: { url: welkomgif }, contextInfo: { mentionedJid: [num] }, caption: `Opa @${num.split("@")[0]}, bem vindo ao grupo ${metadata.subject}. Espero que tenha uma boa estadia.`, gifPlayback: true })
+              }}
             } catch (err) {
             console.log(err)
         }
