@@ -47,31 +47,17 @@ async function startShiro() {
     })
 
     shiro.ev.on('group-participants.update', async (anu) => {
-        if (welkom.includes(anu.id)) {
+        if (!welkom.includes(anu.id)) {
           return
         } else {
         console.log(anu)
         try {
             let metadata = await shiro.groupMetadata(anu.id)
-            let participants = anu.participants
-            for (let num of participants) {
-                // Get Profile Picture User
-                try {
-                    ppuser = await shiro.profilePictureUrl(num, 'image')
-                } catch {
-                    ppuser = 'https://telegra.ph/file/d130fec8fa4bee9a4a533.jpg'
-                }
-                // Get Profile Picture Group
-                try {
-                    ppgroup = await shiro.profilePictureUrl(anu.id, 'image')
-                } catch {
-                    ppgroup = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
-                }
-                if (anu.action == 'add') {
-                    shiro.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Opa @${num.split("@")[0]}, bem vindo ao grupo ${metadata.subject}. Espero que tenha uma boa estadia.` })
-                }
-            }
-        } catch (err) {
+            let welkomgif = 'https://telegra.ph/file/f41a458206dcdec65d065.gif'
+            if (anu.action == 'add') {
+                shiro.sendMessage(anu.id, { video: { url: welkomgif }, contextInfo: { mentionedJid: [num] }, caption: `Opa @${num.split("@")[0]}, bem vindo ao grupo ${metadata.subject}. Espero que tenha uma boa estadia.`, gifPlayback: true })
+              } 
+            } catch (err) {
             console.log(err)
         }
     }})
