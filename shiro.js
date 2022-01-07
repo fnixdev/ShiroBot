@@ -508,18 +508,28 @@ _Por enquanto não faço muita coisa_
             }
             break
             case 'neko': {
-                const neko = await axios.get('https://nekos.life/api/v2/img/neko')
+                let neko = await axios.get('https://nekos.life/api/v2/img/neko')
                 shiro.sendMessage(m.chat, { image: { url: neko.data.url }, caption: `_Vai bater pra 2d ne safado_` }, { quoted: m})
             }
             break
             case 'wallpaper': {
-                let neko = await getBuffer('https://nekos.life/api/v2/img/wallpaper')
-                shiro.sendMessage(m.chat, { image: neko }, { quoted: m})
+                let neko = await axios.get('https://nekos.life/api/v2/img/wallpaper')
+                shiro.sendMessage(m.chat, { image: neko.data.url }, { quoted: m})
             }
             break
             case 'waifu': {
-                const neko = await axios.get('https://api.waifu.pics/sfw/waifu')
+                let neko = await axios.get('https://api.waifu.pics/sfw/waifu')
                 shiro.sendMessage(m.chat, { image: { url: neko.data.url }, }, { quoted: m})
+            }
+            break
+            
+            // NSFW CMDS
+            
+            case 'anal': {
+              if (!m.isGroup) throw mess.group
+              let neko = await axios.get('https://nekos.life/api/v2/img/anal')
+              if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
+              shiro.sendMessage(m.chat, { image: { url: neko.data.url }, }, { quoted: m })
             }
             break
 
