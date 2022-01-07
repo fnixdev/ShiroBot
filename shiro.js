@@ -232,17 +232,17 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isGroupAdmins) throw mess.admin
 		      			if (!text) return m.reply('Hmmmm')
-		      			if (text[0] === 'on') {
+		      			if (Number(text[0]) === 1) {
 		     				if (isNsfw) return m.reply('_A putaria ja esta liberada._')
 	    					nsfw.push(groupMetadata.id)
 	    					fs.writeFileSync('./src/nsfw.json', JSON.stringify(nsfw))
     						m.reply('_A putaria foi liberada 😈_')
-      					} else if (args[0] === 'on') {
+      					} else if (Number(args[0]) === 0) {
 		    				nsfw.splice(groupMetadata.id, 1)
     						fs.writeFileSync('./src/nsfw.json', JSON.stringify(nsfw))
 				    		m.reply('_Nsfw foi desativado no grupo_')
 	    				  } else {
-				    		m.reply('_Digite on para ativar ou off para desativar._')
+				    		m.reply('_Digite 1 para ativar ou 0 para desativar._')
     					  }
             break
             
