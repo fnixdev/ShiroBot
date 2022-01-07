@@ -17,7 +17,7 @@ const path = require('path')
 const os = require('os')
 const speed = require('performance-now')
 const yts = require('yt-search')
-import fetch from 'node-fetch';
+
 
 // SRC
 const config = JSON.parse(fs.readFileSync('./src/config.json'))
