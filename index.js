@@ -46,6 +46,23 @@ async function startShiro() {
         }
     })
 
+    shiro.ev.on('group-participants.update', async (anu) => {
+        if (!welkom.includes(anu.id)) {
+          return
+        } else {
+        console.log(anu)
+        try {
+            let metadata = await shiro.groupMetadata(anu.id)
+            let welkomgif = 'https://telegra.ph/file/f41a458206dcdec65d065.gif'
+            let participants = anu.participants
+            for (let num of participants) {
+                if (anu.action == 'add') {
+                    shiro.sendMessage(anu.id, { video: { url: welkomgif }, contextInfo: { mentionedJid: [num] }, caption: `Opa @${num.split("@")[0]}, bem vindo ao grupo ${metadata.subject}. Espero que tenha uma boa estadia.`, gifPlayback: true })
+              }}
+            } catch (err) {
+            console.log(err)
+        }
+    }})
 	
     // Setting
     shiro.public = true
