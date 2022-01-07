@@ -532,7 +532,7 @@ _Por enquanto não faço muita coisa_
                     {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: '♫ Audio'}, type: 1}
                 ]
                 let buttonMessage = {
-                    video: { url: res.result.video.original },
+                    video: { url: res.result.video.nowm },
                     caption: capt,
                     footer: 'Pressione um botão',
                     buttons: buttons,
@@ -558,7 +558,7 @@ _Por enquanto não faço muita coisa_
                     headerType: 2
                 }
                 let msg = await shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
-                hisoka.sendMessage(m.chat, { audio: { url: res.result.audio.original } }, { quoted: msg })
+                shiro.sendMessage(m.chat, { audio: { url: res.result.audio.original } }, { quoted: msg })
             }
             break
             /*
