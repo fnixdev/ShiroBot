@@ -47,10 +47,10 @@ async function startShiro() {
     })
 
     shiro.ev.on('group-participants.update', async (anu) => {
-        if (!welkom.includes(anu.id)) return
+        let metadata = await shiro.groupMetadata(anu.id)
+        if (!welkom.includes(metadata.id)) return
         console.log(anu)
         try {
-            let metadata = await shiro.groupMetadata(anu.id)
             let welkomgif = 'https://telegra.ph/file/f41a458206dcdec65d065.gif'
             let participants = anu.participants
             for (let num of participants) {
