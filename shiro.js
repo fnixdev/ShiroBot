@@ -228,9 +228,9 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
            	}
 	          break
 		    		case 'nsfw':
-		            if (!m.isGroup) throw mess.group
-                if (!isBotAdmins) throw mess.botAdmin
-                if (!isGroupAdmins) throw mess.admin
+                if (!m.isGroup) return m.reply(mess.group)
+                if (!isBotAdmins) return m.reply(mess.botAdmin)
+                if (!isGroupAdmins) return m.reply(mess.admin)
 		      			if (!text) return m.reply('Hmmmm')
 		      			if (Number(text[0]) === 1) {
 		     				if (isNsfw) return m.reply('_A putaria ja esta liberada._')
@@ -526,7 +526,7 @@ _Por enquanto não faço muita coisa_
             // NSFW CMDS
             
             case 'anal': {
-              if (!m.isGroup) throw mess.group
+              if (!m.isGroup) return m.reply(mess.group)
               let neko = await axios.get('https://nekos.life/api/v2/img/anal')
               if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
               shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
