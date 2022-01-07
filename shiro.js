@@ -542,10 +542,10 @@ _Por enquanto não faço muita coisa_
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
-                res = await axios.get(`https://meguxrest.herokuapp.com/api/ytmp3?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
-                result = `*Título* ➠ _${res.data.title}_\n*Canal* ➠ _${res.data.channel}_\n*Views* ➠ _${res.data.views}_\n\n_Processando o download aguarde._`
-                shiro.sendMessage(m.chat, { image: { url: res.data.thumb }, caption: result }, { quoted: m})
-                shiro.sendMessage(m.chat, { audio: { url: res.data.url }, }, { quoted: m})
+                res = await axios.get(`http://hadi-api.herokuapp.com/api/yt2/audio?url=https://youtu.be/${search.all[0].videoId}`)
+                result = `*Título* ➠ _${res.data.result.title}_\n*Tamanho* ➠ _${res.data.result.size}_\n\n_Processando o download aguarde._`
+                shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
+                shiro.sendMessage(m.chat, { audio: { url: res.data.result.download_audio }, }, { quoted: m})
             }
             break 
             case 'mp4': {
@@ -559,64 +559,19 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { video: { url: res.data.result.download_video }, mimetype: 'video/mp4'}, { quoted: m}) */
             }
             break
-            case 'tiktok': case 'tiktoknowm': {
+            case 'tiktok': {
                 if (!text) throw 'Eu preciso que você insira um link!'
                 if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
                 m.reply(mess.wait)
                 res = await axios.get(`http://hadi-api.herokuapp.com/api/tiktok?url=${text}`)
                 capt = `_Enviado por ShiroBot_`
-                let buttons = [
-                    {buttonId: `tiktokv ${text}`, buttonText: {displayText: '► Video'}, type: 1},
-                    {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: '♫ Audio'}, type: 1}
-                ]
                 let buttonMessage = {
                     video: { url: res.result.video.nowm },
                     caption: capt,
                     footer: 'Pressione um botão',
-                    buttons: buttons,
                     headerType: 5
                 }
                 shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
-            }
-            break
-            case 'tiktokwm': {
-                if (!text) throw 'Eu preciso que você insira um link!'
-                if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
-                m.reply(mess.wait)
-                res = await axios.get(`http://hadi-api.herokuapp.com/api/tiktok?url=${text}`)
-                capt = `_Enviado por ShiroBot_`
-                let buttons = [
-                    {buttonId: `tiktokv ${text}`, buttonText: {displayText: '► Video'}, type: 1},
-                    {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: '♫ Audio'}, type: 1}
-                ]
-                let buttonMessage = {
-                    video: { url: res.result.video.nowm },
-                    caption: capt,
-                    footer: 'Pressione um botão',
-                    buttons: buttons,
-                    headerType: 5
-                }
-                shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
-            }
-            break
-            case 'tiktokmp3': {
-                if (!text) throw 'Eu preciso que você insira um link!'
-                if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
-                m.reply(mess.wait)
-                res = await axios.get(`http://hadi-api.herokuapp.com/api/tiktok?url=${text}`)
-                capt = `_Enviado por ShiroBot_`
-                let buttons = [
-                    {buttonId: `tiktok ${text}`, buttonText: {displayText: '► Video'}, type: 1},
-                    {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: '♫ Audio'}, type: 1}
-                ]
-                let buttonMessage = {
-                    text: capt,
-                    footer: 'Pressione um botão',
-                    buttons: buttons,
-                    headerType: 2
-                }
-                let msg = await shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
-                shiro.sendMessage(m.chat, { audio: { url: res.result.audio.original } }, { quoted: msg })
             }
             break
             /*
