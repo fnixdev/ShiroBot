@@ -473,7 +473,7 @@ _Por enquanto não faço muita coisa_
 ┌──⭓ *Procurar Anime*
 │
 │▸ ${prefix}anime [Nome]
-│▸ ${prefix}manga (indisponível)
+│▸ ${prefix}manga (indisponi)
 │
 └───────⭓ 
 
@@ -496,7 +496,7 @@ _Por enquanto não faço muita coisa_
                     caption: capt,
                     gifPlayback: true,
                     footer: 'Menu Anime • ShiroBot',
-                    headerType: 5
+                    headerType: 4
                 }
                 shiro.sendMessage(m.chat, animeMessage, { quoted: m })
             }
