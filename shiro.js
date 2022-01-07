@@ -495,7 +495,7 @@ _Por enquanto não faço muita coisa_
                     video: { url: './src/shiro.gif' },
                     caption: capt,
                     gifPlayback: true,
-                    footer: 'Menu Anime • ShiroBot',
+                    footerText: 'Menu Anime • ShiroBot',
                     headerType: 4
                 }
                 shiro.sendMessage(m.chat, animeMessage, { quoted: m })
