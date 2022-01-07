@@ -350,7 +350,7 @@ _Por enquanto não faço muita coisa_
 │▸ ${prefix}dono
 │▸ ${prefix}shiro / ${prefix}source
 │▸ ${prefix}menu / ${prefix}help
-│▸ ${prefix}menuanime
+│▸ ${prefix}animemenu
 │
 └───────⭓
 
@@ -373,13 +373,10 @@ _Por enquanto não faço muita coisa_
 │
 └───────⭓ 
 
-┌──⭓ *Outros Comandos*
+┌──⭓ *Ultilidades*
 │
 │▸ ${prefix}mine
 │▸ ${prefix}discord
-│▸ ${prefix}neko
-│▸ ${prefix}waifu
-│▸ ${prefix}wallpaper
 │
 └───────⭓ 
 
@@ -403,7 +400,7 @@ _Por enquanto não faço muita coisa_
 │▸ ${prefix}unblock @user
 │
 └───────⭓`
-                let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/shiro.jpg') }, { upload: shiro.waUploadToServer })
+                let message = await prepareWAMessageMedia({ image: fs.readFileSync('./src/shiro.jpg') }, { upload: shiro.waUploadToServer })
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                     templateMessage: {
                         hydratedTemplate: {
@@ -470,6 +467,40 @@ _Por enquanto não faço muita coisa_
 //                                                       //
 ///////////////////////////////////////////////////////////
 
+            case 'menuanime': case 'animemenu':{
+                capt = `    _Oi, eu sou ShiroBot ✨_
+
+┌──⭓ *Procurar Anime*
+│
+│▸ ${prefix}anime [Nome]
+│▸ ${prefix}manga (indisponível)
+│
+└───────⭓ 
+
+┌──⭓ *Anime Fotos/Gifs*
+│
+│▸ ${prefix}neko
+│▸ ${prefix}waifu
+│▸ ${prefix}wallpaper
+│▸ ${prefix}kiss
+│▸ ${prefix}nekogif
+│▸ ${prefix}poke
+│▸ ${prefix}smug
+│▸ ${prefix}cute
+│▸ ${prefix}baka
+│▸ ${prefix}foxgirl
+│
+└───────⭓`
+                let animeMessage = {
+                    video: { url: './src/shiro.gif' },
+                    caption: capt,
+                    gifPlayback: true,
+                    footer: 'Menu Anime • ShiroBot',
+                    headerType: 5
+                }
+                shiro.sendMessage(m.chat, animeMessage, { quoted: m })
+            }
+            break
             case 'anime': {
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
@@ -521,7 +552,27 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { video: { url: res.data.result.download_video }, mimetype: 'video/mp4'}, { quoted: m}) */
             }
             break
-            case 'tiktok': {
+            case 'tiktok': case 'tiktoknowm': {
+                if (!text) throw 'Eu preciso que você insira um link!'
+                if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
+                m.reply(mess.wait)
+                res = await axios.get(`http://hadi-api.herokuapp.com/api/tiktok?url=${text}`)
+                capt = `_Enviado por ShiroBot_`
+                let buttons = [
+                    {buttonId: `tiktokv ${text}`, buttonText: {displayText: '► Video'}, type: 1},
+                    {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: '♫ Audio'}, type: 1}
+                ]
+                let buttonMessage = {
+                    video: { url: res.result.video.nowm },
+                    caption: capt,
+                    footer: 'Pressione um botão',
+                    buttons: buttons,
+                    headerType: 5
+                }
+                shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
+            break
+            case 'tiktokwm': {
                 if (!text) throw 'Eu preciso que você insira um link!'
                 if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
                 m.reply(mess.wait)

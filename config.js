@@ -24,7 +24,7 @@ global.mess = {
     bot: 'Recursos especial do bot',
     wait: 'Carregando...',
 }
-global.thumb = fs.readFileSync('./lib/shiro.jpg')
+global.thumb = fs.readFileSync('./src/shiro.jpg')
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
