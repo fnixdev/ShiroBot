@@ -564,8 +564,7 @@ _Por enquanto não faço muita coisa_
                 if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
                 m.reply(mess.wait)
                 res = await axios.get(`http://hadi-api.herokuapp.com/api/tiktok?url=${text}`)
-                capt = `_Enviado por ShiroBot_`
-                shiro.sendMessage(m.chat, { video: { url: res.result.video.nowm }, caption: capt, mimetype: 'video/mp4'}, { quoted: m})
+                shiro.sendMessage(m.chat, { video: { url: res.result.video.mp4 }, mimetype: 'video/mp4'}, { quoted: m})
             }
             break
             /*
