@@ -529,7 +529,7 @@ _Por enquanto não faço muita coisa_
               if (!m.isGroup) throw mess.group
               let neko = await axios.get('https://nekos.life/api/v2/img/anal')
               if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
-              shiro.sendMessage(m.chat, { image: { url: neko.data.url }, }, { quoted: m })
+              shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
             }
             break
 
