@@ -236,11 +236,11 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 		      			if (text.length < 1) return m.reply('Hmmmm')
 		      			if (Number(text[0]) === 1) {
 		     				if (isWelkom) return m.reply('Welcome ja está ativo.')
-	    					welkom.push(m.chat)
+	    					welkom.push(groupMetadata)
 	    					fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
     						m.reply('Welcome foi ativado ✅')
       					} else if (Number(args[0]) === 0) {
-		    				welkom.splice(m.chat, 1)
+		    				welkom.splice(groupMetadata, 1)
     						fs.writeFileSync('./src/welkom.json', JSON.stringify(welkom))
 				    		m.reply('Welcome foi desativado ❎')
 	    				  } else {
