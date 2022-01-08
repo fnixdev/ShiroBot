@@ -18,7 +18,7 @@
 ```bash
 git clone https://github.com/fnixdev/ShiroBot
 cd ShiroBot
-sh start.sh
+sh install.sh
 npm start
 ```
 

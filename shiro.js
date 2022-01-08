@@ -471,7 +471,7 @@ _Por enquanto não faço muita coisa_
 ┌──⭓ *Procurar Anime*
 │
 │▸ ${prefix}anime [Nome]
-│▸ ${prefix}manga (indisponi)
+│▸ ${prefix}manga (indisponível)
 │
 └───────⭓ 
 
@@ -488,13 +488,25 @@ _Por enquanto não faço muita coisa_
 │▸ ${prefix}baka
 │▸ ${prefix}foxgirl
 │
+└───────⭓
+
+┌──⭓ *Hentai Menu*
+│
+│▸ ${prefix}hentai
+│▸ ${prefix}hentaigif
+│▸ ${prefix}hentaineko
+│▸ ${prefix}anal
+│▸ ${prefix}boobs
+│▸ ${prefix}pussy
+│▸ ${prefix}cum
+│▸ ${prefix}blowjob
+│▸ ${prefix}feet
+│▸ ${prefix}yuri
+│
 └───────⭓`
                 let animeMessage = {
-                    video: { url: './src/shiro.gif' },
+                    image: { url: './src/shiro.jpg' },
                     caption: capt,
-                    gifPlayback: true,
-                    footerText: 'Menu Anime • ShiroBot',
-                    headerType: 4
                 }
                 shiro.sendMessage(m.chat, animeMessage, { quoted: m })
             }
@@ -507,9 +519,22 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { image: { url: res.data.results[0].image_url }, caption: animeinfo }, { quoted: m})
             }
             break
+            case 'manga': {
+                m.reply('_Funcão ainda em desenvolvimento._')
+            }
+            break
+            case 'nhentai': {
+                if (!text) return m.reply('Eu preciso que você digite o id de um hentai do nhentai')
+                
+                let res = await axios.get(`http://hadi-api.herokuapp.com/api/nhentai?id=${text}`)
+                if (!res.status === 'true') return m.reply(`_ Não foi possível encontrar o hentai, verifique que o ID digitado esta correto em nhentai.to/g/${text}`)
+                let result =`• Nome: ${res.result.name}\n• Tags: ${res.result.tags}\n• Idioma: ${res.result.language}\n• Paginas: ${res.result.pages}\n• Categoria: ${res.result.catefories}\n\n_Fazendo download aguarde..._`
+                m.reply(result)
+            }
+            break
             case 'neko': {
                 let neko = await axios.get('https://nekos.life/api/v2/img/neko')
-                shiro.sendMessage(m.chat, { image: { url: neko.data.url }, caption: `_Vai bater pra 2d ne safado_` }, { quoted: m})
+                shiro.sendMessage(m.chat, { image: { url: neko.data.url }}, { quoted: m})
             }
             break
             case 'wallpaper': {
@@ -530,6 +555,78 @@ _Por enquanto não faço muita coisa_
               let neko = await axios.get('https://nekos.life/api/v2/img/anal')
               if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
               shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
+            }
+            break
+
+            case 'hentai': {
+              if (!m.isGroup) return m.reply(mess.group)
+              let neko = await axios.get('https://nekos.life/api/v2/img/hentai')
+              if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
+              shiro.sendMessage(m.chat, { image: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._'}, { quoted: m })
+            }
+            break
+
+            case 'boobs': {
+              if (!m.isGroup) return m.reply(mess.group)
+              let neko = await axios.get('https://nekos.life/api/v2/img/boobs')
+              if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
+              shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
+            }
+            break
+
+            case 'pussy': {
+              if (!m.isGroup) return m.reply(mess.group)
+              let neko = await axios.get('https://nekos.life/api/v2/img/pussy')
+              if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
+              shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
+            }
+            break
+
+            case 'cum': {
+              if (!m.isGroup) return m.reply(mess.group)
+              let neko = await axios.get('https://nekos.life/api/v2/img/cum')
+              if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
+              shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
+            }
+            break
+
+            case 'blowjob': {
+              if (!m.isGroup) return m.reply(mess.group)
+              let neko = await axios.get('https://nekos.life/api/v2/img/bj')
+              if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
+              shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
+            }
+            break
+
+            case 'hentaineko': {
+              if (!m.isGroup) return m.reply(mess.group)
+              let neko = await axios.get('https://nekos.life/api/v2/img/nsfw_neko_gif')
+              if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
+              shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
+            }
+            break
+
+            case 'hentaigif': {
+              if (!m.isGroup) return m.reply(mess.group)
+              let neko = await axios.get('https://nekos.life/api/v2/img/Random_hentai_gif')
+              if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
+              shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
+            }
+            break
+
+            case 'feet': {
+              if (!m.isGroup) return m.reply(mess.group)
+              let neko = await axios.get('https://nekos.life/api/v2/img/feetg')
+              if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
+              shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
+            }
+            break
+
+            case 'yuri': {
+              if (!m.isGroup) return m.reply(mess.group)
+              let neko = await axios.get('https://nekos.life/api/v2/img/eroyuri')
+              if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
+              shiro.sendMessage(m.chat, { image: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._'}, { quoted: m })
             }
             break
 
