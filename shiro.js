@@ -540,6 +540,7 @@ _Por enquanto não faço muita coisa_
 ///////////////////////////////////////////////////////////
 
             case 'mp3': { // Reservado caso cair Y2mate
+                m.reply('_Função desativada temporáriamente._') /*
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
@@ -547,10 +548,11 @@ _Por enquanto não faço muita coisa_
                 result = `*Título* • _${res.data.result.title}_\n*Tamanho* • _${res.data.result.size}_\n\n_Processando o download aguarde._`
                 shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
                 shiro.sendMessage(m.chat, { audio: { url: res.data.result.download_audio }, mimetype: 'audio/mp4', }, { quoted: m})
+                */
             }
             break 
             case 'mp4': {
-                m.reply('_Função ainda em desenvolvimento._') /*
+                m.reply('_Função desativada temporáriamente._') /*
                 if (!text) throw 'Insira o link do video!'
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 m.reply(mess.wait)
@@ -561,12 +563,14 @@ _Por enquanto não faço muita coisa_
             }
             break
             case 'tiktok': {
+                m.reply('_Função desativada temporáriamente._') /*
                 if (!text) throw 'Eu preciso que você insira um link!'
                 if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
                 m.reply(mess.wait)
                 capt = '_Send by ShiroBot_'
                 res = await axios.get(`http://hadi-api.herokuapp.com/api/tiktok?url=${text}`)
                 shiro.sendMessage(m.chat, { video: { url: res.data.result.video.nowm }, mimetype: 'video/mp4', caption: capt}, { quoted: m})
+                */
             }
             break
             /*

@@ -14,6 +14,14 @@
     Ainda não possuí muitas funções..
 ```
 
+### Install:
+```bash
+git clone https://github.com/fnixdev/ShiroBot
+cd ShiroBot
+sh start.sh
+npm start
+```
+
 ### Agradecimentos
 
 * [BaileysMD](https://github.com/adiwajshing/baileys/tree/multi-device)
