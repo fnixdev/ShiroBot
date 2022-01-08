@@ -528,7 +528,7 @@ _Por enquanto não faço muita coisa_
                 
                 let res = await axios.get(`http://hadi-api.herokuapp.com/api/nhentai?id=${text}`)
                 if (!res.status === 'true') return m.reply(`_ Não foi possível encontrar o hentai, verifique que o ID digitado esta correto em nhentai.to/g/${text}`)
-                let result =`• Nome: ${res.result.name}\n• Tags: ${res.result.tags}\n• Idioma: ${res.result.language}\n• Paginas: ${res.result.pages}\n• Categoria: ${res.result.catefories}\n\n_Fazendo download aguarde..._`
+                let result =`• Nome: ${res.data.result.name}\n• Tags: ${res.data.result.tags}\n• Idioma: ${res.data.result.language}\n• Paginas: ${res.data.result.pages}\n• Categoria: ${res.data.result.catefories}\n\n_Fazendo download aguarde..._`
                 m.reply(result)
             }
             break
