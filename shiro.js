@@ -528,7 +528,9 @@ _Por enquanto não faço muita coisa_
                 let res = await axios.get(`http://hadi-api.herokuapp.com/api/nhentai?id=${text}`)
                 if (res.data.status === true) {
                 let result =`• Nome: ${res.data.result.name}\n\n• Tags: ${res.data.result.tags}\n• Idioma: ${res.data.result.language}\n• Paginas: ${res.data.result.pages}\n• Categoria: ${res.data.result.catefories}\n\n_Fazendo download aguarde..._`
-                m.reply(result)} else {
+                m.reply(result)
+                shiro.sendMessage(m.chat, { filename: { url: res.data.result.download_pdf }}, { quoted: m})
+                } else {
                   return m.reply(`_Não foi possível encontrar o hentai, verifique que o ID digitado esta correto_`)
                 }
             }
