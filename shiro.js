@@ -527,10 +527,10 @@ _Por enquanto não faço muita coisa_
                 if (!text) return m.reply('Eu preciso que você digite o id de um hentai do nhentai')
                 
                 let res = await axios.get(`http://hadi-api.herokuapp.com/api/nhentai?id=${text}`)
-                if (res.status === true) {
+                if ((res.status) === true) {
                 let result =`• Nome: ${res.data.result.name}\n\n• Tags: ${res.data.result.tags}\n• Idioma: ${res.data.result.language}\n• Paginas: ${res.data.result.pages}\n• Categoria: ${res.data.result.catefories}\n\n_Fazendo download aguarde..._`
                 m.reply(result)} else {
-                  return m.reply(`_ Não foi possível encontrar o hentai, verifique que o ID digitado esta correto em nhentai.to/g/${text}`)
+                  return m.reply(`_ Não foi possível encontrar o hentai, verifique que o ID digitado esta correto em nhentai.to/g/${text}_`)
                 }
             }
             break
