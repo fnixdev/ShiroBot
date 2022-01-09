@@ -17,11 +17,12 @@ const path = require('path')
 const os = require('os')
 const speed = require('performance-now')
 const yts = require('yt-search')
-
+const afk = require("./lib/afk");
 
 // SRC
 const config = JSON.parse(fs.readFileSync('./src/config.json'))
 const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
+// let _afk = JSON.parse(fs.readFileSync('./src/afk.json'));
 
 // LIB
 
@@ -65,6 +66,9 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         
         // NSFW
         const isNsfw = m.isGroup ? nsfw.includes(groupMetadata.id) : false
+        
+        // AFK
+        const isAfkOn = afk.checkAfkUser(m.sender, _afk)
 
         // Bot Status
         const used = process.memoryUsage()

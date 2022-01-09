@@ -15,7 +15,7 @@ const fetch = require('node-fetch')
 const FileType = require('file-type')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
 const { smsg, isUrl, generateMessageTag } = require('./lib/myfunc')
-const hora = new Date();
+
 
 // Client Bot
 async function startShiro() {
