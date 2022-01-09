@@ -22,7 +22,7 @@ async function startShiro() {
     const shiro = makeWASocket({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
-        browser: ['https://github.com/fnixdev/ShiroBot Multi Device','Safari','1.0.0'],
+        browser: ['ShiroBot Multi Device','Safari','1.0.1'],
         auth: state
     })
 

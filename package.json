@@ -1,6 +1,6 @@
 {
   "name": "shiro-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Whatsapp Bot Using Baileys#MD",
   "main": "index.js",
   "type": "commonjs",
