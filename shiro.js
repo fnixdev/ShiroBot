@@ -17,7 +17,7 @@ const path = require('path')
 const os = require('os')
 const speed = require('performance-now')
 const yts = require('yt-search')
-const afk = require("./lib/afk");
+// const afk = require("./lib/afk");
 
 // SRC
 const config = JSON.parse(fs.readFileSync('./src/config.json'))
