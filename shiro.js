@@ -39,7 +39,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         // Comandos
         
         const isCmd = prefix.includes(body != '' && body.slice(0, 1)) && body.slice(1) != ''
-        const command = body.startsWith(prefix) ? body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase() : ''
+        const command = isCmd ? body.slice(1).trim().split(' ')[0].toLowerCase() : ''
 
         //
         
