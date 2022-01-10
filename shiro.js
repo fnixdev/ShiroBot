@@ -20,7 +20,7 @@ const yts = require('yt-search')
 // const afk = require("./lib/afk");
 
 // SRC
-const config = JSON.parse(fs.readFileSync('./src/config.json'))
+
 const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
 // let _afk = JSON.parse(fs.readFileSync('./src/afk.json'));
 
