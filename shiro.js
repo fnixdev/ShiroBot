@@ -679,7 +679,7 @@ _Por enquanto não faço muita coisa_
                 res = await axios.get(`http://hadi-api.herokuapp.com/api/yt2/video?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
                 result = `*Título* ➠ _${res.data.result.title}_\n*Canal* ➠ _${res.data.result.channel}_\n*Views* ➠ _${res.data.result.views}_\n\n_Processando o download aguarde._`
                 shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
-                shiro.sendVideo(m.chat, { video: res.data.result.download_video, mimetype: mimetype} , { quoted: m}) 
+                shiro.sendVideo(m.chat, { video: res.data.result.download_video} , { quoted: m}) 
             }
             break
             case 'tiktok': {
