@@ -68,7 +68,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
         const isNsfw = m.isGroup ? nsfw.includes(groupMetadata.id) : false
         
         // AFK
-        const isAfkOn = afk.checkAfkUser(m.sender, _afk)
+        // const isAfkOn = afk.checkAfkUser(m.sender, _afk)
 
         // Bot Status
         const used = process.memoryUsage()
