@@ -672,14 +672,14 @@ _Por enquanto não faço muita coisa_
             }
             break 
             case 'mp4': {
-                m.reply('_Função desativada temporáriamente._') /*
+               // m.reply('_Função desativada temporáriamente._') 
                 if (!text) throw 'Insira o link do video!'
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 m.reply(mess.wait)
                 res = await axios.get(`http://hadi-api.herokuapp.com/api/yt2/video?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
                 result = `*Título* ➠ _${res.data.result.title}_\n*Canal* ➠ _${res.data.result.channel}_\n*Views* ➠ _${res.data.result.views}_\n\n_Processando o download aguarde._`
                 shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
-                shiro.sendMessage(m.chat, { video: { url: res.data.result.download_video }, mimetype: 'video/mp4'}, { quoted: m}) */
+                shiro.sendVideo(m.chat, { video: res.data.result.download_video, mimetype: mimetype} , { quoted: m}) 
             }
             break
             case 'tiktok': {
