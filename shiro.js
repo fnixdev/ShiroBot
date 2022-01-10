@@ -191,7 +191,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             case 'listgp': {
                 if (!isCreator) throw mess.owner
                 let grup = Object.values(await shiro.groupFetchAllParticipating()).map(v => `${v.subject}\n${v.id}`).join`\n\n`
-			          m.reply('List Groups:\n\n' + grup)
+			          m.reply('Lista de Grupos:\n\n' + grup)
             }
 
 
