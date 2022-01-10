@@ -193,7 +193,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 let grup = Object.values(await shiro.groupFetchAllParticipating()).map(v => `${v.subject}\n${v.id}`).join`\n\n`
 			          m.reply('Lista de Grupos:\n\n' + grup)
             }
-
+            break
 
 ///////////////////////////////////////////////////////////
 //                                                       //
