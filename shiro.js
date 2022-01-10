@@ -660,15 +660,15 @@ _Por enquanto não faço muita coisa_
 ///////////////////////////////////////////////////////////
 
             case 'mp3': { // Reservado caso cair Y2mate
-                m.reply('_Função desativada temporáriamente._') /*
+              //  m.reply('_Função desativada temporáriamente._')
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 res = await axios.get(`http://hadi-api.herokuapp.com/api/yt2/audio?url=https://youtu.be/${search.all[0].videoId}`)
+                let aud = res.data.result.download_audio
                 result = `*Título* • _${res.data.result.title}_\n*Tamanho* • _${res.data.result.size}_\n\n_Processando o download aguarde._`
                 shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
-                shiro.sendMessage(m.chat, { audio: { url: res.data.result.download_audio }, mimetype: 'audio/mp4', }, { quoted: m})
-                */
+                shiro.sendMessage(m.chat, aud)
             }
             break 
             case 'mp4': {
