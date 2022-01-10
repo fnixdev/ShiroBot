@@ -690,7 +690,7 @@ _Por enquanto não faço muita coisa_
                 capt = '_Send by ShiroBot_'
                 res = await axios.get(`http://hadi-api.herokuapp.com/api/tiktok?url=${text}`)
                 let vid = res.data.result.video.nowm
-                shiro.sendVideo(m.chat, { video: vid , caption: capt})
+                shiro.sendVideo(m.chat, vid ,capt)
             }
             break
             /*
