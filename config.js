@@ -10,9 +10,10 @@ const chalk = require('chalk')
 
 
 // Outros
-global.prefa = ['','!']
+global.owner = ['3189092420']
+global.prefix = ['','!']
 global.packname = 'Shiro Bot'
-global.author = '\n'
+global.author = 'https://github.com/fnixdev'
 global.sp = '⭔'
 global.mess = {
     admin: 'Apenas administradores podem usar esse comando!',

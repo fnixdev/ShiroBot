@@ -31,25 +31,23 @@ const { performance } = require('perf_hooks')
 const { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, delay, format, logic, generateProfilePicture, parseMention, getRandom } = require('./lib/myfunc')
 
-
-
-global.owner = [config.dono]
-
 module.exports = shiro = async (shiro, m, chatUpdate) => {
     try {
         var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
         var budy = (typeof m.text == 'string' ? m.text : '')
         
-        //
-        var prefix = prefa ? /^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi)[0] : "" : prefa ?? global.prefix
+        // Comandos
+        
         const isCmd = prefix.includes(body != '' && body.slice(0, 1)) && body.slice(1) != ''
-        const command = isCmd ? body.slice(1).trim().split(' ')[0].toLowerCase() : ''
+        const command = body.startsWith(prefix) ? body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase() : ''
+
         //
         
         const args = body.trim().split(/ +/).slice(1)
         const pushname = m.pushName || "No Name"
         
         const isCreator = [shiro.user.id, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
+        
         const itsMe = m.sender == shiro.user.id ? true : false
         const text = q = args.join(" ")
         const quoted = m.quoted ? m.quoted : m
@@ -192,6 +190,13 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 if (!isCreator) throw mess.owner
                 let grup = Object.values(await shiro.groupFetchAllParticipating()).map(v => `${v.subject}\n${v.id}`).join`\n\n`
 			          m.reply('Lista de Grupos:\n\n' + grup)
+            }
+            break
+            case 'setprefix': {
+                if (!isCreator) throw mess.owner
+                if (!text) return m.reply('_Eu preciso que você informe um prefixo._')
+                global.prefix = text[0]
+                m.reply(`_Prefixo alterado para ${text}_`)
             }
             break
 
