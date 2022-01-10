@@ -199,6 +199,12 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 m.reply(`_Prefixo alterado para ${text[0]}_`)
             }
             break
+            case 'restart': {
+                if (!isCreator) throw mess.owner
+                await m.reply('Reiniciando...')
+                process.send('reset')
+            }
+            break
 
 ///////////////////////////////////////////////////////////
 //                                                       //
