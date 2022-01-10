@@ -11,7 +11,7 @@ const chalk = require('chalk')
 
 // Outros
 global.owner = ['553189092420']
-global.prefix = ['!']
+global.prefix = ['/']
 global.packname = 'Shiro Bot'
 global.author = 'https://github.com/fnixdev'
 global.sp = '⭔'
