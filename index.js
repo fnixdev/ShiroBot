@@ -7,7 +7,7 @@
 
 require('./config')
 const { default: makeWASocket, useSingleFileAuthState, DisconnectReason, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage } = require("@adiwajshing/baileys-md")
-const { state, saveState } = useSingleFileAuthState(`./${sessionName}.json`)
+const { state, saveState } = useSingleFileAuthState(`./shiro.json`)
 const pino = require('pino')
 const fs = require('fs')
 const chalk = require('chalk')
@@ -22,7 +22,7 @@ async function startShiro() {
     const shiro = makeWASocket({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
-        browser: ['ShiroBot Multi Device','Safari','1.0.1'],
+        browser: ['Shiro MD','Safari','1.0.1'],
         auth: state
     })
 
@@ -63,7 +63,7 @@ async function startShiro() {
     shiro.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect } = update
         if (connection === 'close') {
-            lastDisconnect.erro&&r?.output?.statusCode !== DisconnectReason.loggedOut ? startShiro() : console.log('Conexao desligada...')
+            lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut ? startShiro() : console.log('Conexao desligada...')
         }
         console.log('Conectado...', update)
     })

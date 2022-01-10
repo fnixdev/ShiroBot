@@ -13,7 +13,6 @@ const chalk = require('chalk')
 global.prefa = ['','!']
 global.packname = 'Shiro Bot'
 global.author = '\n'
-global.sessionName = 'shirosession'
 global.sp = '⭔'
 global.mess = {
     admin: 'Apenas administradores podem usar esse comando!',
