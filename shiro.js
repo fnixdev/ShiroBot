@@ -196,7 +196,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
                 if (!isCreator) throw mess.owner
                 if (!text) return m.reply('_Eu preciso que você informe um prefixo._')
                 global.prefix = text[0]
-                m.reply(`_Prefixo alterado para ${text}_`)
+                m.reply(`_Prefixo alterado para ${text[0]}_`)
             }
             break
 
@@ -208,8 +208,8 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 
           	case 'kick': {
 	            	if (!m.isGroup) throw mess.group
+	            	if (!isGroupAdmins) throw mess.admin
                 if (!isBotAdmins) throw mess.botAdmin
-                if (!isGroupAdmins) throw mess.admin
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 	              if (users){
 	                await shiro.sendMessage(m.chat, { video: { url: "./src/banido.mp4" }, caption: 'Banido, banido, banido' }, { quoted: m}) ,shiro.groupParticipantsUpdate(m.chat, [users], 'remove')
@@ -220,31 +220,31 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 	          break
 	          case 'add': {
 	            	if (!m.isGroup) throw mess.group
+	            	if (!isGroupAdmins) throw mess.admin
                 if (!isBotAdmins) throw mess.botAdmin
-                if (!isGroupAdmins) throw mess.admin
 	             	let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 		            await shiro.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 	          }
           	break
           	case 'promote': {
-            		if (!m.isGroup) throw mess.group
-                if (!isBotAdmins) throw mess.botAdmin
-                if (!isGroupAdmins) throw mess.admin
+	            	if (!m.isGroup) throw mess.group
+	            	if (!isGroupAdmins) throw mess.admin
+	            	if (!isBotAdmins) throw mess.botAdmin
 	            	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 	            	await shiro.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply('_Usuario Promovido_')).catch((err) => m.reply(jsonformat(err)))
           	}
           	break
           	case 'demote': {
-		            if (!m.isGroup) throw mess.group
-                if (!isBotAdmins) throw mess.botAdmin
-                if (!isGroupAdmins) throw mess.admin
+	            	if (!m.isGroup) throw mess.group
+	            	if (!isGroupAdmins) throw mess.admin
+	            	if (!isBotAdmins) throw mess.botAdmin
 		            let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
             		await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply('_Usuario foi rebaixado a membro comum_')).catch((err) => m.reply(jsonformat(err)))
            	}
 	          break
 		    		case 'nsfw':
-                if (!m.isGroup) return m.reply(mess.group)
-                if (!isGroupAdmins) return m.reply(mess.admin)
+	            	if (!m.isGroup) throw mess.group
+	            	if (!isGroupAdmins) throw mess.admin
 		      			if (!text) return m.reply('Hmmmm')
 		      			if (Number(text[0]) === 1) {
 		     				if (isNsfw) return m.reply('_A putaria ja esta liberada._')
