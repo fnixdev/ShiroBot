@@ -580,7 +580,6 @@ _Por enquanto não faço muita coisa_
               shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
             }
             break
-
             case 'hentai': {
               if (!m.isGroup) return m.reply(mess.group)
               let neko = await axios.get('https://nekos.life/api/v2/img/hentai')
@@ -588,7 +587,6 @@ _Por enquanto não faço muita coisa_
               shiro.sendMessage(m.chat, { image: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._'}, { quoted: m })
             }
             break
-
             case 'boobs': {
               if (!m.isGroup) return m.reply(mess.group)
               let neko = await axios.get('https://nekos.life/api/v2/img/boobs')
@@ -596,7 +594,6 @@ _Por enquanto não faço muita coisa_
               shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
             }
             break
-
             case 'pussy': {
               if (!m.isGroup) return m.reply(mess.group)
               let neko = await axios.get('https://nekos.life/api/v2/img/pussy')
@@ -604,7 +601,6 @@ _Por enquanto não faço muita coisa_
               shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
             }
             break
-
             case 'cum': {
               if (!m.isGroup) return m.reply(mess.group)
               let neko = await axios.get('https://nekos.life/api/v2/img/cum')
@@ -612,7 +608,6 @@ _Por enquanto não faço muita coisa_
               shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
             }
             break
-
             case 'blowjob': {
               if (!m.isGroup) return m.reply(mess.group)
               let neko = await axios.get('https://nekos.life/api/v2/img/bj')
@@ -620,7 +615,6 @@ _Por enquanto não faço muita coisa_
               shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
             }
             break
-
             case 'hentaineko': {
               if (!m.isGroup) return m.reply(mess.group)
               let neko = await axios.get('https://nekos.life/api/v2/img/nsfw_neko_gif')
@@ -628,7 +622,6 @@ _Por enquanto não faço muita coisa_
               shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
             }
             break
-
             case 'hentaigif': {
               if (!m.isGroup) return m.reply(mess.group)
               let neko = await axios.get('https://nekos.life/api/v2/img/Random_hentai_gif')
@@ -636,7 +629,6 @@ _Por enquanto não faço muita coisa_
               shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
             }
             break
-
             case 'feet': {
               if (!m.isGroup) return m.reply(mess.group)
               let neko = await axios.get('https://nekos.life/api/v2/img/feetg')
@@ -644,7 +636,6 @@ _Por enquanto não faço muita coisa_
               shiro.sendMessage(m.chat, { video: { url: neko.data.url }, caption: '_Vai bater pra 2d né safado._', gifPlayback: true,}, { quoted: m })
             }
             break
-
             case 'yuri': {
               if (!m.isGroup) return m.reply(mess.group)
               let neko = await axios.get('https://nekos.life/api/v2/img/eroyuri')
@@ -659,66 +650,41 @@ _Por enquanto não faço muita coisa_
 //                                                       //
 ///////////////////////////////////////////////////////////
 
-            case 'mp3': { // Reservado caso cair Y2mate
-              //  m.reply('_Função desativada temporáriamente._')
-                if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
+            case 'mp3': {
+                m.reply('_Função desativada temporáriamente._')
+                /* if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 res = await axios.get(`http://hadi-api.herokuapp.com/api/yt2/audio?url=https://youtu.be/${search.all[0].videoId}`)
                 let aud = res.data.result.download_audio
                 result = `*Título* • _${res.data.result.title}_\n*Tamanho* • _${res.data.result.size}_\n\n_Processando o download aguarde._`
                 shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
-                shiro.sendMessage(m.chat, aud)
+                shiro.sendMessage(m.chat, aud)*/
             }
             break 
             case 'mp4': {
-               // m.reply('_Função desativada temporáriamente._') 
-                if (!text) throw 'Insira o link do video!'
+                  m.reply('_Função desativada temporáriamente._')
+                /*if (!text) throw 'Insira o link do video!'
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 m.reply(mess.wait)
                 res = await axios.get(`http://hadi-api.herokuapp.com/api/yt2/video?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
                 let vid = res.data.result.download_video
                 result = `*Título* ➠ _${res.data.result.title}_\n*Canal* ➠ _${res.data.result.channel}_\n*Views* ➠ _${res.data.result.views}_\n\n_Processando o download aguarde._`
                 shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
-                shiro.sendVideo(m.chat, vid)
+                shiro.sendVideo(m.chat, vid)*/
             }
             break
             case 'tiktok': {
-               //  m.reply('_Função desativada temporáriamente._') 
+                m.reply('_Função desativada temporáriamente._') /*
                 if (!text) throw 'Eu preciso que você insira um link!'
                 if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
                 m.reply(mess.wait)
                 capt = '_Send by ShiroBot_'
                 res = await axios.get(`http://hadi-api.herokuapp.com/api/tiktok?url=${text}`)
                 let vid = res.data.result.video.nowm
-                shiro.sendVideo(m.chat, vid ,capt)
+                shiro.sendVideo(m.chat, vid ,capt) */
             }
             break
-            /*
-            case 'mp3':
-                if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
-                m.reply(mess.wait)
-                const ssa = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
-                res = await y2mateA(`https://www.youtube.com/watch?v=${ssa.all[0].videoId}`).catch(e => {
-                m.reply('_[ ! ] Erro Ao Entrar Em Contato Com Y2mate_')
-                })
-                result = `*YOUTUBE MP4*\n\n*•Titulo* : _${res[0].judul}_\n*•Formato* : _MP4_\n*•Tamanho* : _${res[0].size}_\n\n_Aguarde o download_`
-                shiro.sendMessage(m.chat, { image: { url: res[0].thumb }, caption: result }, { quoted: m }).then((lalu) => {
-                shiro.sendMessage(m.chat, { audio: { url: res[0].link }, }, { quoted: m })
-                })
-            break 
-            case 'mp4':
-                if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
-                m.reply(mess.wait)
-                const ssv = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
-                res = await y2mateV(`https://www.youtube.com/watch?v=${ssv.all[0].videoId}`).catch(e => {
-                m.reply('_[ ! ] Erro Ao Entrar Em Contato Com Y2mate_')
-                })
-                result = `*YOUTUBE MP4*\n\n*•Titulo* : _${res[0].judul}_\n*•Formato* : _MP4_\n*•Tamanho* : _${res[0].size}_\n\n_Aguarde o download_`
-                shiro.sendMessage(m.chat, { image: { url: res[0].thumb }, capion: result }, { quoted: m }).then((lalu) => {
-                shiro.sendMessage(m.chat, { video: { url: res[0].link }, caption: res[0].judul }, { quoted: m })
-                })
-            break */
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return m.reply(mess.owner)
