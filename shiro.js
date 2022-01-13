@@ -22,6 +22,7 @@ const yts = require('yt-search')
 // SRC
 
 const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
+const slap = JSON.parse(fs.readFileSync('./src/slap.json'))
 // let _afk = JSON.parse(fs.readFileSync('./src/afk.json'));
 
 // LIB
@@ -272,6 +273,21 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 //                                                       //
 ///////////////////////////////////////////////////////////
 
+            case 'bater': case 'slap': {
+                if (!m.isGroup) throw mess.group
+                let user2 = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+                const rjogar = Object.values(slap.throw)
+                const rhit = Object.values(slap.hit)
+                const ritens = Object.values(slap.itens)
+                const rtemplate = Object.values(slap.template)
+                const jogar = (Math.random() * rjogar.length)
+                const hit = (Math.random() * rhit.length)
+                const itens = (Math.random() * ritens.length)
+                const template = (Math.random() * rtemplate.length)
+                m.reply(template)
+                
+            }
+            break
             case 'linkgrupo': case 'link': {
                 if (!m.isGroup) throw mess.group
                 let response = await shiro.groupInviteCode(m.chat)

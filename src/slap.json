@@ -1,0 +1,58 @@
+{
+  "template": [
+    "Você ${hits} ${user2} com um ${item}.",
+    "Você ${hits} ${user2} no rosto com um ${item}.",
+    "Você ${hits} ${user2} um pouco com um ${item}.",
+    "Você ${throws} ${item} no ${user2}.",
+    "Você ${throws} ${item} na cara do ${user2} .",
+    "Você joga um ${item} na cabeça do ${user2}.",
+    "Você pensa em bater no ${user2} com ${item}.",
+    "Você derruba ${user2} e repetidamente o ${hits} com ${item}.",
+    "Você pega ${item} e ${hits} no ${user2}.",
+    "Você amarra ${user2} em uma cadeira e ${throws} ${item}.",
+    "Você deu um empurrão amigável no ${user2} para que ele aprenda a nadar na lava"
+  ],
+  "itens": [
+    "frigideira de ferro fundido",
+    "truta grande",
+    "taco de beisebol",
+    "bastão de cricket",
+    "bengala de madeira",
+    "unha",
+    "penis de borracha",
+    "pá",
+    "ventilador",
+    "um Nokia 3310",
+    "torradeira",
+    "Laptop da positivo",
+    "televisão",
+    "caminhão de cinco toneladas",
+    "piroca",
+    "livro",
+    "laptop",
+    "televisão antiga",
+    "chifre do administrador",
+    "um vibrador gigante",
+    "galinha de borracha",
+    "morcego cravado",
+    "extintor de incêndio",
+    "litro de 51",
+    "pedaço de terra",
+    "colméia",
+    "pedaço de carne podre",
+    "Urso",
+    "a mãe do admin"
+  ],
+  "jogar": [
+    "joga",
+    "lança",
+    "arremessa"
+  ],
+  "hit": [
+    "golpeia",
+    "bate",
+    "golpeia",
+    "esmurra",
+    "ataca"
+  ]
+}
