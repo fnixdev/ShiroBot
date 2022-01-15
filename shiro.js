@@ -691,14 +691,14 @@ _Por enquanto não faço muita coisa_
             }
             break
             case 'tiktok': {
-                m.reply('_Função desativada temporáriamente._') /*
+                //m.reply('_Função desativada temporáriamente._')
                 if (!text) throw 'Eu preciso que você insira um link!'
                 if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
                 m.reply(mess.wait)
                 capt = '_Send by ShiroBot_'
                 res = await axios.get(`http://hadi-api.herokuapp.com/api/tiktok?url=${text}`)
                 let vid = res.data.result.video.nowm
-                shiro.sendVideo(m.chat, vid ,capt) */
+                shiro.sendMessage(m.chat, { document: { url: vid }, caption: capt})
             }
             break
             default:
