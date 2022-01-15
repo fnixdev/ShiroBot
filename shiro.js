@@ -276,16 +276,11 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             case 'bater': case 'slap': {
                 if (!m.isGroup) throw mess.group
                 let user2 = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-                const rjogar = Object.values(slap.throw)
-                const rhit = Object.values(slap.hit)
-                const ritens = Object.values(slap.itens)
-                const rtemplate = Object.values(slap.template)
-                const jogar = (Math.random() * rjogar.length)
-                const hit = (Math.random() * rhit.length)
-                const itens = (Math.random() * ritens.length)
-                const template = (Math.random() * rtemplate.length)
-                m.reply(template)
-                
+                const rjogar = getRandom(slap.throw)
+                const rhit = getRandom(slap.hit)
+                const ritens = getRandom(slap.itens)
+                const rtemplate = getRandom(slap.template)
+                m.reply(rtemplate)
             }
             break
             case 'linkgrupo': case 'link': {
