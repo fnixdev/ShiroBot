@@ -679,7 +679,7 @@ _Por enquanto não faço muita coisa_
             }
             break 
             case 'mp4': {
-                  //m.reply('_Função desativada temporáriamente._')
+                m.reply('_Função desativada temporáriamente._')/*
                 if (!text) throw 'Insira o link do video!'
                 const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
                 m.reply(mess.wait)
@@ -687,7 +687,7 @@ _Por enquanto não faço muita coisa_
                 let vid = res.data.result.download_video
                 result = `*Título* ➠ _${res.data.result.title}_\n*Canal* ➠ _${res.data.result.channel}_\n*Views* ➠ _${res.data.result.views}_\n\n_Processando o download aguarde._`
                 shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
-                shiro.sendMessage(m.chat, { document: { url: vid }, mimetype: 'video/mp4'})
+                shiro.sendMessage(m.chat, { document: { url: vid }, mimetype: 'video/mp4'})*/
             }
             break
             case 'tiktok': {
