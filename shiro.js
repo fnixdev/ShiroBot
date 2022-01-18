@@ -228,7 +228,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 	          case 'add': {
 	            	if (!m.isGroup) throw mess.group
 	            	if (!isGroupAdmins) throw mess.admin
-                if (!isBotAdmins) throw mess.botAdmin
+                if (!isBotAdmins) throw me irss.botAdmin
 	             	let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 		            await shiro.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 	          }
@@ -390,15 +390,15 @@ _Por enquanto não faço muita coisa_
 │▸ ${prefix}kick @user
 │▸ ${prefix}promote @user
 │▸ ${prefix}demote @user
-│▸ ${prefix}welcome [opção]
+│▸ ${prefix}nsfw [opção]
 │
 └───────⭓
 
 ┌──⭓ *Download Menu*
 │
-│▸ ${prefix}mp3 
-│▸ ${prefix}mp4
-│▸ ${prefix}tiktok [link]
+│▸ ${prefix}mp3 [desativado]
+│▸ ${prefix}mp4 [desativado]
+│▸ ${prefix}tiktok [link] [desativado]
 │
 └───────⭓ 
 
@@ -511,13 +511,13 @@ _Por enquanto não faço muita coisa_
 │▸ ${prefix}neko
 │▸ ${prefix}waifu
 │▸ ${prefix}wallpaper
-│▸ ${prefix}kiss
-│▸ ${prefix}nekogif
-│▸ ${prefix}poke
-│▸ ${prefix}smug
-│▸ ${prefix}cute
-│▸ ${prefix}baka
-│▸ ${prefix}foxgirl
+│▸ ${prefix}kiss [desativado]
+│▸ ${prefix}nekogif [desativado]
+│▸ ${prefix}poke [desativado]
+│▸ ${prefix}smug [desativado]
+│▸ ${prefix}cute [desativado]
+│▸ ${prefix}baka [desativado]
+│▸ ${prefix}foxgirl [desativado]
 │
 └───────⭓
 
