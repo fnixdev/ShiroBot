@@ -228,7 +228,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 	          case 'add': {
 	            	if (!m.isGroup) throw mess.group
 	            	if (!isGroupAdmins) throw mess.admin
-                if (!isBotAdmins) throw me irss.botAdmin
+                if (!isBotAdmins) throw mess.botAdmin
 	             	let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 		            await shiro.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 	          }
