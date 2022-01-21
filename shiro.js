@@ -213,6 +213,12 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 //                                                       //
 ///////////////////////////////////////////////////////////
 
+            case 'tagall': 
+                if (!m.isGroup) throw mess.group
+	            	if (!isGroupAdmins) throw mess.admin
+	            	if (!text) return m.reply('Digite uma mensagem')
+                shiro.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}) 
+            break
           	case 'kick': {
 	            	if (!m.isGroup) throw mess.group
 	            	if (!isGroupAdmins) throw mess.admin
