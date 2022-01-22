@@ -11,7 +11,6 @@ const fs = require('fs')
 const util = require('util')
 const chalk = require('chalk')
 const { exec, spawn, execSync } = require("child_process")
-const xa = require('xfarr-api')
 const axios = require('axios')
 const { fromBuffer } = require('file-type')
 const path = require('path')
@@ -690,14 +689,6 @@ _Por enquanto não faço muita coisa_
                 result = `*Título* ➠ _${res.data.result.title}_\n*Canal* ➠ _${res.data.result.channel}_\n*Views* ➠ _${res.data.result.views}_\n\n_Processando o download aguarde._`
                 shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
                 shiro.sendMessage(m.chat, { document: { url: vid }, mimetype: 'video/mp4'})*/
-            }
-            break
-            case 'ytv': {
-                if (!text) throw 'Eu preciso que você insira um link!'
-                if (!isUrl(args[0]) && !args[0].includes('yout')) throw 'Link Invalido!'
-                const url_youtube = `${text}`
-                res = xa.Youtube(url_youtube)
-                m.reply(res)
             }
             break
             case 'tiktok': {
