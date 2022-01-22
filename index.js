@@ -11,7 +11,7 @@ const { state, saveState } = useSingleFileAuthState(`./shiro.json`)
 const pino = require('pino')
 const fs = require('fs')
 const chalk = require('chalk')
-import fetch from 'node-fetch'
+const fetch = require('node-fetch')
 const FileType = require('file-type')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
 const { smsg, isUrl, generateMessageTag } = require('./lib/myfunc')
