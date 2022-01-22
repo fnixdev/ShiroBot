@@ -691,6 +691,14 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { document: { url: vid }, mimetype: 'video/mp4'})*/
             }
             break
+            case 'ytv': {
+                if (!text) throw 'Eu preciso que você insira um link!'
+                if (!isUrl(args[0]) && !args[0].includes('yout')) throw 'Link Invalido!'
+                const url_youtube = `${text}`
+                res = xa.Youtube(url_youtube)
+                m.reply(res)
+            }
+            break
             case 'tiktok': {
                 //m.reply('_Função desativada temporáriamente._')
                 if (!text) throw 'Eu preciso que você insira um link!'
