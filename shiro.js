@@ -216,7 +216,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
             case 'tagall': 
                 if (!m.isGroup) throw mess.group
 	            	if (!isGroupAdmins) throw mess.admin
-	            	if (!text) return m.reply('Digite uma mensagem')
+	            	if (!text) throw mess.text
                 shiro.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}) 
             break
           	case 'kick': {
@@ -258,7 +258,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 		    		case 'nsfw':
 	            	if (!m.isGroup) throw mess.group
 	            	if (!isGroupAdmins) throw mess.admin
-		      			if (!text) return m.reply('Hmmmm')
+		      			if (!text) throw mess.text
 		      			if (Number(text[0]) === 1) {
 		     				if (isNsfw) return m.reply('_A putaria ja esta liberada._')
 	    					nsfw.push(groupMetadata.id)
@@ -549,7 +549,7 @@ _Por enquanto não faço muita coisa_
             }
             break
             case 'anime': {
-                if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
+                if (!text) throw mess.text
                 m.reply(mess.wait)
                 const res = await axios.get(`https://api.jikan.moe/v3/search/anime?q=${text}`)
                 animeinfo = `✨️ *Título:* ${res.data.results[0].title}\n🎆️ *Episódios:* ${res.data.results[0].episodes}\n💌️ *Avaliação:* ${res.data.results[0].rated}\n❤️ *Score:* ${res.data.results[0].score}\n💚️ *Descrição:* ${res.data.results[0].synopsis}\n`

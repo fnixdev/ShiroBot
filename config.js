@@ -14,7 +14,7 @@ global.owner = ['553189092420']
 global.prefix = ['/']
 global.packname = 'Shiro Bot'
 global.author = 'https://github.com/fnixdev'
-global.sp = '⭔'
+global.sp = '›'
 global.mess = {
     admin: 'Apenas administradores podem usar esse comando!',
     botAdmin: 'Eu preciso ser administrador pra fazer isso!',
@@ -23,6 +23,7 @@ global.mess = {
     private: 'Isso só pode ser usado no privado',
     bot: 'Recursos especial do bot',
     wait: 'Carregando...',
+    text: 'Eu preciso que você digite',
 }
 global.thumb = fs.readFileSync('./src/shiro.jpg')
 
