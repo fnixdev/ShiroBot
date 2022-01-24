@@ -23,7 +23,7 @@ global.mess = {
     private: 'Isso só pode ser usado no privado',
     bot: 'Recursos especial do bot',
     wait: 'Carregando...',
-    text: 'Eu preciso que você digite',
+    text: 'Eu preciso que você digite algo',
 }
 global.thumb = fs.readFileSync('./src/shiro.jpg')
 
