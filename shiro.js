@@ -176,7 +176,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 		switch (command) {
 			case 'chat': {
 				if (!isCreator) throw mess.owner
-				if (!q) throw '_Opções :\n1 - mute\n2 - unmute_'
+				if (!q) throw '_Opções_ :\n1 - mute\n2 - unmute'
 				if (args[0] === 'mute') {
 					shiro.chatModify({
 						mute: 'Infinity'
@@ -188,6 +188,17 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 				}
 			}
 			break
+      case 'listgp': {
+				if (!isCreator) throw mess.owner
+        let anu = await store.chats.all().filter(v => v.id.endsWith('@g.us')).map(v => v.id)
+        let teks = `⬣ *Lista de Grupos*\n\nTotal : ${anu.length} Group\n\n`
+        for (let i of anu) {
+          let metadata = await shiro.groupMetadata(i)
+          teks += `⬡ *Nome :* ${metadata.subject}\n⬡ *Dono :* @${metadata.owner.split('@')[0]}\n⬡ *ID :* ${metadata.id}\n⬡ *Criado :* ${moment(metadata.creation * 1000).tz('America/Sao_Paulo').format('DD/MM/YYYY HH:mm:ss')}\n⬡ *Membro :* ${metadata.participants.length}\n\n────────────────────────\n\n`
+                 }
+                 shiro.sendTextWithMentions(m.chat, teks, m)
+    }
+    break
 		case 'join': {
 			if (!isCreator) throw mess.owner
 			if (!text) throw 'Insira o link do grupo!'
@@ -334,7 +345,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 			//                                                       //
 			///////////////////////////////////////////////////////////
 
-		case 'bater':
+/*		case 'bater':
 		case 'slap': {
 			if (!m.isGroup) throw mess.group
 			let user2 = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
@@ -344,7 +355,7 @@ module.exports = shiro = async (shiro, m, chatUpdate) => {
 			const rtemplate = getRandom(slap.template)
 			m.reply(rtemplate)
 		}
-		break
+		break*/
 		case 'linkgrupo':
 		case 'link': {
 			if (!m.isGroup) throw mess.group
