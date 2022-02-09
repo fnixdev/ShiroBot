@@ -930,7 +930,32 @@ _Por enquanto não faço muita coisa_
 		//                                                       //
 		///////////////////////////////////////////////////////////
 
-		case 'mp3': {
+            case 'mp3':
+                if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
+                m.reply(mess.wait)
+                const ssa = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
+                res = await y2mateA(`https://www.youtube.com/watch?v=${ssa.all[0].videoId}`).catch(e => {
+                m.reply('_[ ! ] Erro Ao Entrar Em Contato Com Y2mate_')
+                })
+                result = `*YOUTUBE MP4*\n\n*•Titulo* : _${res[0].judul}_\n*•Formato* : _MP4_\n*•Tamanho* : _${res[0].size}_\n\n_Aguarde o download_`
+                shiro.sendMessage(m.chat, { image: { url: res[0].thumb }, caption: result }, { quoted: m }).then((lalu) => {
+                shiro.sendMessage(m.chat, { audio: { url: res[0].link }, }, { quoted: m })
+                })
+            break 
+            case 'mp4':
+                if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
+                m.reply(mess.wait)
+                const ssv = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
+                res = await y2mateV(`https://www.youtube.com/watch?v=${ssv.all[0].videoId}`).catch(e => {
+                m.reply('_[ ! ] Erro Ao Entrar Em Contato Com Y2mate_')
+                })
+                result = `*YOUTUBE MP4*\n\n*•Titulo* : _${res[0].judul}_\n*•Formato* : _MP4_\n*•Tamanho* : _${res[0].size}_\n\n_Aguarde o download_`
+                shiro.sendMessage(m.chat, { image: { url: res[0].thumb }, capion: result }, { quoted: m }).then((lalu) => {
+                shiro.sendMessage(m.chat, { video: { url: res[0].link }, caption: res[0].judul }, { quoted: m })
+                })
+            break
+
+		/*case 'mp3': {
 			m.reply('_Função desativada temporáriamente._')
 			/* if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
 			m.reply(mess.wait)
@@ -939,12 +964,12 @@ _Por enquanto não faço muita coisa_
 			let aud = res.data.result.download_audio
 			result = `*Título* • _${res.data.result.title}_\n*Tamanho* • _${res.data.result.size}_\n\n_Processando o download aguarde._`
 			shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
-			shiro.sendMessage(m.chat, aud)*/
+			shiro.sendMessage(m.chat, aud)
 		}
 		break
 		case 'mp4': {
 			m.reply('_Função desativada temporáriamente._')
-			/*
+			
 			                if (!text) throw 'Insira o link do video!'
 			                const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
 			                m.reply(mess.wait)
@@ -952,9 +977,9 @@ _Por enquanto não faço muita coisa_
 			                let vid = res.data.result.download_video
 			                result = `*Título* ➠ _${res.data.result.title}_\n*Canal* ➠ _${res.data.result.channel}_\n*Views* ➠ _${res.data.result.views}_\n\n_Processando o download aguarde._`
 			                shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
-			                shiro.sendMessage(m.chat, { document: { url: vid }, mimetype: 'video/mp4'})*/
+			                shiro.sendMessage(m.chat, { document: { url: vid }, mimetype: 'video/mp4'})
 		}
-		break
+		break*/
 		case 'tiktok': {
 			//m.reply('_Função desativada temporáriamente._')
 			if (!text) throw 'Eu preciso que você insira um link!'
