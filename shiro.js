@@ -600,7 +600,7 @@ _Por enquanto não faço muita coisa_
 						hydratedButtons: [{
 							urlButton: {
 								displayText: 'Baixar Minecraft',
-								url: 'https://mcpedl.org/uploads_files/09-12-2021/minecraft-1-18-2.apk'
+								url: 'https://mcpedl.org/uploads_files/01-12-2021/minecraft-1-18-10-21.apk'
 							}
 						}]
 					}
