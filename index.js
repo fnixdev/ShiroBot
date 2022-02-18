@@ -23,7 +23,8 @@ async function startShiro() {
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
         browser: ['Shiro MD','Safari','1.0.1'],
-        auth: state
+        auth: state,
+        version: [2, 2204, 13]
     })
 
     shiro.ev.on('messages.upsert', async chatUpdate => {
