@@ -208,6 +208,17 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			await shiro.groupAcceptInvite(result).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 		}
 		break
+		case 'isowner': {
+			if (!m.isGroup) throw mess.group
+			if (!isGroupAdmins) throw mess.admin
+			if (!isBotAdmins) throw mess.botAdmin
+			let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
+			if (users == isCreator) { throw mess.isowner }
+			 else {
+				await m.reply('Não é dono')
+			}
+		}
+		break
 		case 'public': {
 			if (!isCreator) throw mess.owner
 			shiro.public = true
@@ -291,6 +302,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			if (!isGroupAdmins) throw mess.admin
 			if (!isBotAdmins) throw mess.botAdmin
 			let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
+			if (users == isCreator) throw mess.isowner
 			if (users) {
 				await shiro.sendMessage(m.chat, {
 					video: {

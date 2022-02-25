@@ -19,6 +19,7 @@ global.mess = {
     admin: 'Apenas administradores podem usar esse comando!',
     botAdmin: 'Eu preciso ser administrador pra fazer isso!',
     owner: 'Apenas meu dono pode usar isso!',
+    isowner: 'Lol ele é meu dono.',
     group: 'Isso só pode ser usado em um grupo!',
     private: 'Isso só pode ser usado no privado',
     bot: 'Recursos especial do bot',
