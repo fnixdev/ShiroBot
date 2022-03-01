@@ -394,6 +394,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 		case 'sticker':
 		case 'stickergif':
 		case 'sgif': {
+			if (!m.isGroup) throw mess.group
 			if (!quoted) throw `Responda a uma imagem/video ${prefix + command}`
 			if (/image/.test(mime)) {
 				let media = await quoted.download()
@@ -417,6 +418,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 		break
 		case 'toimage':
 		case 'toimg': {
+			if (!m.isGroup) throw mess.group
 			if (!quoted) throw 'Reply Image'
 			if (!/webp/.test(mime)) throw `Responda a um sticker *${prefix + command}*`
 			m.reply(mess.wait)
@@ -437,6 +439,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 		break
 		case 'tomp4':
 		case 'tovideo': {
+			if (!m.isGroup) throw mess.group
 			if (!quoted) throw 'Reply Image'
 			if (!/webp/.test(mime)) throw `Responda a um sticker animado *${prefix + command}*`
 			m.reply(mess.wait)
@@ -454,6 +457,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 		}
 		break
 		case 'togif': {
+			if (!m.isGroup) throw mess.group
 			if (!quoted) throw 'Reply Image'
 			if (!/webp/.test(mime)) throw `Responda a um sticker *${prefix + command}*`
 			m.reply(mess.wait)
@@ -472,6 +476,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 		}
 		break
 		case 'tourl': {
+			if (!m.isGroup) throw mess.group
 			m.reply(mess.wait)
 			let media = await shiro.downloadAndSaveMediaMessage(quoted)
 			if (/image/.test(mime)) {
