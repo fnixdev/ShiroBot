@@ -12,7 +12,7 @@
   "author": "fnixdev",
   "license": "MIT",
   "dependencies": {
-    "@adiwajshing/baileys-md": "github:adiwajshing/baileys#multi-device",
+    "@adiwajshing/baileys": "^4.0.1",
     "awesome-phonenumber": "^2.64.0",
     "axios": "^0.24.0",
     "chalk": "^4.1.2",
