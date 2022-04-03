@@ -6,7 +6,7 @@
 
 
 require('./config')
-const { default: makeWASocket, useSingleFileAuthState, DisconnectReason, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage } = require("@adiwajshing/baileys-md")
+const { default: shiroConnect, useSingleFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
 const { state, saveState } = useSingleFileAuthState(`./shiro.json`)
 const pino = require('pino')
 const fs = require('fs')
@@ -15,11 +15,11 @@ const fetch = require('node-fetch')
 const FileType = require('file-type')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
 const { smsg, isUrl, generateMessageTag } = require('./lib/myfunc')
-
+const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 
 // Client Bot
 async function startShiro() {
-    const shiro = makeWASocket({
+    const shiro = shiroConnect({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
         browser: ['Shiro MD','Safari','1.0.1'],
@@ -27,8 +27,9 @@ async function startShiro() {
         version: [2, 2204, 13]
     })
 
+    store.bind(shiro.ev)
+
     shiro.ev.on('messages.upsert', async chatUpdate => {
-        //console.log(JSON.stringify(chatUpdate, undefined, 2))
         try {
         mek = chatUpdate.messages[0]
         if (!mek.message) return
@@ -37,7 +38,7 @@ async function startShiro() {
         if (!shiro.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
         if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
         m = smsg(shiro, mek)
-        require("./shiro")(shiro, m, chatUpdate)
+        require("./shiro")(shiro, m, chatUpdate, store)
         } catch (err) {
             console.log(err)
         }
@@ -57,16 +58,25 @@ async function startShiro() {
             console.log(err)
         }
     })
-	
+
+    
     // Setting
     shiro.public = true
 
     shiro.ev.on('connection.update', async (update) => {
-        const { connection, lastDisconnect } = update
+        const { connection, lastDisconnect } = update	    
         if (connection === 'close') {
-            lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut ? startShiro() : console.log('Conexao desligada...')
+        let reason = new Boom(lastDisconnect?.error)?.output.statusCode
+            if (reason === DisconnectReason.badSession) { console.log(`Bad Session File, Please Delete Session and Scan Again`); shiro.logout(); }
+            else if (reason === DisconnectReason.connectionClosed) { console.log("Connection closed, reconnecting...."); startShiro(); }
+            else if (reason === DisconnectReason.connectionLost) { console.log("Connection Lost from Server, reconnecting..."); startShiro(); }
+            else if (reason === DisconnectReason.connectionReplaced) { console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First"); shiro.logout(); }
+            else if (reason === DisconnectReason.loggedOut) { console.log(`Device Logged Out, Please Scan Again And Run.`); shiro.logout(); }
+            else if (reason === DisconnectReason.restartRequired) { console.log("Restart Required, Restarting..."); startShiro(); }
+            else if (reason === DisconnectReason.timedOut) { console.log("Connection TimedOut, Reconnecting..."); startShiro(); }
+            else shiro.end(`Unknown DisconnectReason: ${reason}|${connection}`)
         }
-        console.log('Conectado...', update)
+        console.log('Connected...', update)
     })
 
     shiro.ev.on('creds.update', saveState)
