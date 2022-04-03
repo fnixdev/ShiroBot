@@ -37,7 +37,7 @@ async function startShiro() {
         if (mek.key && mek.key.remoteJid === 'status@broadcast') return
         if (!shiro.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
         if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
-        m = smsg(shiro, mek)
+        m = smsg(hisoka, mek, store)
         require("./shiro")(shiro, m, chatUpdate, store)
         } catch (err) {
             console.log(err)
@@ -59,7 +59,7 @@ async function startShiro() {
         }
     })
 
-    
+
     // Setting
     shiro.public = true
 
@@ -209,7 +209,19 @@ async function startShiro() {
         await fs.writeFileSync(trueFileName, buffer)
         return trueFileName
     }
-    
+
+    shiro.downloadMediaMessage = async (message) => {
+        let mime = (message.msg || message).mimetype || ''
+        let messageType = message.mtype ? message.mtype.replace(/Message/gi, '') : mime.split('/')[0]
+        const stream = await downloadContentFromMessage(message, messageType)
+        let buffer = Buffer.from([])
+        for await(const chunk of stream) {
+            buffer = Buffer.concat([buffer, chunk])
+	}
+        
+	return buffer
+     } 
+
     /**
      * 
      * @param {*} jid 

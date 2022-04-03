@@ -6,18 +6,9 @@
 
 
 require('./config')
-const {
-	default: makeWASocket,
-	BufferJSON,
-	WA_DEFAULT_EPHEMERAL,
-	generateWAMessageFromContent,
-	downloadContentFromMessage,
-	downloadHistory,
-	proto,
-	getMessage,
-	generateWAMessageContent,
-	prepareWAMessageMedia
-} = require('@adiwajshing/baileys-md')
+const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType } = require('@adiwajshing/baileys')
+
+
 const fs = require('fs')
 const util = require('util')
 const chalk = require('chalk')
