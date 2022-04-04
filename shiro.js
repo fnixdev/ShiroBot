@@ -941,9 +941,9 @@ _Por enquanto não faço muita coisa_
 		///////////////////////////////////////////////////////////
 
 			case 'ytmp3': case 'ytaudio': {
-				if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
-				m.reply(mess.wait)
-				const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
+				if (!text) throw '_Eu preciso que você digite algo para pesquisar!_'
+				m.reply('_Tudo bem querido eu vou procurar pra você._')
+				const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_')})
 				argyts = `https://youtu.be/${search.all[0].videoId}`
 				let quality = '128kbps'
 				let media = await yta(argyts, quality)
@@ -953,43 +953,17 @@ _Por enquanto não faço muita coisa_
 			}
 			break
 
-			case 'mp3': {
-				m.reply('_Função desativada temporáriamente._')
-				if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
-				m.reply(mess.wait)
-				const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
-				res = await axios.get(`http://hadi-api.herokuapp.com/api/yt2/audio?url=https://youtu.be/${search.all[0].videoId}`)
-				let aud = res.data.result.download_audio
-				result = `*Título* • _${res.data.result.title}_\n*Tamanho* • _${res.data.result.size}_\n\n_Processando o download aguarde._`
-				shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
-				shiro.sendMessage(m.chat, aud)
-			}
-			break
-
-            /* case 'mp3':
-                if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
-                m.reply(mess.wait)
-                const ssa = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
-                res = await y2mateA(`https://www.youtube.com/watch?v=${ssa.all[0].videoId}`).catch(e => {
-                m.reply('_[ ! ] Erro Ao Entrar Em Contato Com Y2mate_')
-                })
-                result = `*YOUTUBE MP4*\n\n*•Titulo* : _${res[0].judul}_\n*•Formato* : _MP4_\n*•Tamanho* : _${res[0].size}_\n\n_Aguarde o download_`
-                shiro.sendMessage(m.chat, { image: { url: res[0].thumb }, caption: result }, { quoted: m }).then((lalu) => {
-                shiro.sendMessage(m.chat, { audio: { url: res[0].link }, }, { quoted: m })
-                })
-            break 
-            case 'mp4':
-                if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
-                m.reply(mess.wait)
-                const ssv = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
-                res = await y2mateV(`https://www.youtube.com/watch?v=${ssv.all[0].videoId}`).catch(e => {
-                m.reply('_[ ! ] Erro Ao Entrar Em Contato Com Y2mate_')
-                })
-                result = `*YOUTUBE MP4*\n\n*•Titulo* : _${res[0].judul}_\n*•Formato* : _MP4_\n*•Tamanho* : _${res[0].size}_\n\n_Aguarde o download_`
-                shiro.sendMessage(m.chat, { image: { url: res[0].thumb }, capion: result }, { quoted: m }).then((lalu) => {
-                shiro.sendMessage(m.chat, { video: { url: res[0].link }, caption: res[0].judul }, { quoted: m })
-                })
-            break */
+            case 'ytmp4': case 'ytvideo': {
+				if (!text) throw '_Eu preciso que você digite algo para pesquisar!_'
+				m.reply('_Tudo bem querido eu vou procurar pra você._')
+				const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_')})
+				argyts = `https://youtu.be/${search.all[0].videoId}`
+                let quality = '360p'
+                let media = await ytv(text, quality)
+                if (media.filesize >= 100000) return m.reply('_Esse arquivo é muito grande!_ '+util.format(media))
+                shiro.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}` }, { quoted: m })
+            }
+            break
 
 		case 'tiktok': {
 			//m.reply('_Função desativada temporáriamente._')
