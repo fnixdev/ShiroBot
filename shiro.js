@@ -85,7 +85,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 
 		const args = body.trim().split(/ +/).slice(1)
 		const pushname = m.pushName || "No Name"
-
+		const botNumber = await shiro.decodeJid(shiro.user.id)
 		const isCreator = [shiro.user.id, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
 
 		const itsMe = m.sender == shiro.user.id ? true : false

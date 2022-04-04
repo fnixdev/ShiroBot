@@ -61,6 +61,15 @@ async function startShiro() {
 
 
     // Setting
+
+    shiro.decodeJid = (jid) => {
+        if (!jid) return jid
+        if (/:\d+@/gi.test(jid)) {
+            let decode = jidDecode(jid) || {}
+            return decode.user && decode.server && decode.user + '@' + decode.server || jid
+        } else return jid
+    }
+
     shiro.public = true
 
     shiro.ev.on('connection.update', async (update) => {
