@@ -946,24 +946,22 @@ _Por enquanto não faço muita coisa_
 			if (!text) throw '_Eu preciso que você digite algo para pesquisar!_'
 			m.reply('_Tudo bem querido eu vou procurar pra você._')
 			const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_')})
-			argyts = `https://youtu.be/${search.all[0].videoId}`
-			vidzin = await yts( { videoId: `${search.all[0].videoId}` } )
-			m.reply(`${vidzin.url}`)
-			
-			/*
+			anu = await yts( { videoId: `${search.all[0].videoId}` } )
 			let buttons = [
-				{buttonId: `ytmp3 ${argyts}`, buttonText: {displayText: '♫ Audio'}, type: 1},
-				{buttonId: `ytmp4 ${argyts}`, buttonText: {displayText: '► Video'}, type: 1}
+				{buttonId: `ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
+				{buttonId: `ytmp4 ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
 			]
 			let buttonMessage = {
 				image: { url: anu.thumbnail },
 				caption: `
-teste`,
+⭔ Titulo : ${anu.title}
+⭔ Views : ${anu.views}
+`,
 				footer: shiro.user.name,
 				buttons: buttons,
 				headerType: 4
 			}
-			shiro.sendMessage(m.chat, buttonMessage, { quoted: m })*/
+			shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
 		} 
 		break
 
