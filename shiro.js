@@ -69,6 +69,8 @@ const {
 	getRandom
 } = require('./lib/myfunc')
 
+const { yta } = require('./lib/y2mate')
+
 module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 	try {
 		var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
@@ -939,7 +941,6 @@ _Por enquanto não faço muita coisa_
 		///////////////////////////////////////////////////////////
 
 			case 'ytmp3': case 'ytaudio': {
-				let { yta } = require('./lib/y2mate')
 				if (!text) throw `Example : ${prefix + command} https://www.youtube.com/watch?v=8GEMevc3RA4 128kbps`
 				let quality = args[1] ? args[1] : '128kbps'
 				let media = await yta(text, quality)
