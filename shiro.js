@@ -948,8 +948,8 @@ _Por enquanto não faço muita coisa_
 				const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_')})
 				anu = await yts( { videoId: `${search.all[0].videoId}` } )
 				let buttons = [
-					{buttonId: `${prefix}ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
-					{buttonId: `${prefix}ytmp4 ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
+					{buttonId: `${prefix}ytaudio ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
+					{buttonId: `${prefix}ytvideo ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
 				]
 				let buttonMessage = {
 					image: { url: anu.thumbnail },
