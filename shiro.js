@@ -967,7 +967,6 @@ _Por enquanto não faço muita coisa_
 
 			case 'ytmp3':{
 				let { yta } = require('./lib/y2mate')
-				if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
 				let quality = args[1] ? args[1] : '128kbps'
 				let media = await yta(text, quality)
 				if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
@@ -977,7 +976,6 @@ _Por enquanto não faço muita coisa_
 			break
 			case 'ytmp4':{
 				let { ytv } = require('./lib/y2mate')
-				if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
 				let quality = args[1] ? args[1] : '360p'
 				let media = await ytv(text, quality)
 				if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
