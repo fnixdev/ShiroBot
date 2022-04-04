@@ -194,10 +194,11 @@ async function startShiro() {
      * @param {*} attachExtension 
      * @returns 
      */
-    shiro.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
+
+     shiro.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
         let quoted = message.msg ? message.msg : message
         let mime = (message.msg || message).mimetype || ''
-        let messageType = mime.split('/')[0].replace('application', 'document') ? mime.split('/')[0].replace('application', 'document') : mime.split('/')[0]
+        let messageType = message.mtype ? message.mtype.replace(/Message/gi, '') : mime.split('/')[0]
         const stream = await downloadContentFromMessage(quoted, messageType)
         let buffer = Buffer.from([])
         for await(const chunk of stream) {
@@ -221,22 +222,41 @@ async function startShiro() {
         
 	return buffer
      } 
-
+    
     /**
      * 
      * @param {*} jid 
      * @param {*} path 
+     * @param {*} filename
+     * @param {*} caption
      * @param {*} quoted 
      * @param {*} options 
      * @returns 
      */
-    shiro.sendMedia = async (jid, path, quoted, options = {}) => {
-	 let { ext, mime, data } = await shiro.getFile(path)
-	 messageType = mime.split("/")[0]
-	 pase = messageType.replace('application', 'document') || messageType
-	 return await shiro.sendMessage(m.chat, { [`${pase}`]: data, mimetype: mime, ...options }, { quoted })
-    }
-
+    shiro.sendMedia = async (jid, path, fileName = '', caption = '', quoted = '', options = {}) => {
+        let types = await hisoka.getFile(path, true)
+           let { mime, ext, res, data, filename } = types
+           if (res && res.status !== 200 || file.length <= 65536) {
+               try { throw { json: JSON.parse(file.toString()) } }
+               catch (e) { if (e.json) throw e.json }
+           }
+       let type = '', mimetype = mime, pathFile = filename
+       if (options.asDocument) type = 'document'
+       if (options.asSticker || /webp/.test(mime)) {
+        let { writeExif } = require('./lib/exif')
+        let media = { mimetype: mime, data }
+        pathFile = await writeExif(media, { packname: options.packname ? options.packname : global.packname, author: options.author ? options.author : global.author, categories: options.categories ? options.categories : [] })
+        await fs.promises.unlink(filename)
+        type = 'sticker'
+        mimetype = 'image/webp'
+        }
+       else if (/image/.test(mime)) type = 'image'
+       else if (/video/.test(mime)) type = 'video'
+       else if (/audio/.test(mime)) type = 'audio'
+       else type = 'document'
+       await hisoka.sendMessage(jid, { [type]: { url: pathFile }, caption, mimetype, fileName, ...options }, { quoted, ...options })
+       return fs.promises.unlink(pathFile)
+       }
     /**
      * 
      * @param {*} jid 
@@ -279,6 +299,33 @@ async function startShiro() {
         await shiro.relayMessage(jid, waMessage.message, { messageId:  waMessage.key.id })
         return waMessage
     }
+
+    shiro.cMod = (jid, copy, text = '', sender = shiro.user.id, options = {}) => {
+        //let copy = message.toJSON()
+		let mtype = Object.keys(copy.message)[0]
+		let isEphemeral = mtype === 'ephemeralMessage'
+        if (isEphemeral) {
+            mtype = Object.keys(copy.message.ephemeralMessage.message)[0]
+        }
+        let msg = isEphemeral ? copy.message.ephemeralMessage.message : copy.message
+		let content = msg[mtype]
+        if (typeof content === 'string') msg[mtype] = text || content
+		else if (content.caption) content.caption = text || content.caption
+		else if (content.text) content.text = text || content.text
+		if (typeof content !== 'string') msg[mtype] = {
+			...content,
+			...options
+        }
+        if (copy.key.participant) sender = copy.key.participant = sender || copy.key.participant
+		else if (copy.key.participant) sender = copy.key.participant = sender || copy.key.participant
+		if (copy.key.remoteJid.includes('@s.whatsapp.net')) sender = sender || copy.key.remoteJid
+		else if (copy.key.remoteJid.includes('@broadcast')) sender = sender || copy.key.remoteJid
+		copy.key.remoteJid = jid
+		copy.key.fromMe = sender === shiro.user.id
+
+        return proto.WebMessageInfo.fromObject(copy)
+    }
+
 
     /**
      * 
