@@ -10,6 +10,7 @@ const { default: shiroConnect, useSingleFileAuthState, DisconnectReason, fetchLa
 const { state, saveState } = useSingleFileAuthState(`./shiro.json`)
 const pino = require('pino')
 const fs = require('fs')
+const { Boom } = require('@hapi/boom')
 const chalk = require('chalk')
 const fetch = require('node-fetch')
 const FileType = require('file-type')
