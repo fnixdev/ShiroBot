@@ -20,8 +20,6 @@ const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, awa
 
 
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
-global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
-
 
 // Client Bot
 async function startShiro() {
