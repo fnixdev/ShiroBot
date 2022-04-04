@@ -974,11 +974,14 @@ _Por enquanto não faço muita coisa_
 			res = await axios.get(`http://hadi-api.herokuapp.com/api/tiktok?url=${text}`)
 			let vid = res.data.result.video.nowm
 			shiro.sendMessage(m.chat, {
-				document: {
+				video: {
 					url: vid
 				},
 				caption: capt,
-				mimetype: 'video/mp4'
+				mimetype: 'video/mp4',
+				fileName: 'video.mp4'
+			}, { 
+				quoted: m 
 			})
 		}
 		break
