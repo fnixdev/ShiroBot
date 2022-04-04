@@ -29,20 +29,32 @@ async function startShiro() {
 
     store.bind(shiro.ev)
 
-    shiro.ev.on('messages.upsert', async chatUpdate => {
-        try {
-        mek = chatUpdate.messages[0]
-        if (!mek.message) return
-        mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
-        if (mek.key && mek.key.remoteJid === 'status@broadcast') return
-        if (!shiro.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
-        if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
-        m = smsg(shiro, mek, store)
-        require("./shiro")(shiro, m, chatUpdate, store)
-        } catch (err) {
-            console.log(err)
+    // anticall auto block
+    shiro.ws.on('CB:call', async (json) => {
+        const callerId = json.content[0].attrs['call-creator']
+        if (json.content[0].tag == 'offer') {
+        let pa7rick = await shiro.sendContact(callerId, global.owner)
+        shiro.sendMessage(callerId, { text: `Sistem otomatis block!\nJangan menelpon bot!\nSilahkan Hubungi Owner Untuk Dibuka !`}, { quoted : pa7rick })
+        await sleep(8000)
+        await shiro.updateBlockStatus(callerId, "block")
         }
-    })
+        })
+
+    shiro.ev.on('messages.upsert', async chatUpdate => {
+        //console.log(JSON.stringify(chatUpdate, undefined, 2))
+        try {
+            mek = chatUpdate.messages[0]
+            if (!mek.message) return
+            mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
+            if (mek.key && mek.key.remoteJid === 'status@broadcast') return
+            if (!shiro.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
+            if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
+            m = smsg(shiro, mek, store)
+            require("./shiro")(shiro, m, chatUpdate, store)
+            } catch (err) {
+                console.log(err)
+            }
+        })
 
     shiro.ev.on('group-participants.update', async (anu) => {
         let metadata = await shiro.groupMetadata(anu.id)
