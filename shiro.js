@@ -167,6 +167,23 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 		///////////////////////////////////////////////////////////
 
 		switch (command) {
+
+			case 'bcgc': case 'bcgroup': {
+                if (!isCreator) throw mess.owner
+                if (!text) throw mess.text
+                let getGroups = await hisoka.groupFetchAllParticipating()
+                let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
+                let anu = groups.map(v => v.id)
+                m.reply(`Enviando broadcast em ${anu.length} grupos.`)
+                for (let i of anu) {
+                    await sleep(1500)
+					txt = `「 Mensagem Broadcast 」\n\n${text}`
+                    shiro.sendMessage(i, txt)
+                    }
+                m.reply(`Mensagens enviadas em ${anu.length} grupos.`)
+            }
+            break
+
 			case 'chat': {
 				if (!isCreator) throw mess.owner
 				if (!q) throw '_Opções_ :\n1 - mute\n2 - unmute'
@@ -470,20 +487,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			await fs.unlinkSync(media)
 		}
 		break
-		case 'tourl': {
-			if (!m.isGroup) throw mess.group
-			m.reply(mess.wait)
-			let media = await shiro.downloadAndSaveMediaMessage(quoted)
-			if (/image/.test(mime)) {
-				let anu = await TelegraPh(media)
-				m.reply(util.format(anu))
-			} else if (!/image/.test(mime)) {
-				let anu = await UploadFileUgu(media)
-				m.reply(util.format(anu))
-			}
-			await fs.unlinkSync(media)
-		}
-		break
+
 		case 'owner':
 		case 'creator':
 		case 'dono': {
@@ -515,8 +519,8 @@ _Por enquanto não faço muita coisa_
 ┌──⭓ *Menu Principal*
 │
 │▸ ${prefix}dono
-│▸ ${prefix}shiro / ${prefix}source
-│▸ ${prefix}menu / ${prefix}help
+│▸ ${prefix}source
+│▸ ${prefix}menu ${prefix}help
 │▸ ${prefix}animemenu
 │
 └───────⭓
@@ -553,7 +557,6 @@ _Por enquanto não faço muita coisa_
 │▸ ${prefix}sticker
 │▸ ${prefix}tovideo
 │▸ ${prefix}togif
-│▸ ${prefix}tourl
 │
 └───────⭓ 
 
@@ -973,10 +976,10 @@ _Por enquanto não faço muita coisa_
 				shiro.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
 			}
 			break
-			
+
 			case 'ytaudio': {
 				if (!text) throw '_Eu preciso que você digite algo para pesquisar!_'
-				m.reply('_Tudo bem querido eu vou procurar pra você._')
+				m.reply(mess.wait)
 				const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_')})
 				argyts = `https://youtu.be/${search.all[0].videoId}`
 				let quality = '128kbps'
@@ -989,7 +992,7 @@ _Por enquanto não faço muita coisa_
 
             case 'ytvideo': {
 				if (!text) throw '_Eu preciso que você digite algo para pesquisar!_'
-				m.reply('_Tudo bem querido eu vou procurar pra você._')
+				m.reply(mess.wait)
 				const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_')})
 				argyts = `https://youtu.be/${search.all[0].videoId}`
                 let quality = '360p'
