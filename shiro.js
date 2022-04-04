@@ -69,7 +69,7 @@ const {
 	getRandom
 } = require('./lib/myfunc')
 
-const { yta } = require('./lib/y2mate')
+const { yta, ytv } = require('./lib/y2mate')
 
 module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 	try {
