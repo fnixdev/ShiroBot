@@ -370,8 +370,16 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			})
 		}
 		break
-		case 'source':
+
 		case 'shiro': {
+			if (!text) throw '_Acho que você tem Q.I baixo._'
+			let respsimi = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=pt&cf=false`)
+			let simitext = respsimi.result.sucess
+			await m.reply(`_${simitext}_`)
+		}
+		break
+
+		case 'source': {
 			const fnix = 'https://telegra.ph/file/d7d397bcc9208d6407818.jpg'
 			anu = `┌──⭓ *Shiro Bot* ✨\n│\n│▸ _Bot com intuito de aprender_\n│  _programação em JavaScript_\n│\n│▸ *Dono*: fnixdev\n│▸ https://github.com/fnixdev/ShiroBot\n│\n└───────⭓\n`
 			shiro.sendMessage(m.chat, {
