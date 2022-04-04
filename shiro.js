@@ -27,6 +27,7 @@ const path = require('path')
 const os = require('os')
 const speed = require('performance-now')
 const yts = require('yt-search')
+
 // const afk = require("./lib/afk");
 
 // SRC
@@ -35,10 +36,6 @@ const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
 
 // LIB
 
-const {
-	y2mateA,
-	y2mateV
-} = require('./lib/y2mate')
 
 const {
 	performance
