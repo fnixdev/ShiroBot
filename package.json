@@ -26,6 +26,7 @@
     "got": "^11.8.3",
     "human-readable": "^0.2.1",
     "jimp": "^0.16.1",
+    "jsdom": "^16.4.0",
     "moment-timezone": "^0.5.34",
     "node-fetch": "^2.6.7",
     "node-webpmux": "^3.1.0",

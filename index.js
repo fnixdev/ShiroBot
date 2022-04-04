@@ -159,9 +159,52 @@ async function startShiro() {
     })
 
     shiro.ev.on('creds.update', saveState)
-
     // Add Other
+    /** Send Button 5 Image
+     *
+     * @param {*} jid
+     * @param {*} text
+     * @param {*} footer
+     * @param {*} image
+     * @param [*] button
+     * @param {*} options
+     * @returns
+     */
+     shiro.send5ButImg = async (jid , text = '' , footer = '', img, but = [], options = {}) =>{
+        let message = await prepareWAMessageMedia({ image: img }, { upload: shiro.waUploadToServer })
+        var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+        templateMessage: {
+        hydratedTemplate: {
+        imageMessage: message.imageMessage,
+               "hydratedContentText": text,
+               "hydratedFooterText": footer,
+               "hydratedButtons": but
+            }
+            }
+            }), options)
+            shiro.relayMessage(jid, template.message, { messageId: template.key.id })
+    }
 
+    /**
+     * 
+     * @param {*} jid 
+     * @param {*} buttons 
+     * @param {*} caption 
+     * @param {*} footer 
+     * @param {*} quoted 
+     * @param {*} options 
+     */
+    shiro.sendButtonText = (jid, buttons = [], text, footer, quoted = '', options = {}) => {
+        let buttonMessage = {
+            text,
+            footer,
+            buttons,
+            headerType: 2,
+            ...options
+        }
+        shiro.sendMessage(jid, buttonMessage, { quoted, ...options })
+    }
+    
     /**
      * 
      * @param {*} jid 
@@ -182,7 +225,7 @@ async function startShiro() {
      * @returns 
      */
     shiro.sendImage = async (jid, path, caption = '', quoted = '', options) => {
-        let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await fetch(path)).buffer() : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
+	let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         return await shiro.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted })
     }
 
@@ -196,7 +239,7 @@ async function startShiro() {
      * @returns 
      */
     shiro.sendVideo = async (jid, path, caption = '', quoted = '', gif = false, options) => {
-        let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await fetch(path)).buffer() : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
+        let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         return await shiro.sendMessage(jid, { video: buffer, caption: caption, gifPlayback: gif, ...options }, { quoted })
     }
 
@@ -210,7 +253,7 @@ async function startShiro() {
      * @returns 
      */
     shiro.sendAudio = async (jid, path, quoted = '', ptt = false, options) => {
-        let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await fetch(path)).buffer() : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
+        let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         return await shiro.sendMessage(jid, { audio: buffer, ptt: ptt, ...options }, { quoted })
     }
 
@@ -233,7 +276,7 @@ async function startShiro() {
      * @returns 
      */
     shiro.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
-        let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await fetch(path)).buffer() : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
+        let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
         if (options && (options.packname || options.author)) {
             buffer = await writeExifImg(buff, options)
@@ -254,7 +297,7 @@ async function startShiro() {
      * @returns 
      */
     shiro.sendVideoAsSticker = async (jid, path, quoted, options = {}) => {
-        let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await getBuffer(path) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
+        let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
         if (options && (options.packname || options.author)) {
             buffer = await writeExifVid(buff, options)
@@ -273,8 +316,7 @@ async function startShiro() {
      * @param {*} attachExtension 
      * @returns 
      */
-
-     shiro.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
+    shiro.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
         let quoted = message.msg ? message.msg : message
         let mime = (message.msg || message).mimetype || ''
         let messageType = message.mtype ? message.mtype.replace(/Message/gi, '') : mime.split('/')[0]
@@ -336,6 +378,7 @@ async function startShiro() {
        await shiro.sendMessage(jid, { [type]: { url: pathFile }, caption, mimetype, fileName, ...options }, { quoted, ...options })
        return fs.promises.unlink(pathFile)
        }
+
     /**
      * 
      * @param {*} jid 
@@ -411,20 +454,24 @@ async function startShiro() {
      * @param {*} path 
      * @returns 
      */
-    shiro.getFile = async (path) => {
+    shiro.getFile = async (PATH, save) => {
         let res
-		let data = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,` [1], 'base64') : /^https?:\/\//.test(path) ? await (res = await fetch(path)).buffer() : fs.existsSync(path) ? fs.readFileSync(path) : typeof path === 'string' ? path : Buffer.alloc(0)
-		if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer')
-		let type = await FileType.fromBuffer(data) || {
-			mime: 'application/octet-stream',
-			ext: '.bin'
-		}
+        let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await getBuffer(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
+        //if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer')
+        let type = await FileType.fromBuffer(data) || {
+            mime: 'application/octet-stream',
+            ext: '.bin'
+        }
+        filename = path.join(__filename, '../src/' + new Date * 1 + '.' + type.ext)
+        if (data && save) fs.promises.writeFile(filename, data)
+        return {
+            res,
+            filename,
+	    size: await getSizeMedia(data),
+            ...type,
+            data
+        }
 
-		return {
-			res,
-			...type,
-			data
-		}
     }
 
     return shiro
