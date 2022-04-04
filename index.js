@@ -11,13 +11,18 @@ const { state, saveState } = useSingleFileAuthState(`./shiro.json`)
 const pino = require('pino')
 const fs = require('fs')
 const { Boom } = require('@hapi/boom')
+const yargs = require('yargs/yargs')
 const chalk = require('chalk')
 const fetch = require('node-fetch')
 const FileType = require('file-type')
 const PhoneNumber = require('awesome-phonenumber')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('./lib/myfunc')
+
+
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
+global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
+
 
 // Client Bot
 async function startShiro() {
