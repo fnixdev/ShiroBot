@@ -532,9 +532,9 @@ _Por enquanto não faço muita coisa_
 
 ┌──⭓ *Download Menu*
 │
-│▸ ${prefix}mp3 [desativado]
-│▸ ${prefix}mp4 [desativado]
-│▸ ${prefix}tiktok [link] [desativado]
+│▸ ${prefix}ytvideo
+│▸ ${prefix}ytaudio
+│▸ ${prefix}tiktok [link] 
 │
 └───────⭓ 
 
