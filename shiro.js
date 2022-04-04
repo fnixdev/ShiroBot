@@ -32,8 +32,6 @@ const yts = require('yt-search')
 // SRC
 
 const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
-const slap = JSON.parse(fs.readFileSync('./src/slap.json'))
-// let _afk = JSON.parse(fs.readFileSync('./src/afk.json'));
 
 // LIB
 
@@ -943,7 +941,18 @@ _Por enquanto não faço muita coisa_
 		//                                                       //
 		///////////////////////////////////////////////////////////
 
-            case 'mp3':
+			case 'ytmp3': case 'ytaudio': {
+				let { yta } = require('./lib/y2mate')
+				if (!text) throw `Example : ${prefix + command} https://www.youtube.com/watch?v=8GEMevc3RA4 128kbps`
+				let quality = args[1] ? args[1] : '128kbps'
+				let media = await yta(text, quality)
+				if (media.filesize >= 100000) return m.reply('_Esse arquivo é muito grande!_ '+util.format(media))
+				shiro.sendImage(m.chat, media.thumb, `⭔ Titulo : ${media.title}\n⭔ Tamanho : ${media.filesizeF}\n⭔ Tipo : MP3`, m)
+				shiro.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
+			}
+			break
+
+            /* case 'mp3':
                 if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
                 m.reply(mess.wait)
                 const ssa = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
@@ -966,33 +975,8 @@ _Por enquanto não faço muita coisa_
                 shiro.sendMessage(m.chat, { image: { url: res[0].thumb }, capion: result }, { quoted: m }).then((lalu) => {
                 shiro.sendMessage(m.chat, { video: { url: res[0].link }, caption: res[0].judul }, { quoted: m })
                 })
-            break
+            break */
 
-		/*case 'mp3': {
-			m.reply('_Função desativada temporáriamente._')
-			/* if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
-			m.reply(mess.wait)
-			const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
-			res = await axios.get(`http://hadi-api.herokuapp.com/api/yt2/audio?url=https://youtu.be/${search.all[0].videoId}`)
-			let aud = res.data.result.download_audio
-			result = `*Título* • _${res.data.result.title}_\n*Tamanho* • _${res.data.result.size}_\n\n_Processando o download aguarde._`
-			shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
-			shiro.sendMessage(m.chat, aud)
-		}
-		break
-		case 'mp4': {
-			m.reply('_Função desativada temporáriamente._')
-			
-			                if (!text) throw 'Insira o link do video!'
-			                const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
-			                m.reply(mess.wait)
-			                res = await axios.get(`http://hadi-api.herokuapp.com/api/yt2/video?url=https://www.youtube.com/watch?v=${search.all[0].videoId}`)
-			                let vid = res.data.result.download_video
-			                result = `*Título* ➠ _${res.data.result.title}_\n*Canal* ➠ _${res.data.result.channel}_\n*Views* ➠ _${res.data.result.views}_\n\n_Processando o download aguarde._`
-			                shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
-			                shiro.sendMessage(m.chat, { document: { url: vid }, mimetype: 'video/mp4'})
-		}
-		break*/
 		case 'tiktok': {
 			//m.reply('_Função desativada temporáriamente._')
 			if (!text) throw 'Eu preciso que você insira um link!'
