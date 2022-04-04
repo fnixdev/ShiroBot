@@ -374,7 +374,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 		case 'shiro': {
 			if (!text) throw '_Acho que você tem Q.I baixo._'
 			let respsimi = await fetchJson(`https://api.simsimi.net/v2/?text=${text}&lc=pt&cf=false`)
-			let simitext = respsimi.result.sucess
+			let simitext = respsimi.result.success
 			await m.reply(`_${simitext}_`)
 		}
 		break
