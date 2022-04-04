@@ -168,7 +168,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 
 		switch (command) {
 
-			case 'bcgc': case 'bcgroup': {
+			case 'bc': case 'bcgc': case 'bcgroup': {
                 if (!isCreator) throw mess.owner
                 if (!text) throw mess.text
                 let getGroups = await shiro.groupFetchAllParticipating()
