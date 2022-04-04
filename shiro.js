@@ -947,7 +947,7 @@ _Por enquanto não faço muita coisa_
 				argyts = `https://youtu.be/${search.all[0].videoId}`
 				let quality = '128kbps'
 				let media = await yta(argyts, quality)
-				if (media.filesize >= 100000) return m.reply('_Esse arquivo é muito grande!_ '+util.format(media))
+				if (media.filesize >= 100000) return m.reply(`_O audio que você quer é muito grande, eu só consigo enviar arquivos ate 100mb, este possui ${media.filesizeF}_`)
 				shiro.sendImage(m.chat, media.thumb, `⭔ Titulo : ${media.title}\n⭔ Tamanho : ${media.filesizeF}\n⭔ Tipo : MP3`, m)
 				shiro.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
 			}
@@ -960,7 +960,7 @@ _Por enquanto não faço muita coisa_
 				argyts = `https://youtu.be/${search.all[0].videoId}`
                 let quality = '360p'
                 let media = await ytv(argyts, quality)
-                if (media.filesize >= 100000) return m.reply('_Esse arquivo é muito grande!_ '+util.format(media))
+                if (media.filesize >= 100000) return m.reply(`_O vídeo que você quer é muito grande, eu só consigo enviar arquivos ate 100mb, este possui ${media.filesizeF}_`)
                 shiro.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `⭔ Titulo : ${media.title}\n⭔ Tamanho : ${media.filesizeF}\n⭔ Tipo : MP4`}, { quoted: m })
             }
             break
