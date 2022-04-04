@@ -943,13 +943,16 @@ _Por enquanto não faço muita coisa_
 		///////////////////////////////////////////////////////////
 
 	    case 'play': case 'yt': {
-			if (!text) throw mess.text
-			let yts = require("yt-search")
-			let search = await yts(text)
-			let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+			if (!text) throw '_Eu preciso que você digite algo para pesquisar!_'
+			m.reply('_Tudo bem querido eu vou procurar pra você._')
+			const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_')})
+			argyts = `https://youtu.be/${search.all[0].videoId}`
+			m.reply(`${argyts}`)
+			
+			/*
 			let buttons = [
-				{buttonId: `ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
-				{buttonId: `ytmp4 ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
+				{buttonId: `ytmp3 ${argyts}`, buttonText: {displayText: '♫ Audio'}, type: 1},
+				{buttonId: `ytmp4 ${argyts}`, buttonText: {displayText: '► Video'}, type: 1}
 			]
 			let buttonMessage = {
 				image: { url: anu.thumbnail },
@@ -959,8 +962,8 @@ teste`,
 				buttons: buttons,
 				headerType: 4
 			}
-			shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
-		}
+			shiro.sendMessage(m.chat, buttonMessage, { quoted: m })*/
+		} 
 		break
 
 			case 'ytmp3': case 'ytaudio': {
