@@ -941,12 +941,28 @@ _Por enquanto não faço muita coisa_
 		///////////////////////////////////////////////////////////
 
 			case 'ytmp3': case 'ytaudio': {
-				if (!text) throw `Example : ${prefix + command} https://www.youtube.com/watch?v=8GEMevc3RA4 128kbps`
+				if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
+				m.reply(mess.wait)
+				const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
+				argyts = `https://youtu.be/${search.all[0].videoId}`
 				let quality = args[1] ? args[1] : '128kbps'
-				let media = await yta(text, quality)
+				let media = await yta(argyts, quality)
 				if (media.filesize >= 100000) return m.reply('_Esse arquivo é muito grande!_ '+util.format(media))
 				shiro.sendImage(m.chat, media.thumb, `⭔ Titulo : ${media.title}\n⭔ Tamanho : ${media.filesizeF}\n⭔ Tipo : MP3`, m)
 				shiro.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
+			}
+			break
+
+			case 'mp3': {
+				m.reply('_Função desativada temporáriamente._')
+				if (!text) throw 'Eu preciso que você digite algo para pesquisar!'
+				m.reply(mess.wait)
+				const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
+				res = await axios.get(`http://hadi-api.herokuapp.com/api/yt2/audio?url=https://youtu.be/${search.all[0].videoId}`)
+				let aud = res.data.result.download_audio
+				result = `*Título* • _${res.data.result.title}_\n*Tamanho* • _${res.data.result.size}_\n\n_Processando o download aguarde._`
+				shiro.sendMessage(m.chat, { image: { url: res.data.result.thumb }, caption: result }, { quoted: m})
+				shiro.sendMessage(m.chat, aud)
 			}
 			break
 
