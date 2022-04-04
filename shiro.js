@@ -178,7 +178,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
                 for (let i of anu) {
                     await sleep(1500)
 					txt = `「 Mensagem Broadcast 」\n\n${text}`
-                    shiro.sendMessage(i, txt)
+                    shiro.sendMessage(i, {text: txt})
                     }
                 m.reply(`Mensagens enviadas em ${anu.length} grupos.`)
             }
