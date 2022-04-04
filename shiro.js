@@ -948,7 +948,7 @@ _Por enquanto não faço muita coisa_
 				const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_')})
 				anu = await yts( { videoId: `${search.all[0].videoId}` } )
 				let buttons = [
-					{buttonId: `${prefix}ytaudio ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
+					{buttonId: `${prefix}ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
 					{buttonId: `${prefix}ytvideo ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
 				]
 				let buttonMessage = {
@@ -969,20 +969,11 @@ _Por enquanto não faço muita coisa_
 				let { yta } = require('./lib/y2mate')
 				let quality = args[1] ? args[1] : '128kbps'
 				let media = await yta(text, quality)
-				if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-				shiro.sendImage(m.chat, media.thumb, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, m)
+				if (media.filesize >= 100000) return m.reply(`_O audio que você quer é muito grande, eu só consigo enviar arquivos ate 100mb, este possui ${media.filesizeF}_`)
 				shiro.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
 			}
 			break
-			case 'ytmp4':{
-				let { ytv } = require('./lib/y2mate')
-				let quality = args[1] ? args[1] : '360p'
-				let media = await ytv(text, quality)
-				if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-				shiro.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}` }, { quoted: m })
-			}
-			break
-
+			
 			case 'ytaudio': {
 				if (!text) throw '_Eu preciso que você digite algo para pesquisar!_'
 				m.reply('_Tudo bem querido eu vou procurar pra você._')
