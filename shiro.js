@@ -171,7 +171,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			case 'bcgc': case 'bcgroup': {
                 if (!isCreator) throw mess.owner
                 if (!text) throw mess.text
-                let getGroups = await hisoka.groupFetchAllParticipating()
+                let getGroups = await shiro.groupFetchAllParticipating()
                 let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
                 let anu = groups.map(v => v.id)
                 m.reply(`Enviando broadcast em ${anu.length} grupos.`)
