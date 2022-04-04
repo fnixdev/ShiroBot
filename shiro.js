@@ -947,7 +947,8 @@ _Por enquanto não faço muita coisa_
 			m.reply('_Tudo bem querido eu vou procurar pra você._')
 			const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_')})
 			argyts = `https://youtu.be/${search.all[0].videoId}`
-			m.reply(`${argyts}`)
+			argsall = `https://youtu.be/${search.all[0]}`
+			m.reply(`${argyts}\n${argsall}`)
 			
 			/*
 			let buttons = [
