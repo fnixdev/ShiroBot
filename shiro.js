@@ -2,7 +2,7 @@
  * Base Create By Dika Ardnt.
  * Updated by fnixdev
  * Follow https://github.com/fnixdev
- **/
+**/
 
 
 require('./config')
@@ -92,14 +92,14 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 		const text = q = args.join(" ")
 		const quoted = m.quoted ? m.quoted : m
 		const mime = (quoted.msg || quoted).mimetype || ''
-		const isMedia = /image|video|sticker|audio/.test(mime)
+	    const isMedia = /image|video|sticker|audio/.test(mime)
 
 		// Group
 		const groupMetadata = m.isGroup ? await shiro.groupMetadata(m.chat).catch(e => {}) : ''
 		const groupName = m.isGroup ? groupMetadata.subject : ''
 		const participants = m.isGroup ? await groupMetadata.participants : ''
 		const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : ''
-		const isBotAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
+		const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
 		const isGroupAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
 
 		// NSFW
@@ -301,12 +301,12 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 					video: {
 						url: "./src/banido.mp4"
 					},
-					caption: 'Banido, banido, banido'
+					caption: '_banido, pam, banido_'
 				}, {
 					quoted: m
 				}), shiro.groupParticipantsUpdate(m.chat, [users], 'remove')
 			} else {
-				await m.reply('Eu preciso que você marque ou mencione um usuario')
+				await m.reply('_Eu preciso que você marque ou mencione um usuario_')
 			}
 		}
 		break

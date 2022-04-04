@@ -38,7 +38,7 @@ async function startShiro() {
         const callerId = json.content[0].attrs['call-creator']
         if (json.content[0].tag == 'offer') {
         let pa7rick = await shiro.sendContact(callerId, global.owner)
-        shiro.sendMessage(callerId, { text: `Sistem otomatis block!\nJangan menelpon bot!\nSilahkan Hubungi Owner Untuk Dibuka !`}, { quoted : pa7rick })
+        shiro.sendMessage(callerId, { text: `*_A.I Auto Block System_*\n\n_Parece que você tentou me ligar, infelizmente você sera bloqueado automaticamente.\nQualquer duvida entre em contato com meu dono._`}, { quoted : pa7rick })
         await sleep(8000)
         await shiro.updateBlockStatus(callerId, "block")
         }
