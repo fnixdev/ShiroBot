@@ -16,15 +16,15 @@ global.packname = 'Shiro Bot'
 global.author = 'https://github.com/fnixdev'
 global.sp = '›'
 global.mess = {
-    admin: 'Apenas administradores podem usar esse comando!',
-    botAdmin: 'Eu preciso ser administrador pra fazer isso!',
+    admin: '_Apenas admins podem usar esse comando!_',
+    botAdmin: '_Eu preciso que você me coloque como admin para fazer isso!_',
     owner: 'Apenas meu dono pode usar isso!',
-    isowner: 'Lol ele é meu dono.',
-    group: 'Isso só pode ser usado em um grupo!',
-    private: 'Isso só pode ser usado no privado',
-    bot: 'Recursos especial do bot',
-    wait: 'Carregando...',
-    text: 'Eu preciso que você digite algo',
+    isowner: '_Lol ele é meu dono._',
+    group: '_Isso só pode ser usado em um grupo!_',
+    private: '_Isso só pode ser usado no privado_',
+    bot: '_Isso é uma função exclusiva do bot_',
+    wait: '_Tudo bem querido, aguarde um momento._',
+    text: '_Eu preciso que você digite algo_',
 }
 global.thumb = fs.readFileSync('./src/shiro.jpg')
 

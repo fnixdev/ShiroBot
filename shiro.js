@@ -942,6 +942,27 @@ _Por enquanto não faço muita coisa_
 		//                                                       //
 		///////////////////////////////////////////////////////////
 
+	    case 'play': case 'yt': {
+			if (!text) throw mess.text
+			let yts = require("yt-search")
+			let search = await yts(text)
+			let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+			let buttons = [
+				{buttonId: `ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
+				{buttonId: `ytmp4 ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
+			]
+			let buttonMessage = {
+				image: { url: anu.thumbnail },
+				caption: `
+teste`,
+				footer: shiro.user.name,
+				buttons: buttons,
+				headerType: 4
+			}
+			shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
+		}
+		break
+
 			case 'ytmp3': case 'ytaudio': {
 				if (!text) throw '_Eu preciso que você digite algo para pesquisar!_'
 				m.reply('_Tudo bem querido eu vou procurar pra você._')
