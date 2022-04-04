@@ -392,31 +392,25 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			})
 		}
 		break
-		case 'sticker':
-		case 'stickergif':
-		case 'sgif': {
-			if (!m.isGroup) throw mess.group
-			if (!quoted) throw `Responda a uma imagem/video ${prefix + command}`
-			if (/image/.test(mime)) {
-				let media = await quoted.download()
-				let encmedia = await shiro.sendImageAsSticker(m.chat, media, m, {
-					packname: global.packname,
-					author: global.author
-				})
-				await fs.unlinkSync(encmedia)
-			} else if (/video/.test(mime)) {
-				if ((quoted.msg || quoted).seconds > 11) return m.reply('10 segundos no máximo!')
-				let media = await quoted.download()
-				let encmedia = await shiro.sendVideoAsSticker(m.chat, media, m, {
-					packname: global.packname,
-					author: global.author
-				})
-				await fs.unlinkSync(encmedia)
-			} else {
-				throw `Envie uma foto/video\nO video deve ter de 1 a 9 segundos`
-			}
-		}
-		break
+
+		case 'sticker': case 's': case 'stickergif': case 'sgif': {
+            if (!quoted) throw `Responda a uma imagem/video ${prefix + command}`
+            m.reply(mess.wait)
+                    if (/image/.test(mime)) {
+                let media = await quoted.download()
+                let encmedia = await hisoka.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
+                await fs.unlinkSync(encmedia)
+            } else if (/video/.test(mime)) {
+                if ((quoted.msg || quoted).seconds > 11) return m.reply('10 segundos no máximo!')
+                let media = await quoted.download()
+                let encmedia = await hisoka.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
+                await fs.unlinkSync(encmedia)
+            } else {
+                throw `Envie uma foto/video\nO video deve ter de 1 a 9 segundos`
+                }
+            }
+            break
+
 		case 'toimage':
 		case 'toimg': {
 			if (!m.isGroup) throw mess.group
