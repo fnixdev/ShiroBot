@@ -945,7 +945,7 @@ _Por enquanto não faço muita coisa_
 				m.reply(mess.wait)
 				const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] O erro de consulta inserido não existe_')})
 				argyts = `https://youtu.be/${search.all[0].videoId}`
-				let quality = args[1] ? args[1] : '128kbps'
+				let quality = '128kbps'
 				let media = await yta(argyts, quality)
 				if (media.filesize >= 100000) return m.reply('_Esse arquivo é muito grande!_ '+util.format(media))
 				shiro.sendImage(m.chat, media.thumb, `⭔ Titulo : ${media.title}\n⭔ Tamanho : ${media.filesizeF}\n⭔ Tipo : MP3`, m)
