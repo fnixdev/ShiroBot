@@ -457,7 +457,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			}, {
 				quickReplyButton: {
 					displayText: 'Menu Principal',
-					id: `${prefix}menu_`
+					id: `${prefix}replymenu`
 				}
 			}, {
 				quickReplyButton: {
@@ -468,55 +468,43 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 		shiro.send5ButImg(m.chat, txt, shiro.user.name, global.thumb, btn)
 	 }
 
-		case 'menu_': {
-			anu = `    _Oi, eu sou ShiroBot ✨_
-_Por enquanto não faço muita coisa_
+		case 'replymenu': {
+			anu = `
+╭─❑ 「 *Menu de Grupo* 」 ❑──
+│ ${prefix}link
+│ ${prefix}add @user
+│ ${prefix}kick @user
+│ ${prefix}promote @user
+│ ${prefix}demote @user
+│ ${prefix}nsfw [opção]
+╰❑
 
-┌──⭓ *Menu Principal*
-│
-│▸ ${prefix}dono
-│▸ ${prefix}source
-│▸ ${prefix}menu ${prefix}help
-│▸ ${prefix}animemenu
-│
-└───────⭓
+╭─❑ 「 *Download Menu* 」 ❑──
+│ ${prefix}play
+│ ${prefix}ytvideo
+│ ${prefix}ytaudio
+│ ${prefix}tiktok [link] 
+╰❑
 
-┌──⭓ *Menu de Grupo*
-│
-│▸ ${prefix}link
-│▸ ${prefix}add @user
-│▸ ${prefix}kick @user
-│▸ ${prefix}promote @user
-│▸ ${prefix}demote @user
-│▸ ${prefix}nsfw [opção]
-│
-└───────⭓
+╭─❑ 「 *Ultilidades* 」 ❑──
+│ ${prefix}minecraft
+│ ${prefix}discord
+╰❑
 
-┌──⭓ *Download Menu*
-│
-│▸ ${prefix}ytvideo
-│▸ ${prefix}ytaudio
-│▸ ${prefix}tiktok [link] 
-│
-└───────⭓ 
+╭─❑ 「 *Sobre o Bot* 」 ❑──
+│ ${prefix}dono
+│ ${prefix}source
+╰❑
 
-┌──⭓ *Ultilidades*
-│
-│▸ ${prefix}mine
-│▸ ${prefix}discord
-│
-└───────⭓ 
-
-┌──⭓ *Menu Dono*
-│
-│▸ ${prefix}ping
-│▸ ${prefix}chat [opção]
+╭─❑ 「 *Menu do Dono* 」 ❑──
+│ ${prefix}ping
+│ ${prefix}chat [opção]
 │▸ ${prefix}join [link]
 │▸ ${prefix}leave
 │▸ ${prefix}block @user
 │▸ ${prefix}unblock @user
-│
-└───────⭓`
+╰❑
+`
 			shiro.sendMessage(m.chat, { text: anu }, { quoted: m })
 		}
 		break
