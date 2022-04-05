@@ -945,6 +945,10 @@ _Por enquanto não faço muita coisa_
 		//                                                       //
 		///////////////////////////////////////////////////////////
 
+			case 'test': {
+
+			}
+			break
 			case 'play': case 'yt': {
 				if (!text) throw '_Eu preciso que você digite algo para pesquisar!_'
 				m.reply('_Tudo bem querido eu vou procurar pra você._')
@@ -962,7 +966,7 @@ _Por enquanto não faço muita coisa_
 	`,
 					footer: shiro.user.name,
 					buttons: buttons,
-					headerType: 4
+					headerType: 5
 				}
 				shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
 			} 
