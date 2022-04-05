@@ -3,7 +3,6 @@
   "version": "1.0.1",
   "description": "Whatsapp Bot Using Baileys#MD",
   "main": "index.js",
-  "type": "commonjs",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
@@ -43,7 +42,8 @@
     "steno": "^2.1.0"
   }, 
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "src": "src"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
