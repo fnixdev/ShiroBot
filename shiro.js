@@ -844,26 +844,32 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 		//                                                       //
 		///////////////////////////////////////////////////////////
 
-			break
 			case 'play': case 'yt': {
 				if (!text) throw '_Eu preciso que você digite algo para pesquisar!_'
 				m.reply('_Tudo bem querido eu vou procurar pra você._')
 				const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_')})
 				anu = await yts( { videoId: `${search.all[0].videoId}` } )
-				let buttons = [
-					{buttonId: `${prefix}ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
-					{buttonId: `${prefix}ytvideo ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
-				]
-				let buttonMessage = {
-					image: { url: anu.thumbnail },
-					caption: `⭔ Titulo : ${anu.title}
+					caption = `
+⭔ Titulo : ${anu.title}
 ⭔ Views : ${anu.views}
-	`,
-					footer: shiro.user.name,
-					buttons: buttons,
-					headerType: 4
-				}
-				shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
+`
+				let btn = [{
+					urlButton: {
+						displayText: 'Ver no YouTube',
+						url: `${anu.url}`
+					}
+				}, {
+					quickReplyButton: {
+						displayText: 'Audio',
+						id: `${prefix}ytmp3 ${anu.url}`
+					}
+				}, {
+					quickReplyButton: {
+						displayText: 'Video',
+						id: `${prefix}ytvideo ${anu.url}`
+					}  
+				}]
+			shiro.send5ButImg(m.chat, caption, shiro.user.name, anu.thumbnail, btn)
 			} 
 			break
 
