@@ -467,7 +467,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			}]
 		shiro.send5ButImg(m.chat, txt, shiro.user.name, global.thumb, btn)
 	 }
-
+	 	break
 		case 'replymenu': {
 			anu = `
 ╭─❑ 「 *Menu de Grupo* 」 ❑──
@@ -484,6 +484,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 │ ${prefix}ytvideo
 │ ${prefix}ytaudio
 │ ${prefix}tiktok [link] 
+│ ${prefix}pinterest [desativado]
 ╰❑
 
 ╭─❑ 「 *Ultilidades* 」 ❑──
@@ -582,17 +583,13 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 
 		case 'menuanime':
 		case 'animemenu': {
-			capt = `    _Oi, eu sou ShiroBot ✨_
-
-┌──⭓ *Procurar Anime*
-│
+			capt = `
+╭─❑ 「 *Anime/Manga* 」 ❑──
 │▸ ${prefix}anime [Nome]
 │▸ ${prefix}manga (indisponível)
-│
-└───────⭓ 
+╰❑
 
-┌──⭓ *Anime Fotos/Gifs*
-│
+╭─❑ 「 *Fotos/Gifs SFW* 」 ❑──
 │▸ ${prefix}neko
 │▸ ${prefix}waifu
 │▸ ${prefix}wallpaper
@@ -603,11 +600,9 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 │▸ ${prefix}cute [desativado]
 │▸ ${prefix}baka [desativado]
 │▸ ${prefix}foxgirl [desativado]
-│
-└───────⭓
+╰❑
 
-┌──⭓ *Hentai Menu*
-│
+╭─❑ 「 *Hentai Menu* 」 ❑──
 │▸ ${prefix}hentai
 │▸ ${prefix}hentaigif
 │▸ ${prefix}hentaineko
@@ -618,8 +613,8 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 │▸ ${prefix}blowjob
 │▸ ${prefix}feet
 │▸ ${prefix}yuri
-│
-└───────⭓`
+╰❑
+`
 			shiro.sendMessage(m.chat, { text: capt }, { quoted: m })
 		}
 		break
