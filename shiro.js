@@ -869,7 +869,8 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 						id: `${prefix}ytvideo ${anu.url}`
 					}  
 				}]
-			shiro.send5ButImg(m.chat, caption, shiro.user.name, anu.thumbnail, btn)
+			imagem = { url: anu.thumbnail }
+			shiro.send5ButImg(m.chat, caption, shiro.user.name, imagem, btn)
 			} 
 			break
 
