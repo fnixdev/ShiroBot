@@ -440,8 +440,35 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			})
 		}
 		break
-		case 'help':
-		case 'menu': {
+		case 'menu': case 'help': {
+			txt = `
+╭────ꕥ Shiro Bot ꕥ────
+│✾ Prefixo: ${prefix}
+│✾ Versão: v1.0.1
+│✾ Biblioteca: Baileys-MD
+│✾ Uptime: ${runtime(process.uptime())}
+╰❑
+`
+			let btn = [{
+				urlButton: {
+					displayText: 'Source',
+					url: 'https://github.com/fnixdev/ShiroBot/'
+				}
+			}, {
+				quickReplyButton: {
+					displayText: 'Menu Principal',
+					id: `${prefix}menu_`
+				}
+			}, {
+				quickReplyButton: {
+					displayText: 'Menu Anime',
+					id: `${prefix}menuanime`
+				}  
+			}]
+		shiro.send5ButImg(m.chat, txt, shiro.user.name, global.thumb, btn)
+	 }
+
+		case 'menu_': {
 			anu = `    _Oi, eu sou ShiroBot ✨_
 _Por enquanto não faço muita coisa_
 
@@ -490,33 +517,10 @@ _Por enquanto não faço muita coisa_
 │▸ ${prefix}unblock @user
 │
 └───────⭓`
-			let message = await prepareWAMessageMedia({
-				image: fs.readFileSync('./src/shiro.jpg')
-			}, {
-				upload: shiro.waUploadToServer
-			})
-			const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-				templateMessage: {
-					hydratedTemplate: {
-						imageMessage: message.imageMessage,
-						hydratedContentText: anu,
-						hydratedButtons: [{
-							urlButton: {
-								displayText: 'Dono',
-								url: 'https://github.com/fnixdev/'
-							}
-						}]
-					}
-				}
-			}), {
-				userJid: m.chat,
-				quoted: m
-			})
-			shiro.relayMessage(m.chat, template.message, {
-				messageId: template.key.id
-			})
+			shiro.sendMessage(m.chat, { text: anu }, { quoted: m })
 		}
 		break
+
 		case 'mine': {
 			const min = 'https://telegra.ph/file/0c97e206340a796a1e0cc.jpg'
 			anu = `_Clique no botão abaixo para baixar a ultima versão do minecraft_`
@@ -628,15 +632,7 @@ _Por enquanto não faço muita coisa_
 │▸ ${prefix}yuri
 │
 └───────⭓`
-			let animeMessage = {
-				image: {
-					url: './src/shiro.jpg'
-				},
-				caption: capt,
-			}
-			shiro.sendMessage(m.chat, animeMessage, {
-				quoted: m
-			})
+			shiro.sendMessage(m.chat, { text: capt }, { quoted: m })
 		}
 		break
 		case 'anime': {
@@ -864,35 +860,6 @@ _Por enquanto não faço muita coisa_
 		//                      Youtube                          //
 		//                                                       //
 		///////////////////////////////////////////////////////////
-
-			case 'test': {
-				txt = `
-╭────ꕥ Shiro Bot ꕥ────
-│
-│✾ Prefixo: ${prefix}
-│✾ Versão: v1.0.1
-│✾ Biblioteca: Baileys-MD
-│✾ Uptime: ${runtime(process.uptime())}
-╰❑
-`
-                let btn = [{
-					urlButton: {
-						displayText: 'Source',
-						url: 'https://github.com/fnixdev/ShiroBot/'
-					}
-				}, {
-					quickReplyButton: {
-						displayText: 'Menu Principal',
-						id: `${prefix}help`
-					}
-				}, {
-					quickReplyButton: {
-						displayText: 'Menu Anime',
-						id: `${prefix}menuanime`
-					}  
-				}]
-			shiro.send5ButImg(m.chat, txt, shiro.user.name, global.thumb, btn)
-		 }
 
 			break
 			case 'play': case 'yt': {
