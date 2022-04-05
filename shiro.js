@@ -960,16 +960,16 @@ _Por enquanto não faço muita coisa_
 					}
 				}, {
 					quickReplyButton: {
-						displayText: 'Menu Principal',
-						id: 'help'
+						displayText: 'Menu',
+						id: `${prefix}help`
 					}
 				}, {
 					quickReplyButton: {
-						displayText: 'Menu Anime',
-						id: 'menuanime'
+						displayText: 'Anime',
+						id: `${prefix}helpmenuanime`
 					}  
 				}]
-			shiro.send5ButImg(m.chat, anu, shiro.user.name, global.thumb, btn)
+			shiro.send5ButImg(m.chat, txt, shiro.user.name, global.thumb, btn)
 		 }
 
 			break
