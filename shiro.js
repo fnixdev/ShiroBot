@@ -480,15 +480,6 @@ _Por enquanto não faço muita coisa_
 │
 └───────⭓ 
 
-┌──⭓ *Convert Menu*
-│
-│▸ ${prefix}toimage
-│▸ ${prefix}sticker
-│▸ ${prefix}tovideo
-│▸ ${prefix}togif
-│
-└───────⭓ 
-
 ┌──⭓ *Menu Dono*
 │
 │▸ ${prefix}ping
@@ -876,10 +867,13 @@ _Por enquanto não faço muita coisa_
 
 			case 'test': {
 				txt = `
-	【 Shiro Bot 】
+╭────ꕥ Shiro Bot ꕥ────
+│✾ Prefixo: ${prefix}
+│✾ Versão: v1.0.1
+│✾ Biblioteca: Baileys-MD
+│✾ Uptime: ${runtime(process.uptime())}
+╰❑
 
-• *Uptime*: ${runtime(process.uptime())}
-• *Prefixo*: ${prefix}
 				`
                 let btn = [{
 					urlButton: {
