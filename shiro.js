@@ -511,67 +511,27 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 		break
 
 		case 'mine': {
-			const min = 'https://telegra.ph/file/0c97e206340a796a1e0cc.jpg'
-			anu = `_Clique no botão abaixo para baixar a ultima versão do minecraft_`
-			let message = await prepareWAMessageMedia({
-				image: {
-					url: min
+			link = { url: 'https://telegra.ph/file/0c97e206340a796a1e0cc.jpg'}
+			caption = `_Escolha uma das opções abaixo para baixar o minecraft_`
+			let btn = [{
+				urlButton: {
+					displayText: 'Baixar APK',
+					url: `https://cdn2.apkscenter.com/Minecraft-v1.18.12.01-xbox-servers.apk`
 				}
-			}, {
-				upload: shiro.waUploadToServer
-			})
-			const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-				templateMessage: {
-					hydratedTemplate: {
-						imageMessage: message.imageMessage,
-						hydratedContentText: anu,
-						hydratedButtons: [{
-							urlButton: {
-								displayText: 'Baixar Minecraft',
-								url: 'https://cdn2.apkscenter.com/Minecraft-v1.18.12.01-xbox-servers.apk'
-							}
-						}]
-					}
-				}
-			}), {
-				userJid: m.chat,
-				quoted: m
-			})
-			shiro.relayMessage(m.chat, template.message, {
-				messageId: template.key.id
-			})
+			}]
+			shiro.send5ButImg(m.chat, caption, shiro.user.name, link, btn)
 		}
 		break
 		case 'discord': {
-			const disc = 'https://telegra.ph/file/5202907a4419530e0848d.jpg'
-			anu = `_Clique no botão abaixo para baixar entrar no nosso servidor do Discord_`
-			let message = await prepareWAMessageMedia({
-				image: {
-					url: disc
+			link = { url: 'https://telegra.ph/file/5202907a4419530e0848d.jpg'}
+			caption = `_Clique no botão abaixo para baixar entrar no nosso servidor do Discord_`
+			let btn = [{
+				urlButton: {
+					displayText: 'Entrar no Discord',
+					url: `https://discord.gg/PQncrzqHmb`
 				}
-			}, {
-				upload: shiro.waUploadToServer
-			})
-			const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-				templateMessage: {
-					hydratedTemplate: {
-						imageMessage: message.imageMessage,
-						hydratedContentText: anu,
-						hydratedButtons: [{
-							urlButton: {
-								displayText: 'Entrar no Discord',
-								url: 'https://discord.gg/PQncrzqHmb'
-							}
-						}]
-					}
-				}
-			}), {
-				userJid: m.chat,
-				quoted: m
-			})
-			shiro.relayMessage(m.chat, template.message, {
-				messageId: template.key.id
-			})
+			}]
+			shiro.send5ButImg(m.chat, caption, shiro.user.name, link, btn)
 		}
 		break
 
