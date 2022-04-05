@@ -26,7 +26,7 @@ try {
 }
 
 const { Low, JSONFile } = low
-const mongoDB = require('./lib/mongoDB')
+const mongoDB = require('./lib/mongodb')
 
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 
