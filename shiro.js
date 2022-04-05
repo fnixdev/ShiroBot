@@ -946,8 +946,32 @@ _Por enquanto não faço muita coisa_
 		///////////////////////////////////////////////////////////
 
 			case 'test': {
+				txt = `┌──【 Shiro Bot 】
+│
+│▸ *Uptime*: ${runtime(process.uptime())}
+│▸ *Prefixo*: ${prefix}
+│
+└───────⭓ 
+				`
+                let btn = [{
+					urlButton: {
+						displayText: 'Source',
+						url: 'https://github.com/fnixdev/ShiroBot/'
+					}
+				}, {
+					quickReplyButton: {
+						displayText: 'Menu Principal',
+						id: 'help'
+					}
+				}, {
+					quickReplyButton: {
+						displayText: 'Menu Anime',
+						id: 'menuanime'
+					}  
+				}]
+			shiro.send5ButImg(m.chat, anu, shiro.user.name, global.thumb, btn)
+		 }
 
-			}
 			break
 			case 'play': case 'yt': {
 				if (!text) throw '_Eu preciso que você digite algo para pesquisar!_'
@@ -960,13 +984,12 @@ _Por enquanto não faço muita coisa_
 				]
 				let buttonMessage = {
 					image: { url: anu.thumbnail },
-					caption: `
-	⭔ Titulo : ${anu.title}
-	⭔ Views : ${anu.views}
+					caption: `⭔ Titulo : ${anu.title}
+⭔ Views : ${anu.views}
 	`,
 					footer: shiro.user.name,
 					buttons: buttons,
-					headerType: 5
+					headerType: 4
 				}
 				shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
 			} 
