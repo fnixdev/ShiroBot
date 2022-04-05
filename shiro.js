@@ -868,13 +868,13 @@ _Por enquanto não faço muita coisa_
 			case 'test': {
 				txt = `
 ╭────ꕥ Shiro Bot ꕥ────
+│
 │✾ Prefixo: ${prefix}
 │✾ Versão: v1.0.1
 │✾ Biblioteca: Baileys-MD
 │✾ Uptime: ${runtime(process.uptime())}
 ╰❑
-
-				`
+`
                 let btn = [{
 					urlButton: {
 						displayText: 'Source',
