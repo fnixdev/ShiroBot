@@ -367,17 +367,6 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			//                                                       //
 			///////////////////////////////////////////////////////////
 
-/*		case 'bater':
-		case 'slap': {
-			if (!m.isGroup) throw mess.group
-			let user2 = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
-			const rjogar = getRandom(slap.throw)
-			const rhit = getRandom(slap.hit)
-			const ritens = getRandom(slap.itens)
-			const rtemplate = getRandom(slap.template)
-			m.reply(rtemplate)
-		}
-		break*/
 		case 'linkgrupo':
 		case 'link': {
 			if (!m.isGroup) throw mess.group
@@ -427,66 +416,6 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
                 }
             }
             break
-
-		case 'toimage':
-		case 'toimg': {
-			if (!m.isGroup) throw mess.group
-			if (!quoted) throw 'Reply Image'
-			if (!/webp/.test(mime)) throw `Responda a um sticker *${prefix + command}*`
-			m.reply(mess.wait)
-			let media = await shiro.downloadAndSaveMediaMessage(quoted)
-			let ran = await getRandom('.png')
-			exec(`ffmpeg -i ${media} ${ran}`, (err) => {
-				fs.unlinkSync(media)
-				if (err) throw err
-				let buffer = fs.readFileSync(ran)
-				shiro.sendMessage(m.chat, {
-					image: buffer
-				}, {
-					quoted: m
-				})
-				fs.unlinkSync(ran)
-			})
-		}
-		break
-		case 'tomp4':
-		case 'tovideo': {
-			if (!m.isGroup) throw mess.group
-			if (!quoted) throw 'Reply Image'
-			if (!/webp/.test(mime)) throw `Responda a um sticker animado *${prefix + command}*`
-			m.reply(mess.wait)
-			let media = await shiro.downloadAndSaveMediaMessage(quoted)
-			let webpToMp4 = await webp2mp4File(media)
-			await shiro.sendMessage(m.chat, {
-				video: {
-					url: webpToMp4.result,
-					caption: 'Convert Webp To Video'
-				}
-			}, {
-				quoted: m
-			})
-			await fs.unlinkSync(media)
-		}
-		break
-		case 'togif': {
-			if (!m.isGroup) throw mess.group
-			if (!quoted) throw 'Reply Image'
-			if (!/webp/.test(mime)) throw `Responda a um sticker *${prefix + command}*`
-			m.reply(mess.wait)
-			let media = await shiro.downloadAndSaveMediaMessage(quoted)
-			let webpToMp4 = await webp2mp4File(media)
-			await shiro.sendMessage(m.chat, {
-				video: {
-					url: webpToMp4.result,
-					caption: 'Convert Webp To Video'
-				},
-				gifPlayback: true
-			}, {
-				quoted: m
-			})
-			await fs.unlinkSync(media)
-		}
-		break
 
 		case 'owner':
 		case 'creator':
@@ -946,12 +875,11 @@ _Por enquanto não faço muita coisa_
 		///////////////////////////////////////////////////////////
 
 			case 'test': {
-				txt = `┌──【 Shiro Bot 】
-│
-│▸ *Uptime*: ${runtime(process.uptime())}
-│▸ *Prefixo*: ${prefix}
-│
-└───────⭓ 
+				txt = `
+	【 Shiro Bot 】
+
+• *Uptime*: ${runtime(process.uptime())}
+• *Prefixo*: ${prefix}
 				`
                 let btn = [{
 					urlButton: {
@@ -960,13 +888,13 @@ _Por enquanto não faço muita coisa_
 					}
 				}, {
 					quickReplyButton: {
-						displayText: 'Menu',
+						displayText: 'Menu Principal',
 						id: `${prefix}help`
 					}
 				}, {
 					quickReplyButton: {
-						displayText: 'Anime',
-						id: `${prefix}helpmenuanime`
+						displayText: 'Menu Anime',
+						id: `${prefix}menuanime`
 					}  
 				}]
 			shiro.send5ButImg(m.chat, txt, shiro.user.name, global.thumb, btn)
