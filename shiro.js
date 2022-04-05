@@ -367,20 +367,20 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			//                                                       //
 			///////////////////////////////////////////////////////////
 
-			case 'gimage': {
+			case 'gimage': case 'img': {
 				if (!text) throw mess.text
 				let gis = require('g-i-s')
 				gis(text, async (error, result) => {
 				n = result
 				images = n[Math.floor(Math.random() * n.length)].url
 				let buttons = [
-							{buttonId: `${prefix}gimage ${text}`, buttonText: {displayText: 'Next Image'}, type: 1}
+							{buttonId: `${prefix}gimage ${text}`, buttonText: {displayText: 'Próxima Imagem'}, type: 1}
 						]
 				let buttonMessage = {
 					image: { url: images },
-                    caption: `*-------「 GIMAGE SEARCH 」-------*
-					
-🤠 *Query* : ${text}`,
+                    caption: `
+*-------「 Resultado 」-------*
+`,
 					footer: shiro.user.name,
 					buttons: buttons,
 					headerType: 4
