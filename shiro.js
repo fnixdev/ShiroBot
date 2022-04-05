@@ -367,6 +367,29 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			//                                                       //
 			///////////////////////////////////////////////////////////
 
+			case 'gimage': {
+				if (!text) throw mess.text
+				let gis = require('g-i-s')
+				gis(text, async (error, result) => {
+				n = result
+				images = n[Math.floor(Math.random() * n.length)].url
+				let buttons = [
+							{buttonId: `${prefix}gimage ${text}`, buttonText: {displayText: 'Next Image'}, type: 1}
+						]
+				let buttonMessage = {
+					image: { url: images },
+                    caption: `*-------「 GIMAGE SEARCH 」-------*
+					
+🤠 *Query* : ${text}`,
+					footer: shiro.user.name,
+					buttons: buttons,
+					headerType: 4
+					}
+					shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
+			})
+			}
+        break
+
 		case 'linkgrupo':
 		case 'link': {
 			if (!m.isGroup) throw mess.group
@@ -510,7 +533,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 		}
 		break
 
-		case 'mine': {
+		case 'mine': case 'minecraft': {
 			link = { url: 'https://telegra.ph/file/0c97e206340a796a1e0cc.jpg'}
 			caption = `_Escolha uma das opções abaixo para baixar o minecraft_`
 			let btn = [{
