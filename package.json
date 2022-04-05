@@ -40,8 +40,7 @@
     "util": "^0.12.4",
     "yargs": "^17.2.1",
     "mongoose": "^6.1.4",
-    "yt-search": "^2.10.2",
-    "steno": "^2.1.0"
+    "yt-search": "^2.10.2"
   }, 
   "directories": {
     "lib": "lib",
