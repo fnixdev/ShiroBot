@@ -1,8 +1,12 @@
 #!/usr/bin/bash
 
-apt-get update
-apt-get upgrade
-apt-get install -y nodejs npm libwebp ffmpeg wget git
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get install -y npm libwebp ffmpeg wget git
+
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo bash -
+sudo apt-get install nodejs -y
+sudo rm nodesource_setup.sh
 
 npm install
 
