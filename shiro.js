@@ -413,7 +413,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
     case 'source':
     case 'sobre': {
       link = { url: 'https://telegra.ph/file/8481268cd704d86ca0a5c.jpg' }
-      txt = `*「 O que é a Shiro? 」*\n\n_Inicialmente um projeto para enviar episódios de animes para o servidor, mas que aos poucos foi crescendo com funções administrativas entre outras._\n\n*「 Posso usar a Shiro? 」*\n\n_Se.você deseja usar esse número em seu grupo, peça ao dono para usa-lo. Se deseja instalar este bot em um número secindario sinta-se livre para usar a source no GitHub._\n\n*「 Como fazer uma "Shiro?" 」*\n\n_Bom, isso é complicado, e se você planeja fazer algo assim, você deve aprender a programar, escolha uma linguagem de programação e pronto! Você saberá fazer uma Shiro._`
+      txt = `*「 O que é a Shiro? 」*\n\n_Inicialmente um projeto para enviar episódios de animes para o servidor, mas que aos poucos foi crescendo com funções administrativas entre outras._\n\n*「 Posso usar a Shiro? 」*\n\n_Se você deseja usar esse número em seu grupo, peça ao dono para usa-lo. Se deseja instalar este bot em um número secindario sinta-se livre para usar a source no GitHub._\n\n*「 Como fazer uma "Shiro?" 」*\n\n_Bom, isso é complicado, e se você planeja fazer algo assim, você deve aprender a programar, escolha uma linguagem de programação e pronto! Você saberá fazer uma Shiro._`
       let btn = [{
         urlButton: {
           displayText: 'Source',
@@ -436,6 +436,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
     case 'donate': case 'doar': case 'pix':{
       aceitas = 'https://telegra.ph/file/4c2400cb1b2d05849cddc.jpg'
       txt = 'Eu aceito: 6d850fc0-7676-4ecb-9277-848c7b3bddc9'
+      shiro.sendImage(m.chat, aceitas, txt)
     }
     break
     case 'sticker':
