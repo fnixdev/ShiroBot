@@ -366,7 +366,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			//                   Comandos Gerais                     //
 			//                                                       //
 			///////////////////////////////////////////////////////////
-
+/*
 			case 'gimage': case 'img': {
 				if (!text) throw mess.text
 				let gis = require('g-i-s')
@@ -389,7 +389,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 			})
 			}
         break
-
+*/
 		case 'linkgrupo':
 		case 'link': {
 			if (!m.isGroup) throw mess.group
