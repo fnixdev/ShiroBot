@@ -412,7 +412,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 
     case 'source':
     case 'sobre': {
-      shiro = { url: 'https://telegra.ph/file/8481268cd704d86ca0a5c.jpg' }
+      link = { url: 'https://telegra.ph/file/8481268cd704d86ca0a5c.jpg' }
       txt = `*「 O que é a Shiro? 」*\n\n_Inicialmente um projeto para enviar episódios de animes para o servidor, mas que aos poucos foi crescendo com funções administrativas entre outras._\n\n*「 Como fazer uma "Shiro" 」*\n\n_Bom, isso é complicado, e se você planeja fazer algo assim, você deve aprender a programar, escolha uma linguagem de programação (como as que eu disse acima) e pronto! Você saberá fazer uma Shiro_`
       let btn = [{
         urlButton: {
@@ -430,7 +430,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
           id: `${prefix}dono`
         }
 			}]
-      shiro.send5ButImg(m.chat, txt, shiro.user.name, shiro, btn)
+      shiro.send5ButImg(m.chat, txt, shiro.user.name, link, btn)
     }
     break
 
