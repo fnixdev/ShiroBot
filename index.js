@@ -62,11 +62,22 @@ async function startShiro() {
         let metadata = await shiro.groupMetadata(anu.id)
         console.log(anu)
         try {
-            let welkomgif = 'https://telegra.ph/file/f41a458206dcdec65d065.gif'
+            let welkompic = { url: 'https://telegra.ph/file/69adf1d87f488d4c6a2fe.png' }
             let participants = anu.participants
+            let btn = [{
+                urlButton: {
+                   displayText: 'Baixar APK do Minecraft',
+                   url: `https://cdn2.apkscenter.com/Minecraft-v1.18.12.01-xbox-servers.apk`
+                },
+                quickReplyButton: {
+                    displayText: 'Regras',
+                    id: `${prefix}regras`
+                    }
+                }]
             for (let num of participants) {
                 if (anu.action == 'add') {
-                    shiro.sendMessage(anu.id, { video: { url: welkomgif }, contextInfo: { mentionedJid: [num] }, caption: `Opa @${num.split("@")[0]}, bem vindo ao grupo ${metadata.subject}.\n\nEspero que tenha uma boa estadia.`, gifPlayback: true })
+                    let txt = `_Opa @${num.split("@")[0]}, bem vindo ao grupo ${metadata.subject}.Leia as regras e fique a vontade para interagir no grupo._`
+                    shiro.send5ButImg(anu.id, txt, shiro.user.name, welkompic, btn)
               }}
             } catch (err) {
             console.log(err)
