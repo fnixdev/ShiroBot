@@ -179,7 +179,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
         m.reply(`Enviando broadcast em ${anu.length} grupos.`)
         for (let i of anu) {
           await sleep(1500)
-          txt = `「 Mensagem Broadcast 」\n\n${text}`
+          txt = `「 Mensagem de Transmissão 」\n\n${text}`
           shiro.sendMessage(i, { text: txt })
         }
         m.reply(`Mensagens enviadas em ${anu.length} grupos.`)
@@ -206,7 +206,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       let teks = `⬣ *Lista de Grupos*\n\nTotal : ${anu.length} Group\n\n`
       for (let i of anu) {
         let metadata = await shiro.groupMetadata(i)
-        teks += `⬡ *Nome :* ${metadata.subject}\n⬡ *Dono :* @${metadata.owner.split('@')[0]}\n⬡ *ID :* ${metadata.id}\n⬡ *Criado :* ${moment(metadata.creation * 1000).tz('America/Sao_Paulo').format('DD/MM/YYYY HH:mm:ss')}\n⬡ *Membro :* ${metadata.participants.length}\n\n────────────────────────\n\n`
+        teks += `⬡ *Nome :* ${metadata.subject}\n⬡ *Dono :* @${metadata.owner.split('@')[0]}\n⬡ *ID :* ${metadata.id}\n⬡ *Criado :* ${moment(metadata.creation * 1000).tz('America/Sao_Paulo').format('DD/MM/YYYY HH:mm:ss')}\n⬡ *Membros :* ${metadata.participants.length}\n\n────────────────────────\n\n`
       }
       shiro.sendTextWithMentions(m.chat, teks, m)
     }
@@ -220,27 +220,16 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       await shiro.groupAcceptInvite(result).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
     }
     break
-    case 'isowner': {
-      if (!m.isGroup) throw mess.group
-      if (!isGroupAdmins) throw mess.admin
-      if (!isBotAdmins) throw mess.botAdmin
-      let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
-      if (users == isCreator) { throw mess.isowner }
-      else {
-        await m.reply('Não é dono')
-      }
-    }
-    break
     case 'public': {
       if (!isCreator) throw mess.owner
       shiro.public = true
-      m.reply('Bot agora esta no modo público.')
+      m.reply('_Ok senpai, passarei a responder outros membros a partir de agora._')
     }
     break
     case 'self': {
       if (!isCreator) throw mess.owner
       shiro.public = false
-      m.reply('Bot agora esta no modo privado')
+      m.reply('_Ok, permanecerei calada a partir de agora._')
     }
     break
     case 'ping':
