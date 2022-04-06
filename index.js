@@ -68,7 +68,8 @@ async function startShiro() {
                 urlButton: {
                    displayText: 'Baixar APK do Minecraft',
                    url: `https://cdn2.apkscenter.com/Minecraft-v1.18.12.01-xbox-servers.apk`
-                },
+                }
+                    }, {
                 quickReplyButton: {
                     displayText: 'Regras',
                     id: `${prefix}regras`
