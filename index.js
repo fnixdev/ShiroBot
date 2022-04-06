@@ -77,7 +77,7 @@ async function startShiro() {
                 }]
             for (let num of participants) {
                 if (anu.action == 'add') {
-                    let txt = `Opa, bem vindo ao grupo ${metadata.subject}.Leia as regras e fique a vontade para interagir no grupo.`
+                    let txt = `Opa, bem vindo ao grupo ${metadata.subject}. Leia as regras e fique a vontade para interagir no grupo.`
                     shiro.sendWelkom(anu.id, txt, shiro.user.name, welkompic, btn)
               }}
             } catch (err) {
