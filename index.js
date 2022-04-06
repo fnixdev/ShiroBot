@@ -78,7 +78,7 @@ async function startShiro() {
             for (let num of participants) {
                 if (anu.action == 'add') {
                     let txt = `_Opa @${num.split("@")[0]}, bem vindo ao grupo ${metadata.subject}.Leia as regras e fique a vontade para interagir no grupo._`
-                    shiro.send5ButImg(anu.id, txt, shiro.user.name, welkompic, btn)
+                    shiro.sendWelkom(anu.id, txt, shiro.user.name, welkompic, btn)
               }}
             } catch (err) {
             console.log(err)
@@ -195,6 +195,20 @@ async function startShiro() {
             shiro.relayMessage(jid, template.message, { messageId: template.key.id })
     }
 
+     shiro.sendWelkom = async (jid , text = '' , footer = '', img, but = [], options = {}) =>{
+        let message = await prepareWAMessageMedia({ image: img }, { upload: shiro.waUploadToServer })
+        var template = generateWAMessageFromContent(jid, proto.Message.fromObject({
+        templateMessage: {
+        hydratedTemplate: {
+        imageMessage: message.imageMessage,
+               "hydratedContentText": text,
+               "hydratedFooterText": footer,
+               "hydratedButtons": but
+            }
+            }
+            }), options)
+            shiro.relayMessage(jid, template.message, { messageId: template.key.id })
+    }    
     /**
      * 
      * @param {*} jid 
