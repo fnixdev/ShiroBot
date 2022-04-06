@@ -77,8 +77,9 @@ async function startShiro() {
                 }]
             for (let num of participants) {
                 if (anu.action == 'add') {
+                    mention =  { contextInfo: { mentionedJid: [num] } }
                     let txt = `Opa @${num.split("@")[0]}, bem vindo ao grupo ${metadata.subject}. Leia as regras e fique a vontade para interagir no grupo.`
-                    shiro.sendWelkom(anu.id, txt, shiro.user.name, welkompic, btn)
+                    shiro.sendWelkom(anu.id, txt, shiro.user.name, welkompic, mention, btn)
               }}
             } catch (err) {
             console.log(err)
