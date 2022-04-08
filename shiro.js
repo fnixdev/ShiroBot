@@ -87,6 +87,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
     const pushname = m.pushName || "No Name"
     const botNumber = await shiro.decodeJid(shiro.user.id)
     const isCreator = [shiro.user.id, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
+    const isOwner = (isCreator + '@s.whatsapp.net')
 
     const itsMe = m.sender == shiro.user.id ? true : false
     const text = q = args.join(" ")
@@ -289,6 +290,22 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
     //                                                       //
     ///////////////////////////////////////////////////////////
 
+    case 'regras': case 'rules': {
+      anu = `
+1º *IDADE MÍNIMA = 14 anos*
+2º Respeitar todos os membros
+3º *Sem pornografia/gore e assuntos impróprios como racismo, preconceito, pedofilia, etc (BAN SEM AVISO)*
+4º Proibido assediar outros membros
+5º Proibido spam/flood,links,divulgação
+6º Proibido mandar mais de 3 sticker
+7° Proibido pedir ADM, falar cringe
+8° *Ghost = BAN*
+9° *Chamar algum ADM ou o BOT no PV = BAN*
+*O grupo é de Minecraft mas é permitido falar sobre qualquer outro jogo/assunto desde que não ofenda nenhum membro*
+`
+      shiro.sendMessage(m.chat, { text: anu }, { quoted: m })
+    }
+    break
     case 'tagall':
       if (!m.isGroup) throw mess.group
       if (!isGroupAdmins) throw mess.admin
@@ -303,7 +320,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       if (!isGroupAdmins) throw mess.admin
       if (!isBotAdmins) throw mess.botAdmin
       let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
-      if (users == '553189092420@s.whatsapp.net') throw mess.isowner
+      if (users == isOwner) throw mess.isowner
       if (users) {
         await shiro.sendMessage(m.chat, {
           video: {
@@ -318,20 +335,12 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       }
     }
     break
-    case 'view': {
-      if (!m.isGroup) throw mess.group
-      if (!isGroupAdmins) throw mess.admin
-      if (!isBotAdmins) throw mess.botAdmin
-      let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
-      m.reply(users)
-    }
-    break
     case 'promote': {
       if (!m.isGroup) throw mess.group
       if (!isGroupAdmins) throw mess.admin
       if (!isBotAdmins) throw mess.botAdmin
       let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
-      await shiro.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply('_Usuario Promovido_')).catch((err) => m.reply(jsonformat(err)))
+      await shiro.groupParticipantsUpdate(m.chat, [users], 'promote').then( m.reply('_Usuario Promovido_')).catch((err) => m.reply(jsonformat(err)))
     }
     break
     case 'demote': {
@@ -339,7 +348,8 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       if (!isGroupAdmins) throw mess.admin
       if (!isBotAdmins) throw mess.botAdmin
       let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
-      await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply('_Usuario foi rebaixado a membro comum_')).catch((err) => m.reply(jsonformat(err)))
+      if (users == isOwner) throw mess.isowner
+      await shiro.groupParticipantsUpdate(m.chat, [users], 'demote').then( m.reply('_Usuario foi rebaixado a membro comum_')).catch((err) => m.reply(jsonformat(err)))
     }
     break
     case 'nsfw':
@@ -365,30 +375,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       //                   Comandos Gerais                     //
       //                                                       //
       ///////////////////////////////////////////////////////////
-      /*
-      			case 'gimage': case 'img': {
-      				if (!text) throw mess.text
-      				let gis = require('g-i-s')
-      				gis(text, async (error, result) => {
-      				n = result
-      				images = n[Math.floor(Math.random() * n.length)].url
-      				let buttons = [
-      							{buttonId: `${prefix}gimage ${text}`, buttonText: {displayText: 'Próxima Imagem'}, type: 1}
-      						]
-      				let buttonMessage = {
-      					image: { url: images },
-                          caption: `
-      *-------「 Resultado 」-------*
-      `,
-      					footer: shiro.user.name,
-      					buttons: buttons,
-      					headerType: 4
-      					}
-      					shiro.sendMessage(m.chat, buttonMessage, { quoted: m })
-      			})
-      			}
-              break
-      */
+
     case 'linkgrupo':
     case 'link': {
       if (!m.isGroup) throw mess.group
@@ -398,7 +385,6 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       })
     }
     break
-
     case 'shiro': {
       if (!text) throw '_Acho que você tem Q.I baixo._'
       let res = await axios.get(`https://api.simsimi.net/v2/?text=${text}&lc=pt&cf=false`)
@@ -406,7 +392,6 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       await m.reply(`_${simitext}_`)
     }
     break
-
     case 'source':
     case 'sobre': {
       link = { url: 'https://telegra.ph/file/8481268cd704d86ca0a5c.jpg' }
