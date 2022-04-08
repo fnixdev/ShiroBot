@@ -318,6 +318,14 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       }
     }
     break
+    case 'view': {
+      if (!m.isGroup) throw mess.group
+      if (!isGroupAdmins) throw mess.admin
+      if (!isBotAdmins) throw mess.botAdmin
+      let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
+      m.reply(users)
+    }
+    break
     case 'promote': {
       if (!m.isGroup) throw mess.group
       if (!isGroupAdmins) throw mess.admin
