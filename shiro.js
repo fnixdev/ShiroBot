@@ -166,9 +166,14 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
     //                Comandos de Dono                       //
     //                                                       //
     ///////////////////////////////////////////////////////////
-
     switch (command) {
 
+      case 'test': {
+        if (!isCreator) throw mess.owner
+        let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
+        m.reply(isOwner)
+      }
+      break
       case 'bc':
       case 'bcgc':
       case 'bcgroup': {
