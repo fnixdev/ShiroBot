@@ -303,7 +303,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       if (!isGroupAdmins) throw mess.admin
       if (!isBotAdmins) throw mess.botAdmin
       let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
-      if (users == isCreator) throw mess.isowner
+      if (users == '553189092420@s.whatsapp.net') throw mess.isowner
       if (users) {
         await shiro.sendMessage(m.chat, {
           video: {
@@ -381,22 +381,6 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       			}
               break
       */
-    case 'regras': case 'rules': {
-      anu = `
-1º *IDADE MÍNIMA = 14 anos*
-2º Respeitar todos os membros
-3º *Sem pornografia/gore e assuntos impróprios como racismo, preconceito, pedofilia, etc (BAN SEM AVISO)*
-4º Proibido assediar outros membros
-5º Proibido spam/flood,links,divulgação
-6º Proibido mandar mais de 3 sticker
-7° Proibido pedir ADM, falar cringe
-8° *Ghost = BAN*
-9° *Chamar algum ADM ou o BOT no PV = BAN*
-*O grupo é de Minecraft mas é permitido falar sobre qualquer outro jogo/assunto desde que não ofenda nenhum membro*
-`
-      shiro.sendMessage(m.chat, { text: anu }, { quoted: m })
-    }
-    break
     case 'linkgrupo':
     case 'link': {
       if (!m.isGroup) throw mess.group
