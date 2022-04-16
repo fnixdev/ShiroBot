@@ -548,7 +548,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       let btn = [{
         urlButton: {
           displayText: 'Baixar APK',
-          url: `https://cdn2.apkscenter.com/Minecraft-v1.18.12.01-xbox-servers.apk`
+          url: `https://cdn-124.anonfiles.com/LbP9FaWex2/c5114e00-1650143087/Minecraft-v1.18.12.01-xbox-servers.apk`
         }
 			}]
       shiro.send5ButImg(m.chat, caption, shiro.user.name, link, btn)
