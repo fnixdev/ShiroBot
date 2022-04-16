@@ -7,6 +7,8 @@
 
 const fs = require('fs')
 const chalk = require('chalk')
+const apikey = JSON.parse(fs.readFileSync('./src/settings.json'))
+
 
 
 // Outros
@@ -15,6 +17,7 @@ global.prefix = ['/']
 global.packname = 'Shiro Bot'
 global.author = 'fnixdev'
 global.sp = '✾'
+global.api = apikey.apikey
 global.mess = {
     admin: '_Apenas admins podem usar esse comando!_',
     botAdmin: '_Eu preciso que você me coloque como admin para fazer isso!_',

@@ -531,10 +531,10 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 ╭─❑ 「 *Menu do Dono* 」 ❑──
 │ ${prefix}ping
 │ ${prefix}chat [opção]
-│▸ ${prefix}join [link]
-│▸ ${prefix}leave
-│▸ ${prefix}block @user
-│▸ ${prefix}unblock @user
+│ ${prefix}join [link]
+│ ${prefix}leave
+│ ${prefix}block @user
+│ ${prefix}unblock @user
 ╰❑
 `
       shiro.sendMessage(m.chat, { text: anu }, { quoted: m })
