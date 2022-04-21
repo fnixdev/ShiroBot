@@ -67,7 +67,7 @@ async function startShiro() {
             let btn = [{
                 urlButton: {
                    displayText: 'Baixar APK do Minecraft',
-                   url: `https://cdn-124.anonfiles.com/LbP9FaWex2/c5114e00-1650143087/Minecraft-v1.18.12.01-xbox-servers.apk`
+                   url: `https://anonfiles.com/pcueI0Y1xd/minecraft-1-18-30_apk`
                 }
                     }, {
                 quickReplyButton: {
