@@ -8,7 +8,7 @@
 require('./config')
 const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType } = require('@adiwajshing/baileys')
 
-
+const jsonFile = require('jsonfile');
 const fs = require('fs')
 const util = require('util')
 const chalk = require('chalk')
@@ -33,7 +33,7 @@ const yts = require('yt-search')
 // SRC
 
 const nsfw = JSON.parse(fs.readFileSync('./src/nsfw.json'))
-
+const rules = JSON.parse(fs.readFileSync('./src/nsfw.json'))
 // LIB
 
 
@@ -106,6 +106,10 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
     // NSFW
     const isNsfw = m.isGroup ? nsfw.includes(groupMetadata.id) : false
 
+    // Rules
+    const savedRules = m.isGroup ? rules.includes(groupMetadata.id) : false
+
+    
     // AFK
     // const isAfkOn = afk.checkAfkUser(m.sender, _afk)
 
@@ -288,26 +292,38 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       process.send('reset')
     }
     break
-
+    case 'sh':
+    case 'term': {
+        if (!isCreator) throw mess.owner
+        if (!text) throw mess.text
+        exec(text, (err, stdout) => {
+          if (err) return m.reply('_Erro ao executar comando no terminal_')
+          if (stdout) return m.reply(stdout)
+        })
+      }
+    break
+  
     ///////////////////////////////////////////////////////////
     //                                                       //
     //                   Comandos de ADM                     //
     //                                                       //
     ///////////////////////////////////////////////////////////
+    
+    case 'setrules':
+      if (!m.isGroup) throw mess.group
+      if (!isGroupAdmins) throw mess.admin
+      if (!text) throw mess.text
+      let gId = groupMetadata.id
+      objeto = { group_id: gId, rules: text }
+      data = JSON.stringify(objeto)
+      fs.writeFileSync(rules, data)
+      await m.reply("_As novas regras foram salvas._")
+    break
 
-    case 'regras': case 'rules': {
-      anu = `
-1º *IDADE MÍNIMA = 14 anos*
-2º Respeitar todos os membros
-3º *Sem pornografia/gore e assuntos impróprios como racismo, preconceito, pedofilia, etc (BAN SEM AVISO)*
-4º Proibido assediar outros membros
-5º Proibido spam/flood,links,divulgação
-6º Proibido mandar mais de 3 sticker
-7° Proibido pedir ADM, falar cringe
-8° *Ghost = BAN*
-9° *Chamar algum ADM ou o BOT no PV = BAN*
-*O grupo é de Minecraft mas é permitido falar sobre qualquer outro jogo/assunto desde que não ofenda nenhum membro*
-`
+    case 'regras': {
+      if (!savedRules) throw '_Nenhuma regra definida pelos admins._'
+      gid = groupMetadata.id
+      data = fs.readFileSync(rules)
       shiro.sendMessage(m.chat, { text: anu }, { quoted: m })
     }
     break
@@ -390,14 +406,8 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       })
     }
     break
-    case 'shiro': {
-      if (!text) throw '_Acho que você tem Q.I baixo._'
-      let res = await axios.get(`https://api.simsimi.net/v2/?text=${text}&lc=pt&cf=false`)
-      let simitext = res.data.success
-      await m.reply(`_${simitext}_`)
-    }
-    break
     case 'source':
+    case 'shiro':
     case 'sobre': {
       link = { url: 'https://telegra.ph/file/8481268cd704d86ca0a5c.jpg' }
       txt = `*「 O que é a Shiro? 」*\n\n_Inicialmente um projeto para enviar episódios de animes para o servidor, mas que aos poucos foi crescendo com funções administrativas entre outras._\n\n*「 Posso usar a Shiro? 」*\n\n_Se você deseja usar esse número em seu grupo, peça ao dono para usa-lo. Se deseja instalar este bot em um número secindario sinta-se livre para usar a source no GitHub._\n\n*「 Como fazer uma "Shiro?" 」*\n\n_Bom, isso é complicado, e se você planeja fazer algo assim, você deve aprender a programar, escolha uma linguagem de programação e pronto! Você saberá fazer uma Shiro._`
@@ -422,7 +432,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
     break
     case 'donate': case 'doar': case 'pix':{
       aceitas = 'https://telegra.ph/file/4c2400cb1b2d05849cddc.jpg'
-      txt = 'Eu aceito: 6d850fc0-7676-4ecb-9277-848c7b3bddc9'
+      txt = '\nEu aceito: 6d850fc0-7676-4ecb-9277-848c7b3bddc9'
       shiro.sendImage(m.chat, aceitas, txt)
     }
     break
@@ -446,7 +456,16 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       }
     }
     break
-
+    case 'casal': {
+      if (!m.isGroup) throw mess.group
+      let member = participants.map(u => u.id)
+      let user1 = member[Math.floor(Math.random() * member.length)]
+      let user2 = member[Math.floor(Math.random() * member.length)]
+      let cupido = `👫 Casal do dia
+      @${user1.split('@')[0]} ❤️ @${user2.split('@')[0]}`
+      await m.reply(cupido)
+    }
+    break
     case 'owner':
     case 'creator':
     case 'dono': {
@@ -503,11 +522,11 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       anu = `
 ╭─❑ 「 *Menu de Grupo* 」 ❑──
 │ ${prefix}link
-│ ${prefix}add @user
-│ ${prefix}kick @user
-│ ${prefix}promote @user
-│ ${prefix}demote @user
-│ ${prefix}nsfw [opção]
+│ ${prefix}casal
+│ ${prefix}kick @user [ADM]
+│ ${prefix}promote @user [ADM]
+│ ${prefix}demote @user [ADM]
+│ ${prefix}nsfw [opção] [ADM]
 ╰❑
 
 ╭─❑ 「 *Download Menu* 」 ❑──
@@ -949,14 +968,6 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
           m = String(err)
           await m.reply(m)
         }
-      }
-
-      if (budy.startsWith('$')) {
-        if (!isCreator) return reply(mess.owner)
-        exec(budy.slice(2), (err, stdout) => {
-          if (err) return m.reply(err)
-          if (stdout) return m.reply(stdout)
-        })
       }
     }
   } catch (err) {
