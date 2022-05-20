@@ -308,7 +308,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
     //                   Comandos de ADM                     //
     //                                                       //
     ///////////////////////////////////////////////////////////
-    
+
     case 'setrules':
       if (!m.isGroup) throw mess.group
       if (!isGroupAdmins) throw mess.admin
@@ -461,8 +461,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       let member = participants.map(u => u.id)
       let user1 = member[Math.floor(Math.random() * member.length)]
       let user2 = member[Math.floor(Math.random() * member.length)]
-      let cupido = `👫 Casal do dia
-      @${user1.split('@')[0]} ❤️ @${user2.split('@')[0]}`
+      let cupido = `👫 Casal do dia\n@${user1.split('@')[0]} ❤️ @${user2.split('@')[0]}`
       await m.reply(cupido)
     }
     break
