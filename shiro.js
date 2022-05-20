@@ -461,8 +461,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       let member = participants.map(u => u.id)
       let user1 = member[Math.floor(Math.random() * member.length)]
       let user2 = member[Math.floor(Math.random() * member.length)]
-      let cupido = `👫 Casal do dia\n@${user1.split('@')[0]} ❤️ @${user2.split('@')[0]}`
-      await m.reply(cupido)
+      shiro.sendTextWithMentions(m.chat, `👫 Casal do dia\n@${user1.split('@')[0]} ❤️ @${user2.split('@')[0]}`, m)
     }
     break
     case 'owner':
