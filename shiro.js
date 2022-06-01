@@ -435,7 +435,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
     break
     case 'textura':{
       m.reply(mess.wait)
-      shiro.sendMessage(m.chat, { document: { url: "./src/3dTextura.mcpack" }, mimetype: 'Mimetype.mcpack', filename: '3dTextura.mcpack' })
+      shiro.sendMessage(m.chat, { document: { url: "./src/3dTextura.mcpack" }, mimetype:'document/mcpack', filename: `3dTextura.mcpack` } )
     }
     break
 
