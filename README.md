@@ -5,6 +5,16 @@
   <b>Shiro Bot ✨</b>
 </h2>
 
+## Disclaimer
+```
+/**
+   ⚠️ Warning ⚠️
+   
+    this bot is for exclusive use in a specific
+    group if you want to use this source make 
+    your own modifications
+/**
+```
 
 ### All credits
 
