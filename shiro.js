@@ -406,6 +406,39 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       })
     }
     break
+
+    // server
+    case 'server':
+    case 'servidor': {
+      link = { url: 'https://telegra.ph/file/8481268cd704d86ca0a5c.jpg' }
+      txt = `--> IP: kuuhaku.ddns.net
+--> Porta: 19132
+
+*Detalhes:*
+- Servidor 24h
+- Suporte para Java e Bedrock
+- Proteção de áreas construídas (sem grifing e destruição)
+- Servidor vanilla sem mods`
+      let btn = [{
+        urlButton: {
+          displayText: 'Mapa do Servidor',
+          url: 'http://kuuhaku.ddns.net:5000/'
+        }
+			}, {
+        quickReplyButton: {
+          displayText: 'Textura Recomendada',
+          id: `${prefix}textura`
+        }
+			}]
+      shiro.send5ButImg(m.chat, txt, shiro.user.name, link, btn)
+    }
+    break
+    case 'textura':{
+      shiro.sendMedia(m.chat, "./src/3dTextura.mcpack")
+
+    }
+    break
+
     case 'source':
     case 'shiro':
     case 'sobre': {
@@ -538,6 +571,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 ╭─❑ 「 *Ultilidades* 」 ❑──
 │ ${prefix}minecraft
 │ ${prefix}discord
+│ ${prefix}servidor
 ╰❑
 
 ╭─❑ 「 *Sobre o Bot* 」 ❑──
