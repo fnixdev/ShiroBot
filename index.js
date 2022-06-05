@@ -71,8 +71,8 @@ async function startShiro() {
                 }
                     }, {
                 quickReplyButton: {
-                    displayText: 'Regras',
-                    id: `${prefix}regras`
+                    displayText: 'Servidor',
+                    id: `${prefix}server`
                     }
                 }]
             for (let num of participants) {
