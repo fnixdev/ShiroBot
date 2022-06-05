@@ -731,6 +731,23 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
     break
 
     // NSFW CMDS
+    case 'xvideos': {
+      if (!m.isGroup) return m.reply(mess.group)
+      if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
+      if (!text) throw 'Eu preciso que você insira um link!'
+      if (!isUrl(args[0]) && !args[0].includes('xvideos.com')) throw 'Link Invalido!'
+      let vid = await axios.get(`https://kuuhaku-api-production.up.railway.app/api/xvideos?url=${text}`)
+      shiro.sendMessage(m.chat, {
+        video: {
+          url: vid.data.url
+        },
+        caption: vid.data.title,
+        gifPlayback: true,
+      }, {
+        quoted: m
+      })
+    }
+
 
     case 'anal': {
       if (!m.isGroup) return m.reply(mess.group)
