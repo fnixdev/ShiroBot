@@ -599,7 +599,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       let btn = [{
         urlButton: {
           displayText: 'Baixar APK',
-          url: `https://www.mediafire.com/file/9og9blpy6nbe8gw/Minecraft_1.18.32.02_OFFICIAL_By_ItzToxicYT.com.apk/file`
+          url: `https://mcpedl.org/uploads_files/07-06-2022/minecraft-1-19-0.apk`
         }
 			}]
       shiro.send5ButImg(m.chat, caption, shiro.user.name, link, btn)
