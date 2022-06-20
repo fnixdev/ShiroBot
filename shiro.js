@@ -415,13 +415,13 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 --> Porta: 19132
 
 *Detalhes:*
-- Servidor 24h
-- Suporte para Java e Bedrock
+- Servidor 24h.
+- Suporte para Java e Bedrock.
 - Proteção de terreno para cada jogador.
 - Servidor survivor com elementos RPG para incrementar a experiencia do jogador.`
       let btn = [{
         urlButton: {
-          displayText: 'Veja o Mapa Ao Viv',
+          displayText: 'Mapa do Servidor',
           url: 'http://kuuhaku.ddns.net:5000/'
         }
 			}, {
