@@ -417,17 +417,17 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
 *Detalhes:*
 - Servidor 24h
 - Suporte para Java e Bedrock
-- Proteção de áreas construídas (sem grifing e destruição)
-- Servidor vanilla sem mods`
+- Proteção de terreno para cada jogador.
+- Servidor survivor com elementos RPG para incrementar a experiencia do jogador.`
       let btn = [{
         urlButton: {
-          displayText: 'Mapa do Servidor',
+          displayText: 'Veja o Mapa Ao Viv',
           url: 'http://kuuhaku.ddns.net:5000/'
         }
 			}, {
-        quickReplyButton: {
-          displayText: 'Textura Recomendada',
-          id: `${prefix}textura`
+        urlButton: {
+          displayText: 'Textura Recomendada(Bedrock)',
+          url: `https://www.mediafire.com/file/tw0syo849nb4x8m/Minecraft+3D+128x.mcpack/file`
         }
 			}]
       shiro.send5ButImg(m.chat, txt, shiro.user.name, link, btn)
