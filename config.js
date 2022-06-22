@@ -33,8 +33,8 @@ global.thumb = fs.readFileSync('./src/shiro.jpg')
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
-	fs.unwatchFile(file)
-	console.log(chalk.redBright(`Update'${__filename}'`))
-	delete require.cache[file]
-	require(file)
+    fs.unwatchFile(file)
+    console.log(chalk.redBright(`Update'${__filename}'`))
+    delete require.cache[file]
+    require(file)
 })
