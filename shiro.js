@@ -433,11 +433,6 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
         shiro.send5ButImg(m.chat, txt, shiro.user.name, link, btn)
       }
         break
-      case 'textura': {
-        m.reply(mess.wait)
-        shiro.sendMessage(m.chat, { document: { url: './src/3dTextura.mcpack' }, mimetype: 'application/mcpack', fileName: '3dTextura.mcpack' })
-      }
-        break
 
       case 'source':
       case 'shiro':
@@ -473,6 +468,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       case 's':
       case 'stickergif':
       case 'sgif': {
+        if (!m.isGroup) return m.reply(mess.group)
         if (!quoted) throw `Responda a uma imagem/video ${prefix + command}`
         m.reply(mess.wait)
         if (/image/.test(mime)) {
@@ -499,6 +495,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
         break
 
         case 'pinterest': {
+          if (!m.isGroup) return m.reply(mess.group)
           m.reply(mess.wait)
 let { pinterest } = require('./lib/scraper')
           anu = await pinterest(text)
@@ -672,6 +669,8 @@ let { pinterest } = require('./lib/scraper')
       }
         break
       case 'anime': {
+        if (!m.isGroup) return m.reply(mess.group)
+
         if (!text) throw mess.text
         m.reply(mess.wait)
         const res = await axios.get(`https://api.jikan.moe/v3/search/anime?q=${text}`)
@@ -691,6 +690,8 @@ let { pinterest } = require('./lib/scraper')
       }
         break
       case 'nhentai': {
+        if (!m.isGroup) return m.reply(mess.group)
+        if (!isNsfw) return m.reply('_Comandos +18 estão desativados nesse grupo._')
         if (!text) return m.reply('_Eu preciso que você digite o id de um hentai do nhentai_')
         let res = await axios.get(`http://hadi-api.herokuapp.com/api/nhentai?id=${text}`)
         if (res.data.status === true) {
@@ -709,6 +710,7 @@ let { pinterest } = require('./lib/scraper')
       }
         break
       case 'neko': {
+        if (!m.isGroup) return m.reply(mess.group)
         let neko = await axios.get('https://nekos.life/api/v2/img/neko')
         shiro.sendMessage(m.chat, {
           image: {
@@ -719,7 +721,9 @@ let { pinterest } = require('./lib/scraper')
         })
       }
         break
+
       case 'wallpaper': {
+        if (!m.isGroup) return m.reply(mess.group)
         let neko = await axios.get('https://nekos.life/api/v2/img/wallpaper')
         shiro.sendMessage(m.chat, {
           image: neko.data.url
@@ -729,6 +733,7 @@ let { pinterest } = require('./lib/scraper')
       }
         break
       case 'waifu': {
+        if (!m.isGroup) return m.reply(mess.group)
         let neko = await axios.get('https://api.waifu.pics/sfw/waifu')
         shiro.sendMessage(m.chat, {
           image: {
@@ -916,6 +921,7 @@ let { pinterest } = require('./lib/scraper')
 
       case 'play':
       case 'yt': {
+        if (!m.isGroup) return m.reply(mess.group)
         if (!text) throw mess.text
         m.reply('_Tudo bem querido eu vou procurar pra você._')
         const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_') })
@@ -946,6 +952,7 @@ let { pinterest } = require('./lib/scraper')
         break
 
       case 'ytmp3': {
+        if (!m.isGroup) return m.reply(mess.group)
         let { yta } = require('./lib/y2mate')
         let quality = args[1] ? args[1] : '128kbps'
         let media = await yta(text, quality)
@@ -955,6 +962,7 @@ let { pinterest } = require('./lib/scraper')
         break
 
       case 'ytaudio': {
+        if (!m.isGroup) return m.reply(mess.group)
         if (!text) throw mess.text
         m.reply(mess.wait)
         const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_') })
@@ -968,6 +976,7 @@ let { pinterest } = require('./lib/scraper')
         break
 
       case 'ytvideo': {
+        if (!m.isGroup) return m.reply(mess.group)
         if (!text) throw mess.text
         m.reply(mess.wait)
         const search = await yts(`${text}`).catch(e => { m.reply('_[ ! ] Não consegui encontrar oque você queria 😔_') })
@@ -979,7 +988,9 @@ let { pinterest } = require('./lib/scraper')
       }
         break
 
+/*
       case 'tiktok': {
+        if (!m.isGroup) return m.reply(mess.group)
         //m.reply('_Função desativada temporáriamente._')
         if (!text) throw 'Eu preciso que você insira um link!'
         if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) throw 'Link Invalido!'
@@ -999,6 +1010,7 @@ let { pinterest } = require('./lib/scraper')
         })
       }
         break
+*/
       default:
         if (budy.startsWith('=>')) {
           if (!isCreator) return m.reply(mess.owner)
