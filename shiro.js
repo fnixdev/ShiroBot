@@ -411,7 +411,7 @@ module.exports = shiro = async (shiro, m, chatUpdate, store) => {
       case 'server':
       case 'servidor': {
         link = { url: 'https://telegra.ph/file/ebdef6e0e27291626c026.jpg' }
-        txt = `--> IP: kuuhaku.ddns.net
+        txt = `--> IP: kuuhaku.ddns.net (sem http)
 --> Porta: 19132
 
 *Detalhes:*
