@@ -67,7 +67,7 @@ async function startShiro() {
             let btn = [{
                 urlButton: {
                     displayText: 'Baixar APK do Minecraft',
-                    url: `https://mcpedl.org/uploads_files/07-06-2022/minecraft-1-19-0.apk`
+                    url: `http://kuuhaku.ddns.net/Minecraft_1.19.2.apk`
                 }
             }, {
                 quickReplyButton: {
